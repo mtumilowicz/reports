@@ -1,0 +1,38 @@
+package xml;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.extended.RegexPatternConverter;
+import entity.Book;
+import xml.validator.XmlValidatorWrapper;
+
+import javax.xml.XMLConstants;
+import java.io.File;
+import java.math.BigDecimal;
+import java.util.Date;
+
+/**
+ * Created by mtumilowicz on 2017-06-25.
+ */
+public class Main {
+    public static void main(String[] args) {
+        XmlValidatorWrapper validatorWrapper = XmlValidatorWrapper.Factory.newInstance("bookSchema.xsd", XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        validatorWrapper.validate("book.xml");
+
+        XStream xstream = new XStream();
+        xstream.processAnnotations(Book.class);
+
+        new RegexPatternConverter();
+
+        Book book = new Book();
+        book.setId("1");
+        book.setTitle("title");
+        book.setAuthor("writer");
+        book.setPrice(BigDecimal.TEN);
+        book.setPubDate(new Date());
+        String s = xstream.toXML(book);
+        System.out.println(s);
+
+        Book bookFromXml = (Book)xstream.fromXML(new File("book.xml"));
+        System.out.println(bookFromXml);
+    }
+}
