@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           elementFormDefault="qualified">
+
+  <xs:element name="books" type="BooksForm"/>
+
+  <xs:complexType name="BooksForm">
+    <xs:sequence>
+      <xs:element name="book"
+                   type="BookForm"
+                   minOccurs="0"
+                   maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="BookForm">
+    <xs:sequence>
+      <xs:element name="author">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="([a-zA-Z])+"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="title"    type="xs:string"/>
+      <xs:element name="genre"    type="xs:string"/>
+      <xs:element name="price"    type="xs:float" />
+      <xs:element name="pub-date" type="xs:date" />
+      <xs:element name="review"   type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id"   type="xs:string"/>
+  </xs:complexType>
+</xs:schema>
