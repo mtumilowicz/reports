@@ -22,11 +22,11 @@ public class XmlSchemaFactory {
     }
 
     public static class Builder {
-        private String fileName;
+        private String schemaPath;
         private String schemaLanguage;
         
-        public Builder fileName(String fileName) {
-            this.fileName = fileName;
+        public Builder schemaPath(String schemaPath) {
+            this.schemaPath = schemaPath;
             
             return this;
         }
@@ -42,7 +42,7 @@ public class XmlSchemaFactory {
             Schema schema;
             
             try {
-                schema = factory.newSchema(new StreamSource(fileName));
+                schema = factory.newSchema(new StreamSource(schemaPath));
             } catch (SAXException e) {
                 throw new XmlSchemaFactoryException(e.getLocalizedMessage());
             }

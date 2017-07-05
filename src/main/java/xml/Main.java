@@ -15,8 +15,8 @@ import java.util.Date;
  */
 public class Main {
     public static void main(String[] args) {
-        XmlValidatorWrapper validatorWrapper = XmlValidatorWrapper.Factory.newInstance("bookSchema.xsd", XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        validatorWrapper.validate("book.xml");
+        XmlValidatorWrapper validatorWrapper = XmlValidatorWrapper.Factory.newInstance("src/main/resources/bookSchema.xsd", XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        validatorWrapper.validate("src/main/resources/bookSchemaImpl.xml");
 
         XStream xstream = new XStream();
         xstream.processAnnotations(Book.class);
@@ -32,7 +32,7 @@ public class Main {
         String s = xstream.toXML(book);
         System.out.println(s);
 
-        Book bookFromXml = (Book)xstream.fromXML(new File("book.xml"));
+        Book bookFromXml = (Book)xstream.fromXML(new File("src/main/resources/book.xml"));
         System.out.println(bookFromXml);
     }
 }

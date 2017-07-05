@@ -27,6 +27,15 @@
       <xs:element name="price"    type="xs:float" />
       <xs:element name="pub-date" type="xs:date" />
       <xs:element name="review"   type="xs:string"/>
+      <xs:element name="type">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="PAPER"/>
+            <xs:enumeration value="ELECTRONIC"/>
+            <xs:enumeration value="ALL"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name="id"   type="xs:string"/>
   </xs:complexType>

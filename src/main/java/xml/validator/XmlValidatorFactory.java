@@ -11,7 +11,7 @@ public class XmlValidatorFactory {
     public static Validator newInstance(String schemaFileName, String schemaLanguage) {
         return new XmlSchemaFactory.Builder()
                 .schemaLanguage(schemaLanguage)
-                .fileName(schemaFileName)
+                .schemaPath(schemaFileName)
                 .build()
                 .getSchema()
                 .newValidator();
