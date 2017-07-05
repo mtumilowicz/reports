@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>reports2</groupId>
-    <artifactId>reports2</artifactId>
+    <groupId>reports</groupId>
+    <artifactId>reports</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <build>
@@ -19,11 +19,12 @@
                 </configuration>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
+        <!--By default, Maven will look for your project's resources under src/main/resources.-->
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>src/main/resources</directory>-->
+            <!--</resource>-->
+        <!--</resources>-->
     </build>
     <dependencies>
         <dependency>
