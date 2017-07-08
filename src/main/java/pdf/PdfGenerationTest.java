@@ -5,6 +5,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Table;
+import core.BundleHandler;
 import dao.BookDAO;
 import entity.Book;
 import pdf.builder.PdfCellBuilder;
@@ -17,6 +18,8 @@ import java.util.List;
  */
 public class PdfGenerationTest {
     public static final String DEST = "output/pdf/test.pdf";
+    
+    private final BundleHandler bundles = new BundleHandler(getClass().getSimpleName());
 
     public static final PdfCellBuilder cellBuilder = new PdfCellBuilder();
 
@@ -35,31 +38,44 @@ public class PdfGenerationTest {
         try (Document document = new Document(pdf, PageSize.A4.rotate())) {
             document.setMargins(20, 20, 20, 20);
 
+            Table header = new Table(new float[]{1});
+            header.setDocument(document);
+
+            header.setPaddingBottom(100)
+                    .setWidthPercent(100)
+                    .addHeaderCell(
+                            cellBuilder
+                                    .value(bundles.get("report.header"))
+                                    .center()
+                                    .singleFontSize(20)
+                                    .build())
+                    .complete();
+
             Table table = new Table(new float[]{1, 1, 1, 1, 1, 1, 1, 1});
             table.setFixedLayout();
             table.setWidthPercent(100);
-            table.addHeaderCell(cellBuilder.value("ID")
+            table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.id"))
                     .backgroundColorStrike()
                     .build());
-            table.addHeaderCell(cellBuilder.value("Author")
+            table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.author"))
                     .backgroundColorStrike()
                     .build());
-            table.addHeaderCell(cellBuilder.value("Title")
+            table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.title"))
                     .backgroundColorStrike()
                     .build());
-            table.addHeaderCell(cellBuilder.value("Genre")
+            table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.genre"))
                     .backgroundColorStrike()
                     .build());
-            table.addHeaderCell(cellBuilder.value("Price")
+            table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.price"))
                     .backgroundColorStrike()
                     .build());
-            table.addHeaderCell(cellBuilder.value("PubDate")
+            table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.pubDate"))
                     .backgroundColorStrike()
                     .build());
-            table.addHeaderCell(cellBuilder.value("Review")
+            table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.review"))
                     .backgroundColorStrike()
                     .build());
-            table.addHeaderCell(cellBuilder.value("Type")
+            table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.type"))
                     .backgroundColorStrike()
                     .build());
             List<Book> allEntities = BookDAO.getAllEntities();

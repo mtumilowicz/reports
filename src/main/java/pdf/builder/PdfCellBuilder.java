@@ -34,6 +34,8 @@ public class PdfCellBuilder {
     private boolean backgroundColorStrike = false;
     private boolean useSingleCellStyle = false;
     private TextAlignment textAlignment = TextAlignment.LEFT;
+    private int singleFontSize = 0;
+    private int defaultFontSize = 14;
 
     public PdfCellBuilder value(String text) {
         this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
@@ -72,7 +74,17 @@ public class PdfCellBuilder {
         
         return this;
     }
-    
+
+    public PdfCellBuilder singleFontSize(int fontSize) {
+        this.singleFontSize = fontSize;
+        
+        return this;
+    }
+
+    public void defaultFontSize(int defaultFontSize) {
+        this.defaultFontSize = defaultFontSize;
+    }
+
     public PdfCellBuilder center() {
         return setTextAlignment(TextAlignment.CENTER);
     }
@@ -92,7 +104,9 @@ public class PdfCellBuilder {
         if (bold) {
             text.setBold();
         }
-
+        
+        text.setFontSize(singleFontSize > 0 ? singleFontSize : defaultFontSize);
+        
         Style style = defaultStyle.getStyle();
         if (useSingleCellStyle) {
             Objects.requireNonNull(singleCellStyle);
@@ -118,6 +132,7 @@ public class PdfCellBuilder {
         this.backgroundColorStrike = false;
         this.useSingleCellStyle = false;
         this.textAlignment = TextAlignment.LEFT;
+        this.singleFontSize = 0;
     }
 
     public <T extends Enum<T>> PdfCellBuilder value(T e) {
