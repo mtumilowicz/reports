@@ -23,16 +23,17 @@ public class Main {
 
         new RegexPatternConverter();
 
-        Book book = new Book();
-        book.setId("1");
-        book.setTitle("title");
-        book.setAuthor("writer");
-        book.setPrice(BigDecimal.TEN);
-        book.setPubDate(new Date());
+        Book book = new Book.Builder().id("1")
+                .title("title")
+                .author("writer")
+                .price(BigDecimal.TEN)
+                .pubDate(new Date())
+                .build();
+
         String s = xstream.toXML(book);
         System.out.println(s);
 
-        Book bookFromXml = (Book)xstream.fromXML(new File("src/main/resources/book.xml"));
+        Book bookFromXml = (Book) xstream.fromXML(new File("src/main/resources/book.xml"));
         System.out.println(bookFromXml);
     }
 }
