@@ -1,15 +1,9 @@
 package pdf;
 
-import com.itextpdf.io.font.FontConstants;
-import com.itextpdf.kernel.color.Color;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.Style;
-import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Table;
 import dao.BookDAO;
 import entity.Book;
@@ -23,7 +17,7 @@ import java.util.List;
  */
 public class PdfGenerationTest {
     public static final String DEST = "output/pdf/test.pdf";
-    
+
     public static final PdfCellBuilder cellBuilder = new PdfCellBuilder();
 
     public static void main(String args[]) throws IOException {
@@ -41,23 +35,33 @@ public class PdfGenerationTest {
         try (Document document = new Document(pdf, PageSize.A4.rotate())) {
             document.setMargins(20, 20, 20, 20);
 
-            PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA, "Cp1250", true);
-            PdfFont bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD, "Cp1250", true);
-
-
-            Style normal = new Style();
-            
             Table table = new Table(new float[]{1, 1, 1, 1, 1, 1, 1, 1});
             table.setFixedLayout();
             table.setWidthPercent(100);
-            table.addHeaderCell(new Cell().add("ID").setBackgroundColor(Color.LIGHT_GRAY));
-            table.addHeaderCell(new Cell().add("Author").setBackgroundColor(Color.LIGHT_GRAY));
-            table.addHeaderCell(new Cell().add("Title").setBackgroundColor(Color.LIGHT_GRAY));
-            table.addHeaderCell(new Cell().add("Genre").setBackgroundColor(Color.LIGHT_GRAY));
-            table.addHeaderCell(new Cell().add("Price").setBackgroundColor(Color.LIGHT_GRAY));
-            table.addHeaderCell(new Cell().add("PubDate").setBackgroundColor(Color.LIGHT_GRAY));
-            table.addHeaderCell(new Cell().add("Review").setBackgroundColor(Color.LIGHT_GRAY));
-            table.addHeaderCell(new Cell().add("Type").setBackgroundColor(Color.LIGHT_GRAY));
+            table.addHeaderCell(cellBuilder.value("ID")
+                    .backgroundColorStrike()
+                    .build());
+            table.addHeaderCell(cellBuilder.value("Author")
+                    .backgroundColorStrike()
+                    .build());
+            table.addHeaderCell(cellBuilder.value("Title")
+                    .backgroundColorStrike()
+                    .build());
+            table.addHeaderCell(cellBuilder.value("Genre")
+                    .backgroundColorStrike()
+                    .build());
+            table.addHeaderCell(cellBuilder.value("Price")
+                    .backgroundColorStrike()
+                    .build());
+            table.addHeaderCell(cellBuilder.value("PubDate")
+                    .backgroundColorStrike()
+                    .build());
+            table.addHeaderCell(cellBuilder.value("Review")
+                    .backgroundColorStrike()
+                    .build());
+            table.addHeaderCell(cellBuilder.value("Type")
+                    .backgroundColorStrike()
+                    .build());
             List<Book> allEntities = BookDAO.getAllEntities();
             allEntities.stream().forEach(book -> process(table, book));
             document.add(table);
@@ -71,8 +75,8 @@ public class PdfGenerationTest {
         table.addCell(cellBuilder.value(book.getTitle()).build());
         table.addCell(cellBuilder.value(book.getGenre()).build());
         table.addCell(cellBuilder.value(book.getPrice()).build());
-        table.addCell(cellBuilder.value(book.getPubDate()).build());
+        table.addCell(cellBuilder.value(book.getPubDate()).center().build());
         table.addCell(cellBuilder.value(book.getReview()).build());
-        table.addCell(cellBuilder.value(book.getType().name()).build());
+        table.addCell(cellBuilder.value(book.getType()).build());
     }
 }
