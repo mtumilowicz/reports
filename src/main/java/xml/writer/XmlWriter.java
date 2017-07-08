@@ -1,7 +1,7 @@
 package xml.writer;
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import core.DocumentWriter;
+import core.DomDocumentWriter;
 import org.w3c.dom.Document;
 import xml.builder.XmlDocumentBuilder;
 import xml.transformer.XmlTransformer;
@@ -9,7 +9,7 @@ import xml.transformer.XmlTransformer;
 /**
  * Created by mtumilowicz on 2017-06-01.
  */
-public abstract class XmlWriter implements DocumentWriter {
+public abstract class XmlWriter implements DomDocumentWriter {
 
     private final XmlDocumentBuilder documentBuilder;
 

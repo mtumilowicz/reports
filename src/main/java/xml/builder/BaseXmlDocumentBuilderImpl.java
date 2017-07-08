@@ -1,6 +1,6 @@
 package xml.builder;
 
-import core.StaticDocumentBuilderFactory;
+import core.StaticDomDocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,7 +18,7 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
     public BaseXmlDocumentBuilderImpl(String name) {
         Objects.requireNonNull(name);
         
-        document = StaticDocumentBuilderFactory.createDocument(name);
+        document = StaticDomDocumentBuilderFactory.createDocument(name);
     }
 
     public BaseXmlDocumentBuilderImpl(Document document) {

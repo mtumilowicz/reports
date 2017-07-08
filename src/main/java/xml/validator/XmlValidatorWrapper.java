@@ -1,6 +1,6 @@
 package xml.validator;
 
-import core.StaticDocumentBuilderFactory;
+import core.StaticDomDocumentBuilderFactory;
 import org.xml.sax.SAXException;
 
 import javax.xml.transform.dom.DOMSource;
@@ -20,7 +20,7 @@ public class XmlValidatorWrapper {
     
     public void validate(String xmlFilePath) {
         try {
-            validator.validate(new DOMSource(StaticDocumentBuilderFactory.parse(xmlFilePath)));
+            validator.validate(new DOMSource(StaticDomDocumentBuilderFactory.parse(xmlFilePath)));
             System.out.println("Xml is correct!");
         } catch (SAXException | IOException e) {
             System.out.println(e.getLocalizedMessage());

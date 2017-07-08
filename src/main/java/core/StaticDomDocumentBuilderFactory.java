@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * Created by mtumilowicz on 2017-06-07.
  */
-public class StaticDocumentBuilderFactory {
+public class StaticDomDocumentBuilderFactory {
     private static final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     
     public static Document createDocument(String name) {
