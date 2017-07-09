@@ -40,7 +40,7 @@ public class PdfCellBuilder {
     private Color backgroundColor = Color.LIGHT_GRAY;
     private boolean backgroundColorStrike = false;
     private TextAlignment textAlignment = TextAlignment.LEFT;
-    private int singleFontSize = 0;
+    private int singleCellFontSize = 0;
     private int defaultFontSize = 14;
     private boolean border = true;
     
@@ -92,8 +92,8 @@ public class PdfCellBuilder {
         return this;
     }
 
-    public PdfCellBuilder singleFontSize(int fontSize) {
-        this.singleFontSize = fontSize;
+    public PdfCellBuilder singleCellFontSize(int fontSize) {
+        this.singleCellFontSize = fontSize;
         
         return this;
     }
@@ -134,7 +134,7 @@ public class PdfCellBuilder {
             text.setBold();
         }
         
-        text.setFontSize(singleFontSize > 0 ? singleFontSize : defaultFontSize);
+        text.setFontSize(singleCellFontSize > 0 ? singleCellFontSize : defaultFontSize);
         
         Style style = defaultStyle.getStyle();
         if (useSingleCellStyle) {
@@ -162,7 +162,7 @@ public class PdfCellBuilder {
         this.backgroundColorStrike = false;
         this.useSingleCellStyle = false;
         this.textAlignment = TextAlignment.LEFT;
-        this.singleFontSize = 0;
+        this.singleCellFontSize = 0;
         this.border = true;
     }
 

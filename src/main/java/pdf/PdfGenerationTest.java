@@ -1,9 +1,11 @@
 package pdf;
 
+import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Table;
 import dao.BookDAO;
 import entity.Book;
@@ -31,6 +33,12 @@ public class PdfGenerationTest {
              Document document = new Document(pdf, PageSize.A4.rotate())) {
             document.setMargins(20, 20, 20, 20);
 
+            Image icon = new Image(ImageDataFactory.create("src/main/resources/harvard.png")).scaleToFit(100, 100);
+            icon.setFixedPosition(0, PageSize.A4.rotate().getHeight() - document.getTopMargin() - icon.getImageScaledHeight());
+            document.add(icon);
+
+            addSpacingTable(document);
+            
             addSheetHeader(document);
 
             addSpacingTable(document);
@@ -55,7 +63,7 @@ public class PdfGenerationTest {
                         cellBuilder
                                 .bundle("report.table.summary.header")
                                 .noBorder()
-                                .singleFontSize(20)
+                                .singleCellFontSize(20)
                                 .build())
                 .addHeaderCell(PdfCellBuilder.EMPTY_CELL)
                 .addCell(
@@ -87,7 +95,7 @@ public class PdfGenerationTest {
                                 .bundle("report.header")
                                 .center()
                                 .noBorder()
-                                .singleFontSize(20)
+                                .singleCellFontSize(20)
                                 .build())
                 .complete();
     }
