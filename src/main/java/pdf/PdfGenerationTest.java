@@ -10,6 +10,8 @@ import entity.Book;
 import pdf.builder.PdfCellBuilder;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Created by mtumilowicz on 2017-07-05.
@@ -24,30 +26,78 @@ public class PdfGenerationTest {
     }
 
     public void createPdf(String dest) throws IOException {
-        try ( PdfWriter writer = new PdfWriter(dest);
-              PdfDocument pdf = new PdfDocument(writer);
-              Document document = new Document(pdf, PageSize.A4.rotate())) {
+        try (PdfWriter writer = new PdfWriter(dest);
+             PdfDocument pdf = new PdfDocument(writer);
+             Document document = new Document(pdf, PageSize.A4.rotate())) {
             document.setMargins(20, 20, 20, 20);
 
             addSheetHeader(document);
 
+            addSpacingTable(document);
+
             addBooksCollectionTable(document);
+
+            addSpacingTable(document);
+
+            
+            addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(), 
+                    BookDAO.getAllEntities().stream().map((x) -> x.getPrice()).filter(Objects::nonNull).reduce((x, y) -> x.add(y)).get());
 
         }
     }
-    
+
+    private void addSummaryBooksCollectionTable(Document doc, Integer quantity, BigDecimal value) {
+        Table table = new Table(new float[]{1, 1});
+        table.setDocument(doc);
+
+        table.setWidthPercent(40)
+                .addHeaderCell(
+                        cellBuilder
+                                .bundle("report.table.summary.header")
+                                .noBorder()
+                                .singleFontSize(20)
+                                .build())
+                .addHeaderCell(PdfCellBuilder.EMPTY_CELL)
+                .addCell(
+                        cellBuilder
+                                .bundle("report.table.summary.quantity")
+                                .build())
+                .addCell(
+                        cellBuilder
+                                .bundle("report.table.summary.value")
+                                .build())
+                .addCell(
+                        cellBuilder
+                                .value(quantity.toString())
+                                .build())
+                .addCell(
+                        cellBuilder
+                                .value(value)
+                                .build())
+                .complete();
+    }
+
     private void addSheetHeader(Document doc) {
         Table table = new Table(new float[]{1});
         table.setDocument(doc);
 
-        table.setPaddingBottom(100)
-                .setWidthPercent(100)
+        table.setWidthPercent(100)
                 .addHeaderCell(
                         cellBuilder
                                 .bundle("report.header")
                                 .center()
+                                .noBorder()
                                 .singleFontSize(20)
                                 .build())
+                .complete();
+    }
+
+    private void addSpacingTable(Document doc) {
+        Table table = new Table(new float[]{1});
+        table.setDocument(doc);
+
+        table.setWidthPercent(100)
+                .addCell(PdfCellBuilder.EMPTY_CELL)
                 .complete();
     }
 

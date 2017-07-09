@@ -2,6 +2,8 @@ package pdf.builder;
 
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.layout.Style;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
@@ -22,22 +24,25 @@ import java.util.Objects;
  */
 public class PdfCellBuilder {
     
-    private PdfStyle defaultStyle = PdfStyle.HELVETICA;
-    private final BundleHandler bundles;
+    public static final Cell EMPTY_CELL = new Cell().add("").setHeight(50).setBorder(Border.NO_BORDER);
     
+    private PdfStyle defaultStyle = PdfStyle.HELVETICA;
+    private Style singleCellStyle = null;
+    private boolean useSingleCellStyle = false;
+
+    private final BundleHandler bundles;
     private final static FastDateFormat SDF = FastDateFormat.getInstance("yyyy-MM-dd");
     private final static DecimalFormat DF = new DecimalFormat("#.00");
     private final static String EMPTY_STRING_VALUE = "-";
     private String text = EMPTY_STRING_VALUE;
     
-    private Style singleCellStyle = null;
     private boolean bold = false;
     private Color backgroundColor = Color.LIGHT_GRAY;
     private boolean backgroundColorStrike = false;
-    private boolean useSingleCellStyle = false;
     private TextAlignment textAlignment = TextAlignment.LEFT;
     private int singleFontSize = 0;
     private int defaultFontSize = 14;
+    private boolean border = true;
     
     public PdfCellBuilder(String pdfClassName) {
         bundles = new BundleHandler(pdfClassName);
@@ -110,6 +115,18 @@ public class PdfCellBuilder {
         
         return this;
     }
+    
+    public PdfCellBuilder border() {
+        this.border = true;
+        
+        return this;
+    }
+    
+    public PdfCellBuilder noBorder() {
+        this.border = false;
+        
+        return this;
+    }
 
     public Cell build() {
         Text text = new Text(this.text);
@@ -127,8 +144,9 @@ public class PdfCellBuilder {
 
         Paragraph paragraph = new Paragraph(text);
         paragraph.setTextAlignment(textAlignment);
-
-        Cell cell = new Cell().add(paragraph).addStyle(style);
+        
+        Cell cell = new Cell().add(paragraph).addStyle(style)
+                .setBorder(border ? new SolidBorder(1) : Border.NO_BORDER);
 
         if (backgroundColorStrike) {
             cell.setBackgroundColor(backgroundColor);
@@ -145,6 +163,7 @@ public class PdfCellBuilder {
         this.useSingleCellStyle = false;
         this.textAlignment = TextAlignment.LEFT;
         this.singleFontSize = 0;
+        this.border = true;
     }
 
     public <T extends Enum<T>> PdfCellBuilder value(T e) {

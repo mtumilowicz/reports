@@ -22,7 +22,7 @@ public class DatabaseMock {
                 .price(null)
                 .pubDate(new Date())
                 .review("5/5")
-                .type(BookType.PAPER)
+                .type(BookType.ALL)
                 .build();
 
         Book book2 = new Book.Builder().id("ISBN2")
