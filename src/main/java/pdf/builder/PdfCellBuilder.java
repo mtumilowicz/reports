@@ -6,6 +6,7 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
+import core.BundleHandler;
 import core.EnumBundleHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
@@ -22,6 +23,7 @@ import java.util.Objects;
 public class PdfCellBuilder {
     
     private PdfStyle defaultStyle = PdfStyle.HELVETICA;
+    private final BundleHandler bundles;
     
     private final static FastDateFormat SDF = FastDateFormat.getInstance("yyyy-MM-dd");
     private final static DecimalFormat DF = new DecimalFormat("#.00");
@@ -36,10 +38,20 @@ public class PdfCellBuilder {
     private TextAlignment textAlignment = TextAlignment.LEFT;
     private int singleFontSize = 0;
     private int defaultFontSize = 14;
+    
+    public PdfCellBuilder(String pdfClassName) {
+        bundles = new BundleHandler(pdfClassName);
+    }
 
     public PdfCellBuilder value(String text) {
         this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
         
+        return this;
+    }
+    
+    public PdfCellBuilder bundle(String key) {
+        this.text = StringUtils.isNotEmpty(text) ? bundles.get(key) : EMPTY_STRING_VALUE;
+
         return this;
     }
 
