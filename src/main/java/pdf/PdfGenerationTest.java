@@ -2,56 +2,55 @@ package pdf;
 
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Table;
+import core.AbstractPdfDocumentWriter;
 import dao.BookDAO;
 import entity.Book;
 import pdf.builder.PdfCellBuilder;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.util.Objects;
 
 /**
  * Created by mtumilowicz on 2017-07-05.
  */
-public class PdfGenerationTest {
+public class PdfGenerationTest extends AbstractPdfDocumentWriter {
     public static final String DEST = "output/pdf/test.pdf";
 
     public final PdfCellBuilder cellBuilder = new PdfCellBuilder(getClass().getSimpleName());
 
     public static void main(String args[]) throws IOException {
-        new PdfGenerationTest().createPdf(DEST);
+        new PdfGenerationTest().save(DEST);
     }
 
-    public void createPdf(String dest) throws IOException {
-        try (PdfWriter writer = new PdfWriter(dest);
-             PdfDocument pdf = new PdfDocument(writer);
-             Document document = new Document(pdf, PageSize.A4.rotate())) {
-            document.setMargins(20, 20, 20, 20);
-
-            Image icon = new Image(ImageDataFactory.create("src/main/resources/harvard.png")).scaleToFit(100, 100);
-            icon.setFixedPosition(document.getLeftMargin(), PageSize.A4.rotate().getHeight() - document.getTopMargin() - icon.getImageScaledHeight());
-            document.add(icon);
-
-            addSpacingTable(document);
-
-            addSheetHeader(document);
-
-            addSpacingTable(document);
-
-            addBooksCollectionTable(document);
-
-            addSpacingTable(document);
-
-
-            addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(),
-                    BookDAO.getAllEntities().stream().map((x) -> x.getPrice()).filter(Objects::nonNull).reduce((x, y) -> x.add(y)).get());
-
+    @Override
+    public void prepare(Document document) {
+        Image icon = null;
+        try {
+            icon = new Image(ImageDataFactory.create("src/main/resources/harvard.png")).scaleToFit(100, 100);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
+        icon.setFixedPosition(document.getLeftMargin(), PageSize.A4.rotate().getHeight() - document.getTopMargin() - icon.getImageScaledHeight());
+        document.add(icon);
+
+        addSpacingTable(document);
+
+        addSheetHeader(document);
+
+        addSpacingTable(document);
+
+        addBooksCollectionTable(document);
+
+        addSpacingTable(document);
+
+
+        addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(),
+                BookDAO.getAllEntities().stream().map((x) -> x.getPrice()).filter(Objects::nonNull).reduce((x, y) -> x.add(y)).get());
     }
 
     private void addSummaryBooksCollectionTable(Document doc, int quantity, BigDecimal value) {
