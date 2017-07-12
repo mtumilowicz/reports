@@ -38,7 +38,7 @@ public class PdfGenerationTest {
             document.add(icon);
 
             addSpacingTable(document);
-            
+
             addSheetHeader(document);
 
             addSpacingTable(document);
@@ -47,8 +47,8 @@ public class PdfGenerationTest {
 
             addSpacingTable(document);
 
-            
-            addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(), 
+
+            addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(),
                     BookDAO.getAllEntities().stream().map((x) -> x.getPrice()).filter(Objects::nonNull).reduce((x, y) -> x.add(y)).get());
 
         }
@@ -105,6 +105,7 @@ public class PdfGenerationTest {
         table.setDocument(doc);
 
         table.setWidthPercent(100)
+                .setHeight(50)
                 .addCell(PdfCellBuilder.EMPTY_CELL)
                 .complete();
     }
@@ -147,7 +148,7 @@ public class PdfGenerationTest {
                 .addCell(cellBuilder.value(book.getAuthor()).build())
                 .addCell(cellBuilder.value(book.getTitle()).build())
                 .addCell(cellBuilder.value(book.getGenre()).build())
-                .addCell(cellBuilder.value(book.getPrice()).build())
+                .addCell(cellBuilder.value(book.getPrice()).right().build())
                 .addCell(cellBuilder.value(book.getPubDate()).center().build())
                 .addCell(cellBuilder.value(book.getReview()).build())
                 .addCell(cellBuilder.value(book.getType()).build());
