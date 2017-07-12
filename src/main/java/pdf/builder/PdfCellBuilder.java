@@ -68,6 +68,10 @@ public class PdfCellBuilder {
         return value(value == null ? StringUtils.EMPTY : SDF.format(value));
     }
 
+    public PdfCellBuilder value(Integer value) {
+        return value(value == null ? StringUtils.EMPTY : value.toString());
+    }
+    
     public PdfCellBuilder bundle(String key) {
         this.text = StringUtils.isNotEmpty(text) ? bundles.get(key) : EMPTY_STRING_VALUE;
 

@@ -34,7 +34,7 @@ public class PdfGenerationTest {
             document.setMargins(20, 20, 20, 20);
 
             Image icon = new Image(ImageDataFactory.create("src/main/resources/harvard.png")).scaleToFit(100, 100);
-            icon.setFixedPosition(0, PageSize.A4.rotate().getHeight() - document.getTopMargin() - icon.getImageScaledHeight());
+            icon.setFixedPosition(document.getLeftMargin(), PageSize.A4.rotate().getHeight() - document.getTopMargin() - icon.getImageScaledHeight());
             document.add(icon);
 
             addSpacingTable(document);
@@ -54,7 +54,7 @@ public class PdfGenerationTest {
         }
     }
 
-    private void addSummaryBooksCollectionTable(Document doc, Integer quantity, BigDecimal value) {
+    private void addSummaryBooksCollectionTable(Document doc, int quantity, BigDecimal value) {
         Table table = new Table(new float[]{1, 1});
         table.setDocument(doc);
 
@@ -76,7 +76,7 @@ public class PdfGenerationTest {
                                 .build())
                 .addCell(
                         cellBuilder
-                                .value(quantity.toString())
+                                .value(quantity)
                                 .build())
                 .addCell(
                         cellBuilder
