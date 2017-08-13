@@ -13,7 +13,7 @@ import java.util.Objects;
  * Created by mtumilowicz on 2017-06-25.
  */
 @XStreamAlias("book")
-public class Book {
+public class Book extends XmlEntity {
     
     @XStreamAsAttribute
     private String id;

@@ -3,10 +3,10 @@ package xml;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.extended.RegexPatternConverter;
 import entity.Book;
+import xml.parser.XmlFromFile;
 import xml.validator.XmlValidatorWrapper;
 
 import javax.xml.XMLConstants;
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -32,8 +32,8 @@ public class Main {
 
         String s = xstream.toXML(book);
         System.out.println(s);
-
-        Book bookFromXml = (Book) xstream.fromXML(new File("src/main/resources/book.xml"));
+        
+        Book bookFromXml = XmlFromFile.parse("src/main/resources/book.xml", Book.class);
         System.out.println(bookFromXml);
     }
 }
