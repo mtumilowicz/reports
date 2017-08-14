@@ -8,11 +8,10 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
-import core.BundleHandler;
 import core.EnumBundleHandler;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 import pdf.utils.PdfStyle;
+import util.ReportDateUtils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -24,12 +23,9 @@ import java.util.Date;
 public class PdfCellBuilder {
 
     public final static Cell EMPTY_CELL = new Cell().add("").setBorder(Border.NO_BORDER);
-
-    private final static FastDateFormat SDF = FastDateFormat.getInstance("yyyy-MM-dd");
+    
     private final static DecimalFormat DF = new DecimalFormat("#.00");
     private final static String EMPTY_STRING_VALUE = "-";
-
-    private final BundleHandler bundles;
 
     private PdfStyle defaultStyle = PdfStyle.HELVETICA;
     private Style singleCellStyle = null;
@@ -43,10 +39,6 @@ public class PdfCellBuilder {
 
     private Color backgroundColor = Color.LIGHT_GRAY;
     private boolean backgroundColorStrike = false;
-
-    public PdfCellBuilder(String pdfClassName) {
-        bundles = new BundleHandler(pdfClassName);
-    }
 
     public PdfCellBuilder value(String text) {
         this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
@@ -65,17 +57,11 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder value(Date value) {
-        return value(value == null ? StringUtils.EMPTY : SDF.format(value));
+        return value(value == null ? StringUtils.EMPTY : ReportDateUtils.ONLY_DATE.format(value));
     }
 
     public PdfCellBuilder value(Integer value) {
         return value(value == null ? StringUtils.EMPTY : value.toString());
-    }
-    
-    public PdfCellBuilder bundle(String key) {
-        this.text = StringUtils.isNotEmpty(text) ? bundles.get(key) : EMPTY_STRING_VALUE;
-
-        return this;
     }
 
     public PdfCellBuilder bold() {

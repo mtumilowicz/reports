@@ -13,22 +13,19 @@ import pdf.builder.PdfCellBuilder;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
-import java.util.Objects;
 
 /**
  * Created by mtumilowicz on 2017-07-05.
  */
 public class PdfGenerationTest extends AbstractPdfDocumentWriter {
-    public static final String DEST = "output/pdf/test.pdf";
-
-    public final PdfCellBuilder cellBuilder = new PdfCellBuilder(getClass().getSimpleName());
+    private static final String DEST = "output/pdf/test.pdf";
 
     public static void main(String args[]) throws IOException {
         new PdfGenerationTest().save(DEST);
     }
 
     @Override
-    public void prepare(Document document) {
+    protected void prepare(Document document) {
         Image icon = null;
         try {
             icon = new Image(ImageDataFactory.create("src/main/resources/harvard.png")).scaleToFit(100, 100);
@@ -47,10 +44,9 @@ public class PdfGenerationTest extends AbstractPdfDocumentWriter {
         addBooksCollectionTable(document);
 
         addSpacingTable(document);
-
-
+        
         addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(),
-                BookDAO.getAllEntities().stream().map((x) -> x.getPrice()).filter(Objects::nonNull).reduce((x, y) -> x.add(y)).get());
+                BookDAO.sumPriceOfAllEntities().get());
     }
 
     private void addSummaryBooksCollectionTable(Document doc, int quantity, BigDecimal value) {
@@ -60,18 +56,18 @@ public class PdfGenerationTest extends AbstractPdfDocumentWriter {
         table.setWidthPercent(40)
                 .addHeaderCell(
                         cellBuilder
-                                .bundle("report.table.summary.header")
+                                .value(bundles.get("report.table.summary.header"))
                                 .noBorder()
                                 .singleCellFontSize(20)
                                 .build())
                 .addHeaderCell(PdfCellBuilder.EMPTY_CELL)
                 .addCell(
                         cellBuilder
-                                .bundle("report.table.summary.quantity")
+                                .value(bundles.get("report.table.summary.quantity"))
                                 .build())
                 .addCell(
                         cellBuilder
-                                .bundle("report.table.summary.value")
+                                .value(bundles.get("report.table.summary.value"))
                                 .build())
                 .addCell(
                         cellBuilder
@@ -91,7 +87,7 @@ public class PdfGenerationTest extends AbstractPdfDocumentWriter {
         table.setWidthPercent(100)
                 .addHeaderCell(
                         cellBuilder
-                                .bundle("report.header")
+                                .value(bundles.get("report.header"))
                                 .center()
                                 .noBorder()
                                 .singleCellFontSize(20)
@@ -114,28 +110,28 @@ public class PdfGenerationTest extends AbstractPdfDocumentWriter {
                 .setFixedLayout()
                 .setWidthPercent(100);
         table.setDocument(doc);
-        table.addHeaderCell(cellBuilder.bundle("report.table.book.id")
+        table.addHeaderCell(cellBuilder.value(bundles.get("report.table.book.id"))
                 .backgroundColorStrike()
                 .build())
-                .addHeaderCell(cellBuilder.bundle("report.table.book.author")
+                .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.author"))
                         .backgroundColorStrike()
                         .build())
-                .addHeaderCell(cellBuilder.bundle("report.table.book.title")
+                .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.title"))
                         .backgroundColorStrike()
                         .build())
-                .addHeaderCell(cellBuilder.bundle("report.table.book.genre")
+                .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.genre"))
                         .backgroundColorStrike()
                         .build())
-                .addHeaderCell(cellBuilder.bundle("report.table.book.price")
+                .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.price"))
                         .backgroundColorStrike()
                         .build())
-                .addHeaderCell(cellBuilder.bundle("report.table.book.pubDate")
+                .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.pubDate"))
                         .backgroundColorStrike()
                         .build())
-                .addHeaderCell(cellBuilder.bundle("report.table.book.review")
+                .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.review"))
                         .backgroundColorStrike()
                         .build())
-                .addHeaderCell(cellBuilder.bundle("report.table.book.type")
+                .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.type"))
                         .backgroundColorStrike()
                         .build());
         BookDAO.getAllEntities().stream().forEach(book -> addRow(table, book));

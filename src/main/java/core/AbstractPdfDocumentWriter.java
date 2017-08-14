@@ -4,6 +4,7 @@ import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import pdf.builder.PdfCellBuilder;
 
 import java.io.IOException;
 
@@ -11,6 +12,9 @@ import java.io.IOException;
  * Created by mtumilowicz on 2017-07-12.
  */
 public abstract class AbstractPdfDocumentWriter implements PdfDocumentWriter {
+
+    protected final PdfCellBuilder cellBuilder = new PdfCellBuilder();
+    protected final BundleHandler bundles = new BundleHandler(this.getClass().getSimpleName());
 
     public void save(String dest) {
         try {
