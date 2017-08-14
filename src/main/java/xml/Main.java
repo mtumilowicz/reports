@@ -1,6 +1,5 @@
 package xml;
 
-import com.thoughtworks.xstream.XStream;
 import entity.Book;
 import org.xml.sax.SAXException;
 import xml.parser.XmlFromFile;
@@ -23,17 +22,15 @@ public class Main {
             System.out.println(e.getLocalizedMessage());
         }
 
-        XStream xstream = new XStream();
-        xstream.processAnnotations(Book.class);
-
-        Book book = new Book.Builder().id("1")
+        Book book = new Book.Builder()
+                .id("1")
                 .title("title")
                 .author("writer")
                 .price(BigDecimal.TEN)
                 .pubDate(new Date())
                 .build();
 
-        String s = xstream.toXML(book);
+        String s = book.toXmlString();
         System.out.println(s);
         
         Book bookFromXml = XmlFromFile.parse("src/main/resources/book.xml", Book.class);
