@@ -18,13 +18,9 @@ public class XmlValidatorWrapper {
         this.validator = validator;
     }
     
-    public void validate(String xmlFilePath) {
-        try {
-            validator.validate(new DOMSource(StaticDomDocumentBuilderFactory.parse(xmlFilePath)));
-            System.out.println("Xml is correct!");
-        } catch (SAXException | IOException e) {
-            System.out.println(e.getLocalizedMessage());
-        }
+    public void validate(String xmlFilePath) throws SAXException, IOException {
+        validator.validate(new DOMSource(StaticDomDocumentBuilderFactory.parse(xmlFilePath)));
+        System.out.println("Xml is correct!");
     }
     
     public static final class Factory {
