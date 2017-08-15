@@ -5,9 +5,10 @@ import entity.Book;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellUtil;
-import org.apache.poi.xssf.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ import java.io.IOException;
 public class SimpleExcelWriterExample {
 
     private static final String DEST = "output/xlsx/JavaBooks.xlsx";
-
+    
     public static void main(String[] args) {
         try (XSSFWorkbook workbook = new XSSFWorkbook();
              FileOutputStream outputStream = new FileOutputStream(DEST)) {
@@ -42,11 +43,11 @@ public class SimpleExcelWriterExample {
         
         rowCount++;
         
-        addBookCollectionTableHeaders(workbook, sheet, rowCount);
+        addBookCollectionTableHeaders(sheet, rowCount);
 
         rowCount++;
         
-        addBookCollectionTableContent(workbook, sheet, rowCount);
+        addBookCollectionTableContent(sheet, rowCount);
     }
 
     private static void addSummarySheet(XSSFWorkbook workbook) {
@@ -69,14 +70,13 @@ public class SimpleExcelWriterExample {
     private static void addBookCollectionSheetTitle(XSSFSheet sheet, int rowCount) {
         sheet.addMergedRegion(new CellRangeAddress(0,0,0,7));
 
-        Cell bookCollection = CellUtil.createCell(sheet.createRow(rowCount), 0, "Books Collection");
-        CellUtil.setAlignment(bookCollection, HorizontalAlignment.CENTER);
+        Cell titleCell = CellUtil.createCell(sheet.createRow(rowCount), 0, "Books Collection");
+        CellUtil.setAlignment(titleCell, HorizontalAlignment.CENTER);
     }
 
-    private static void addBookCollectionTableContent(XSSFWorkbook workbook,
-                                                      XSSFSheet sheet,
+    private static void addBookCollectionTableContent(XSSFSheet sheet,
                                                       int rowCount) {
-        DataFormat format = workbook.createDataFormat();
+        DataFormat format = sheet.getWorkbook().createDataFormat();
         for (Book book : BookDAO.getAllEntities()) {
             XSSFRow row = sheet.createRow(rowCount++);
             int columnCount = 0;
@@ -106,7 +106,7 @@ public class SimpleExcelWriterExample {
         }
     }
 
-    private static void addBookCollectionTableHeaders(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
+    private static void addBookCollectionTableHeaders(XSSFSheet sheet, int rowCount) {
         String[] booksCollectionHeaders = {"ID", "Author", "Title", "Genre", 
                 "Price", "PubDate", "Review", "Type"};
 
@@ -116,7 +116,7 @@ public class SimpleExcelWriterExample {
         
         for (String header : booksCollectionHeaders) {
             Cell headerCell = CellUtil.createCell(row, columnCount++, header);
-            addTableHeaderCell(workbook, headerCell);
+            addTableHeaderCell(headerCell);
         }
     }
 
@@ -131,11 +131,11 @@ public class SimpleExcelWriterExample {
         int columnCount = 0;
         XSSFRow row = sheet.createRow(rowCount);
         Cell quantityHeader = CellUtil.createCell(row, columnCount++, "Ilość");
-        addTableHeaderCell(workbook, quantityHeader);
+        addTableHeaderCell(quantityHeader);
 
 
         Cell valueHeader = CellUtil.createCell(row, columnCount++, "Wartość");
-        addTableHeaderCell(workbook, valueHeader);
+        addTableHeaderCell(valueHeader);
     }
 
     private static void addSummaryTableContent(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
@@ -153,11 +153,11 @@ public class SimpleExcelWriterExample {
         CellUtil.setAlignment(value, HorizontalAlignment.RIGHT);
     }
     
-    private static void addTableHeaderCell(XSSFWorkbook workbook, Cell cell) {
-        XSSFCellStyle style = workbook.createCellStyle();
+    private static void addTableHeaderCell(Cell cell) {
+        CellStyle style = cell.getSheet().getWorkbook().createCellStyle();
         style.setBorderLeft(BorderStyle.THIN);
         style.setBorderBottom(BorderStyle.THIN);
-        style.setFillForegroundColor(new XSSFColor(Color.LIGHT_GRAY));
+        style.setFillForegroundColor(IndexedColors.GREY_40_PERCENT.getIndex());
         style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         cell.setCellStyle(style);
     }
