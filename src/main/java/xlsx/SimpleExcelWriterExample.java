@@ -33,10 +33,8 @@ public class SimpleExcelWriterExample {
     }
 
     private static void addSummarySheet(XSSFWorkbook workbook) {
-        DataFormat format = workbook.createDataFormat();
         XSSFSheet sheet = workbook.createSheet("Summary");
         int rowCount = 0;
-        int columnCount = 0;
 
         sheet.addMergedRegion(new CellRangeAddress(0,0,0,7));
 
@@ -44,22 +42,19 @@ public class SimpleExcelWriterExample {
 
         Cell summary = CellUtil.createCell(row, 0, "Summary");
         CellUtil.setAlignment(summary, HorizontalAlignment.CENTER);
-
+        
         rowCount++;
         
-        row = sheet.createRow(rowCount++);
-        
-        addSummaryTableHeader(workbook, row, columnCount++);
+        addSummaryTableHeader(workbook, sheet, rowCount++);
 
-        row = sheet.createRow(rowCount++);
-        columnCount = 0;
-
-        addSummaryTableContent(workbook, row, columnCount);
+        addSummaryTableContent(workbook, sheet, rowCount++);
         
        
     }
     
-    private static void addSummaryTableHeader(XSSFWorkbook workbook, XSSFRow row, int columnCount) {
+    private static void addSummaryTableHeader(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
+        int columnCount = 0;
+        XSSFRow row = sheet.createRow(rowCount++);
         Cell quantityHeader = CellUtil.createCell(row, columnCount++, "Ilość");
         XSSFCellStyle style = workbook.createCellStyle();
         style.setBorderLeft(BorderStyle.THIN);
@@ -73,7 +68,10 @@ public class SimpleExcelWriterExample {
         valueHeader.setCellStyle(style);
     }
     
-    private static void addSummaryTableContent(XSSFWorkbook workbook, XSSFRow row, int columnCount) {
+    private static void addSummaryTableContent(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
+        int columnCount = 0;
+        XSSFRow row = sheet.createRow(rowCount++);
+        
         DataFormat format = workbook.createDataFormat();
         Cell quantity = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAO.getAllEntities().size()));
         quantity.setCellType(CellType.NUMERIC);
@@ -168,5 +166,4 @@ public class SimpleExcelWriterExample {
         sheet.setColumnWidth(5, 3000);
         sheet.setColumnWidth(7, 3000);
     }
-
 }
