@@ -45,8 +45,21 @@ public class SimpleExcelWriterExample {
         Cell summary = CellUtil.createCell(row, 0, "Summary");
         CellUtil.setAlignment(summary, HorizontalAlignment.CENTER);
 
+        rowCount++;
+        
         row = sheet.createRow(rowCount++);
+        
+        addSummaryTableHeader(workbook, row, columnCount++);
 
+        row = sheet.createRow(rowCount++);
+        columnCount = 0;
+
+        addSummaryTableContent(workbook, row, columnCount);
+        
+       
+    }
+    
+    private static void addSummaryTableHeader(XSSFWorkbook workbook, XSSFRow row, int columnCount) {
         Cell quantityHeader = CellUtil.createCell(row, columnCount++, "Ilość");
         XSSFCellStyle style = workbook.createCellStyle();
         style.setBorderLeft(BorderStyle.THIN);
@@ -58,14 +71,14 @@ public class SimpleExcelWriterExample {
 
         Cell valueHeader = CellUtil.createCell(row, columnCount++, "Wartość");
         valueHeader.setCellStyle(style);
-
-        row = sheet.createRow(rowCount++);
-        columnCount = 0;
-        
+    }
+    
+    private static void addSummaryTableContent(XSSFWorkbook workbook, XSSFRow row, int columnCount) {
+        DataFormat format = workbook.createDataFormat();
         Cell quantity = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAO.getAllEntities().size()));
         quantity.setCellType(CellType.NUMERIC);
         CellUtil.setAlignment(quantity, HorizontalAlignment.LEFT);
-        
+
         Cell value = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAO.sumPriceOfAllEntities().get()));
         value.setCellType(CellType.NUMERIC);
         CellUtil.setCellStyleProperty(value, CellUtil.DATA_FORMAT, format.getFormat("#.00"));
@@ -73,7 +86,6 @@ public class SimpleExcelWriterExample {
     }
     
     private static void addBookCollectionSheet(XSSFWorkbook workbook) {
-        DataFormat format = workbook.createDataFormat();
         XSSFSheet sheet = workbook.createSheet("Books");
         setColumnWidthInSheet(sheet);
 
@@ -81,33 +93,28 @@ public class SimpleExcelWriterExample {
 
         sheet.addMergedRegion(new CellRangeAddress(0,0,0,7));
 
-        Row row = sheet.createRow(rowCount++);
+        XSSFRow row = sheet.createRow(rowCount++);
 
         Cell cell = row.createCell(0);
 
         cell.setCellValue("Books Collection");
 
         CellUtil.setAlignment(cell, HorizontalAlignment.CENTER);
+        
+        addBookCollectionTableHeader(workbook, sheet, rowCount);
 
-        String[] booksCollectionHeaders = {"ID", "Author", "Title", "Genre", "Price", "PubDate", "Review", "Type"};
+        rowCount++;
+        
+        addBookCollectionTableContent(workbook, sheet, rowCount);
+    }
 
-        row = sheet.createRow(++rowCount);
-        int columnCount = 0;
-
-        for (String header : booksCollectionHeaders) {
-            Cell cell1 = row.createCell(columnCount++);
-            cell1.setCellValue(header);
-            XSSFCellStyle style = workbook.createCellStyle();
-            style.setBorderLeft(BorderStyle.THIN);
-            style.setBorderBottom(BorderStyle.THIN);
-            style.setFillForegroundColor(new XSSFColor(Color.LIGHT_GRAY));
-            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            cell1.setCellStyle(style);
-        }
-
+    private static void addBookCollectionTableContent(XSSFWorkbook workbook,
+                                                      XSSFSheet sheet,
+                                                      int rowCount) {
+        DataFormat format = workbook.createDataFormat();
         for (Book book : BookDAO.getAllEntities()) {
-            row = sheet.createRow(++rowCount);
-            columnCount = 0;
+            XSSFRow row = sheet.createRow(++rowCount);
+            int columnCount = 0;
 
             CellUtil.createCell(row, columnCount++, book.getId());
 
@@ -132,6 +139,26 @@ public class SimpleExcelWriterExample {
 
             CellUtil.createCell(row, columnCount++, book.getType().toString());
 
+        }
+    }
+
+    private static void addBookCollectionTableHeader(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
+        String[] booksCollectionHeaders = {"ID", "Author", "Title", "Genre", 
+                "Price", "PubDate", "Review", "Type"};
+
+        XSSFRow row = sheet.createRow(++rowCount);
+        
+        int columnCount = 0;
+        
+        for (String header : booksCollectionHeaders) {
+            Cell cell1 = row.createCell(columnCount++);
+            cell1.setCellValue(header);
+            XSSFCellStyle style = workbook.createCellStyle();
+            style.setBorderLeft(BorderStyle.THIN);
+            style.setBorderBottom(BorderStyle.THIN);
+            style.setFillForegroundColor(new XSSFColor(Color.LIGHT_GRAY));
+            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            cell1.setCellStyle(style);
         }
     }
 
