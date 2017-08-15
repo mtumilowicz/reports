@@ -45,27 +45,22 @@ public class SimpleExcelWriterExample {
         
         rowCount++;
         
-        addSummaryTableHeader(workbook, sheet, rowCount++);
+        addSummaryTableHeaders(workbook, sheet, rowCount++);
 
         addSummaryTableContent(workbook, sheet, rowCount++);
         
        
     }
     
-    private static void addSummaryTableHeader(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
+    private static void addSummaryTableHeaders(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
         int columnCount = 0;
         XSSFRow row = sheet.createRow(rowCount++);
         Cell quantityHeader = CellUtil.createCell(row, columnCount++, "Ilość");
-        XSSFCellStyle style = workbook.createCellStyle();
-        style.setBorderLeft(BorderStyle.THIN);
-        style.setBorderBottom(BorderStyle.THIN);
-        style.setFillForegroundColor(new XSSFColor(Color.LIGHT_GRAY));
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        quantityHeader.setCellStyle(style);
+        addTableHeaderCell(workbook, quantityHeader);
 
 
         Cell valueHeader = CellUtil.createCell(row, columnCount++, "Wartość");
-        valueHeader.setCellStyle(style);
+        addTableHeaderCell(workbook, valueHeader);
     }
     
     private static void addSummaryTableContent(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
@@ -91,15 +86,10 @@ public class SimpleExcelWriterExample {
 
         sheet.addMergedRegion(new CellRangeAddress(0,0,0,7));
 
-        XSSFRow row = sheet.createRow(rowCount++);
-
-        Cell cell = row.createCell(0);
-
-        cell.setCellValue("Books Collection");
-
-        CellUtil.setAlignment(cell, HorizontalAlignment.CENTER);
+        Cell bookCollection = CellUtil.createCell(sheet.createRow(rowCount++), 0, "Books Collection");
+        CellUtil.setAlignment(bookCollection, HorizontalAlignment.CENTER);
         
-        addBookCollectionTableHeader(workbook, sheet, rowCount);
+        addBookCollectionTableHeaders(workbook, sheet, rowCount);
 
         rowCount++;
         
@@ -140,7 +130,7 @@ public class SimpleExcelWriterExample {
         }
     }
 
-    private static void addBookCollectionTableHeader(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
+    private static void addBookCollectionTableHeaders(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
         String[] booksCollectionHeaders = {"ID", "Author", "Title", "Genre", 
                 "Price", "PubDate", "Review", "Type"};
 
@@ -149,15 +139,18 @@ public class SimpleExcelWriterExample {
         int columnCount = 0;
         
         for (String header : booksCollectionHeaders) {
-            Cell cell1 = row.createCell(columnCount++);
-            cell1.setCellValue(header);
-            XSSFCellStyle style = workbook.createCellStyle();
-            style.setBorderLeft(BorderStyle.THIN);
-            style.setBorderBottom(BorderStyle.THIN);
-            style.setFillForegroundColor(new XSSFColor(Color.LIGHT_GRAY));
-            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            cell1.setCellStyle(style);
+            Cell headerCell = CellUtil.createCell(row, columnCount++, header);
+            addTableHeaderCell(workbook, headerCell);
         }
+    }
+    
+    private static void addTableHeaderCell(XSSFWorkbook workbook, Cell cell) {
+        XSSFCellStyle style = workbook.createCellStyle();
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setFillForegroundColor(new XSSFColor(Color.LIGHT_GRAY));
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        cell.setCellStyle(style);
     }
 
     private static void setColumnWidthInSheet(Sheet sheet) {
