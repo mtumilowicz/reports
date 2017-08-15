@@ -5,6 +5,7 @@ import entity.Book;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellUtil;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -72,6 +73,9 @@ public class SimpleExcelWriterExample {
 
         Cell titleCell = CellUtil.createCell(sheet.createRow(rowCount), 0, "Books Collection");
         CellUtil.setAlignment(titleCell, HorizontalAlignment.CENTER);
+        XSSFFont font = (XSSFFont) titleCell.getSheet().getWorkbook().createFont();
+        font.setFontHeight((short) 500);
+        CellUtil.setFont(titleCell, font);
     }
 
     private static void addBookCollectionTableContent(XSSFSheet sheet,
@@ -123,8 +127,8 @@ public class SimpleExcelWriterExample {
     private static void addSummarySheetTitle(XSSFSheet sheet, int rowCount) {
         sheet.addMergedRegion(new CellRangeAddress(0,0,0,7));
 
-        Cell summary = CellUtil.createCell(sheet.createRow(rowCount), 0, "Summary");
-        CellUtil.setAlignment(summary, HorizontalAlignment.CENTER);
+        Cell titleCell = CellUtil.createCell(sheet.createRow(rowCount), 0, "Summary");
+        CellUtil.setAlignment(titleCell, HorizontalAlignment.CENTER);
     }
 
     private static void addSummaryTableHeaders(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
