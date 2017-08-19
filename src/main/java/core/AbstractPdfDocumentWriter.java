@@ -14,7 +14,7 @@ import java.io.IOException;
 public abstract class AbstractPdfDocumentWriter implements PdfDocumentWriter {
 
     protected final PdfCellBuilder cellBuilder = new PdfCellBuilder();
-    protected final BundleHandler bundles = new BundleHandler(this.getClass().getSimpleName());
+    protected final BundleHandler bundles = new BundleHandler(this.getClass());
 
     public void save(String dest) {
         try {

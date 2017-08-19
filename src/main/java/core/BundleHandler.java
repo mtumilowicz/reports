@@ -9,8 +9,8 @@ public final class BundleHandler {
     
     private final String clazzName;
 
-    public BundleHandler(String clazzName) {
-        this.clazzName = clazzName;
+    public BundleHandler(Class clazz) {
+        this.clazzName = clazz.getSimpleName();
     }
 
     public String get(String value) {
