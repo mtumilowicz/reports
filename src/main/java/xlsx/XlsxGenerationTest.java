@@ -14,12 +14,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  * Created by mtumilowicz on 2017-08-14.
  */
-public class SimpleExcelWriterExample extends AbstractXlsxWriter {
+public class XlsxGenerationTest extends AbstractXlsxWriter {
     
     private static final String DEST = "output/xlsx/test.xlsx";
     
     public static void main(String[] args) {
-        new SimpleExcelWriterExample().save(DEST);
+        new XlsxGenerationTest().save(DEST);
     }
 
     @Override
