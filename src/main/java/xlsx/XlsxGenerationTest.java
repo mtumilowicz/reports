@@ -89,18 +89,18 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
 
             Cell cell1 = CellUtil.createCell(row, columnCount++, String.valueOf(book.getPrice()));
             CellUtil.setAlignment(cell1, HorizontalAlignment.RIGHT);
-            CellUtil.setCellStyleProperty(cell1, CellUtil.DATA_FORMAT, format.getFormat("#.00"));
+            CellUtil.setCellStyleProperty(cell1, CellUtil.DATA_FORMAT, format.money());
             cell1.setCellType(CellType.NUMERIC);
 
 
             Cell cell2 = CellUtil.createCell(row, columnCount++, "");
             cell2.setCellValue(book.getPubDate());
-            CellUtil.setCellStyleProperty(cell2, CellUtil.DATA_FORMAT, format.getFormat("YYYY-MM-DD"));
+            CellUtil.setCellStyleProperty(cell2, CellUtil.DATA_FORMAT, format.dateOnly());
             CellUtil.setAlignment(cell2, HorizontalAlignment.CENTER);
 
             CellUtil.createCell(row, columnCount++, book.getReview());
 
-            CellUtil.createCell(row, columnCount++, book.getType().toString());
+            CellUtil.createCell(row, columnCount++, bundle.get(book.getType()));
         }
     }
 
@@ -153,7 +153,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
 
         Cell value = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAO.sumPriceOfAllEntities().get()));
         value.setCellType(CellType.NUMERIC);
-        CellUtil.setCellStyleProperty(value, CellUtil.DATA_FORMAT, format.getFormat("#.00"));
+        CellUtil.setCellStyleProperty(value, CellUtil.DATA_FORMAT, format.money());
         CellUtil.setAlignment(value, HorizontalAlignment.RIGHT);
     }
     

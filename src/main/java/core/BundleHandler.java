@@ -16,4 +16,8 @@ public final class BundleHandler {
     public String get(String value) {
         return ResourceBundle.getBundle(clazzName).getString(value);
     }
+    
+    public <T extends Enum<T>> String get(T e) {
+        return EnumBundleHandler.get(e);
+    }
 }
