@@ -1,6 +1,7 @@
 package xlsx;
 
 import core.GenericBuilder;
+import core.xlsx.AbstractXlsxWriter;
 import dao.BookDAO;
 import entity.Book;
 import org.apache.poi.ss.usermodel.*;
@@ -23,7 +24,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
     }
 
     @Override
-    void prepare(XSSFWorkbook workbook) {
+    public void prepare(XSSFWorkbook workbook) {
         addBookCollectionSheet(workbook);
 
         addSummarySheet(workbook);

@@ -3,7 +3,7 @@ package entity;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import xml.converter.DateConverter;
+import core.xml.converter.DateConverter;
 
 import java.math.BigDecimal;
 import java.util.Date;

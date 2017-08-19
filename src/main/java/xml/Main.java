@@ -2,8 +2,8 @@ package xml;
 
 import entity.Book;
 import org.xml.sax.SAXException;
-import xml.parser.XmlFromFile;
-import xml.validator.XmlValidatorWrapper;
+import core.xml.parser.XmlFromFile;
+import core.xml.validator.XmlValidatorWrapper;
 
 import javax.xml.XMLConstants;
 import java.io.IOException;

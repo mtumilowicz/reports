@@ -1,9 +1,10 @@
 package xml.writer;
 
+import core.xml.writer.XmlWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import xml.builder.XmlDocumentBuilder.XmlElementBuilder;
-import xml.builder.XmlDocumentBuilderChainImpl;
+import core.xml.builder.XmlDocumentBuilder.XmlElementBuilder;
+import core.xml.builder.XmlDocumentBuilderChainImpl;
 
 /**
  * Created by mtumilowicz on 2017-06-15.
