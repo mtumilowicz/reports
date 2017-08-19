@@ -75,7 +75,6 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
 
     private void addBookCollectionTableContent(XSSFSheet sheet,
                                                       int rowCount) {
-        DataFormat format = sheet.getWorkbook().createDataFormat();
         for (Book book : BookDAO.getAllEntities()) {
             XSSFRow row = sheet.createRow(rowCount++);
             int columnCount = 0;
@@ -106,7 +105,8 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
     }
 
     private void addBookCollectionTableHeaders(XSSFSheet sheet, int rowCount) {
-        String[] booksCollectionHeaders = {"report.table.book.id", 
+        String[] booksCollectionHeaders = {
+                "report.table.book.id", 
                 "report.table.book.author", 
                 "report.table.book.title", 
                 "report.table.book.genre", 
@@ -146,8 +146,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
     private void addSummaryTableContent(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
         int columnCount = 0;
         XSSFRow row = sheet.createRow(rowCount++);
-
-        DataFormat format = workbook.createDataFormat();
+        
         Cell quantity = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAO.getAllEntities().size()));
         quantity.setCellType(CellType.NUMERIC);
         CellUtil.setAlignment(quantity, HorizontalAlignment.LEFT);
