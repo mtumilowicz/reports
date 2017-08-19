@@ -8,10 +8,9 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
-import core.bundle.EnumBundleHandler;
-import org.apache.commons.lang3.StringUtils;
-import core.pdf.utils.PdfStyle;
 import core.date.DateUtils;
+import core.pdf.utils.PdfStyle;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -42,12 +41,6 @@ public class PdfCellBuilder {
 
     public PdfCellBuilder value(String text) {
         this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
-
-        return this;
-    }
-
-    public <T extends Enum<T>> PdfCellBuilder value(T e) {
-        this.text = EnumBundleHandler.get(e);
 
         return this;
     }

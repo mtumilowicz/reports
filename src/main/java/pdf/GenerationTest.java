@@ -146,6 +146,6 @@ public class GenerationTest extends AbstractDocumentWriter {
                 .addCell(cellBuilder.value(book.getPrice()).right().build())
                 .addCell(cellBuilder.value(book.getPubDate()).center().build())
                 .addCell(cellBuilder.value(book.getReview()).build())
-                .addCell(cellBuilder.value(book.getType()).build());
+                .addCell(cellBuilder.value(bundles.get(book.getType())).build());
     }
 }

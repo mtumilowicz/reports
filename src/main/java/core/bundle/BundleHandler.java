@@ -1,5 +1,8 @@
 package core.bundle;
 
+import com.google.common.base.Preconditions;
+
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -7,17 +10,18 @@ import java.util.ResourceBundle;
  */
 public final class BundleHandler {
     
-    private final String clazzName;
+    private final ResourceBundle bundle;
 
     public BundleHandler(Class clazz) {
-        this.clazzName = clazz.getSimpleName();
+        Preconditions.checkArgument(clazz != null);
+        bundle = ResourceBundle.getBundle(clazz.getSimpleName());
     }
 
     public String get(String value) {
-        return ResourceBundle.getBundle(clazzName).getString(value);
+        return Objects.requireNonNull(bundle.getString(value));
     }
     
     public <T extends Enum<T>> String get(T e) {
-        return EnumBundleHandler.get(e);
+        return get(e.getClass().getSimpleName() + '.' + e.name());
     }
 }
