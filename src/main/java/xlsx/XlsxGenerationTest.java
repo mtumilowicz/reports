@@ -1,6 +1,6 @@
 package xlsx;
 
-import core.GenericBuilder;
+import core.builder.GenericBuilder;
 import core.xlsx.AbstractXlsxWriter;
 import dao.BookDAO;
 import entity.Book;
@@ -96,7 +96,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
 
             Cell cell2 = CellUtil.createCell(row, columnCount++, "");
             cell2.setCellValue(book.getPubDate());
-            CellUtil.setCellStyleProperty(cell2, CellUtil.DATA_FORMAT, format.dateOnly());
+            CellUtil.setCellStyleProperty(cell2, CellUtil.DATA_FORMAT, format.dateHours());
             CellUtil.setAlignment(cell2, HorizontalAlignment.CENTER);
 
             CellUtil.createCell(row, columnCount++, book.getReview());
@@ -171,7 +171,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
     private void setColumnWidthInSheet(Sheet sheet) {
         sheet.setColumnWidth(1, 5000);
         sheet.setColumnWidth(2, 8000);
-        sheet.setColumnWidth(5, 3000);
+        sheet.setColumnWidth(5, 4500);
         sheet.setColumnWidth(7, 3000);
     }
 }

@@ -1,3 +1,5 @@
+package core.bundle;
+
 import core.bundle.BundleHandler;
 import org.junit.Test;
 

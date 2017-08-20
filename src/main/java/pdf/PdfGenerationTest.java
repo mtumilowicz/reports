@@ -1,38 +1,34 @@
 package pdf;
 
-import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Table;
 import core.pdf.AbstractDocumentWriter;
+import core.pdf.builder.ImageBuilder;
+import core.pdf.builder.PdfCellBuilder;
 import dao.BookDAO;
 import entity.Book;
-import core.pdf.builder.PdfCellBuilder;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 
 /**
  * Created by mtumilowicz on 2017-07-05.
  */
-public class GenerationTest extends AbstractDocumentWriter {
+public class PdfGenerationTest extends AbstractDocumentWriter {
     private static final String DEST = "output/pdf/test.pdf";
 
-    public static void main(String args[]) throws IOException {
-        new GenerationTest().save(DEST);
+    public static void main(String args[]) {
+        new PdfGenerationTest().save(DEST);
     }
 
     @Override
     protected void prepare(Document document) {
-        Image icon = null;
-        try {
-            icon = new Image(ImageDataFactory.create("src/main/resources/harvard.png")).scaleToFit(100, 100);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        icon.setFixedPosition(document.getLeftMargin(), PageSize.A4.rotate().getHeight() - document.getTopMargin() - icon.getImageScaledHeight());
+        Image icon = ImageBuilder.Factory.get("src/main/resources/harvard.png")
+                .widthAndHeight(100, 100)
+                .position(document.getLeftMargin(), PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
+                .build();
+        
         document.add(icon);
 
         addSpacingTable(document);

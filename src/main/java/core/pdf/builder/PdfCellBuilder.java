@@ -1,5 +1,6 @@
 package core.pdf.builder;
 
+import com.google.common.base.Preconditions;
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.layout.Style;
 import com.itextpdf.layout.border.Border;
@@ -9,7 +10,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
 import core.date.DateUtils;
-import core.pdf.utils.PdfStyle;
+import core.pdf.utils.PdfFontsContainer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -26,7 +27,7 @@ public class PdfCellBuilder {
     private final static DecimalFormat DF = new DecimalFormat("#.00");
     private final static String EMPTY_STRING_VALUE = "-";
 
-    private PdfStyle defaultStyle = PdfStyle.HELVETICA;
+    private Style defaultStyle = new Style().setFont(PdfFontsContainer.getHelvetica());
     private Style singleCellStyle = null;
 
     private String text = EMPTY_STRING_VALUE;
@@ -64,12 +65,14 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder singleCellStyle(Style style) {
+        Preconditions.checkArgument(style != null);
         this.singleCellStyle = style;
 
         return this;
     }
 
     public PdfCellBuilder backgroundColor(Color backgroundColor) {
+        Preconditions.checkArgument(backgroundColor != null);
         this.backgroundColor = backgroundColor;
 
         return this;
@@ -82,12 +85,14 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder singleCellFontSize(int fontSize) {
+        Preconditions.checkArgument(fontSize > 0);
         this.singleCellFontSize = fontSize;
 
         return this;
     }
 
     public void defaultFontSize(int defaultFontSize) {
+        Preconditions.checkArgument(defaultFontSize > 0);
         this.defaultFontSize = defaultFontSize;
     }
 
@@ -100,6 +105,7 @@ public class PdfCellBuilder {
     }
 
     private PdfCellBuilder setTextAlignment(TextAlignment textAlignment) {
+        Preconditions.checkArgument(textAlignment != null);
         this.textAlignment = textAlignment;
 
         return this;
@@ -144,7 +150,7 @@ public class PdfCellBuilder {
     }
     
     private Style prepareStyle() {
-        return singleCellStyle != null ?  singleCellStyle : defaultStyle.getStyle();
+        return singleCellStyle != null ?  singleCellStyle : defaultStyle;
     }
     
     private Border prepareBorder() {

@@ -1,4 +1,4 @@
-package core;
+package core.builder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +11,16 @@ import java.util.function.Supplier;
  */
 public class GenericBuilder<T> {
 
-    private final Supplier<T> instantiator;
+    private final Supplier<T> instance;
 
     private List<Consumer<T>> instanceModifiers = new ArrayList<>();
 
-    public GenericBuilder(Supplier<T> instantiator) {
-        this.instantiator = instantiator;
+    public GenericBuilder(Supplier<T> instance) {
+        this.instance = instance;
     }
 
-    public static <T> GenericBuilder<T> of(Supplier<T> instantiator) {
-        return new GenericBuilder<T>(instantiator);
+    public static <T> GenericBuilder<T> of(Supplier<T> instance) {
+        return new GenericBuilder<>(instance);
     }
 
     public <U> GenericBuilder<T> with(BiConsumer<T, U> consumer, U value) {
@@ -30,7 +30,7 @@ public class GenericBuilder<T> {
     }
 
     public T build() {
-        T value = instantiator.get();
+        T value = instance.get();
         instanceModifiers.forEach(modifier -> modifier.accept(value));
         instanceModifiers.clear();
         return value;

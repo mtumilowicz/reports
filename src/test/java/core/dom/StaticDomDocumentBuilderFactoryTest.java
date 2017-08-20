@@ -1,4 +1,5 @@
-import core.dom.StaticDomDocumentBuilderFactory;
+package core.dom;
+
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -6,7 +7,6 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXMLEqual;

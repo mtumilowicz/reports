@@ -2,9 +2,7 @@ package core.pdf.utils;
 
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,13 +32,6 @@ public final class PdfFontsContainer {
     }
     
     private static void loadFont(String fontName) {
-        PdfFont font;
-        try {
-            font = PdfFontFactory.createFont(fontName, "Cp1250", true);
-        } catch (IOException e) {
-            throw new IllegalStateException("Cannot load: " + fontName);
-        }
-
-        FONTS.put(fontName, font);
+        FONTS.put(fontName, PdfFontsFactory.createFont(fontName));
     }
 }
