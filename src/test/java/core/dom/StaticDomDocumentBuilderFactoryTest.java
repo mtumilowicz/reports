@@ -59,6 +59,12 @@ public class StaticDomDocumentBuilderFactoryTest {
         StaticDomDocumentBuilderFactory.parse(null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void parseDocumentWithEmptyPath() {
+        StaticDomDocumentBuilderFactory.parse("");
+    }
+
+
     @Test
     public void parseDocumentSameAsImportedFromFile() {
         assertXMLEqual(StaticDomDocumentBuilderFactory.parse("src/test/resources/onlyRoot.xml"),

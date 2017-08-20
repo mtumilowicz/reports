@@ -11,8 +11,11 @@ import java.io.File;
  */
 public class XmlFromFile {
     private static final XStream xstream = new XStream();
-    
-    public static <T> T parse(String path, Class<T> clazz) {
+
+    private XmlFromFile() {
+    }
+
+    public static final <T> T parse(String path, Class<T> clazz) {
         Preconditions.checkArgument(StringUtils.isNotEmpty(path));
         Preconditions.checkArgument(clazz != null);
         xstream.processAnnotations(clazz);

@@ -11,11 +11,11 @@ import java.util.Objects;
 public class XmlDocumentBuilderChainImpl extends BaseXmlDocumentBuilderImpl {
     
     public XmlDocumentBuilderChainImpl(String name) {
-        super(name);
+        super(Objects.requireNonNull(name));
     }
 
     public XmlDocumentBuilderChainImpl(Document document) {
-        super(document);
+        super(Objects.requireNonNull(document));
     }
 
     @Override
@@ -29,7 +29,7 @@ public class XmlDocumentBuilderChainImpl extends BaseXmlDocumentBuilderImpl {
         }
         
         private XmlElementBuilderImpl(Element elem) {
-            super(elem);
+            super(Objects.requireNonNull(elem));
         }
 
         private XmlElementBuilderImpl(Element elem, Element parentElement) {
@@ -38,17 +38,12 @@ public class XmlDocumentBuilderChainImpl extends BaseXmlDocumentBuilderImpl {
 
         @Override
         public XmlElementBuilderImpl element(String name) {
-            Objects.requireNonNull(name);
-
-            return new XmlElementBuilderImpl(createElement(name), getElement());
+            return new XmlElementBuilderImpl(createElement(Objects.requireNonNull(name)), getElement());
         }
 
         @Override
         public XmlElementBuilderImpl attribute(String name, String value) {
-            Objects.requireNonNull(name);
-            Objects.requireNonNull(value);
-
-            super.addAttribute(name, value);
+            super.addAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
 
             return this;
         }

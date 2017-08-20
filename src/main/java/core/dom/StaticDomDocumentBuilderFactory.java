@@ -1,6 +1,7 @@
 package core.dom;
 
 import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -27,7 +28,7 @@ public class StaticDomDocumentBuilderFactory {
     }
     
     public static final Document parse(String path) {
-        Preconditions.checkArgument(path != null);
+        Preconditions.checkArgument(StringUtils.isNotEmpty(path));
         try {
             return Objects.requireNonNull(getBuilder().parse(path));
         } catch (SAXException | IOException e) {

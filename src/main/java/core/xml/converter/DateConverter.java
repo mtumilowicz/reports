@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import core.date.CoreDateUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.text.ParseException;
@@ -16,7 +17,7 @@ import java.util.Date;
  */
 public class DateConverter implements Converter {
     
-    private final FastDateFormat fdf = FastDateFormat.getInstance("yyyy-MM-dd");
+    private final FastDateFormat fdf = CoreDateUtils.ONLY_DATE;
 
     public DateConverter() {
         super();

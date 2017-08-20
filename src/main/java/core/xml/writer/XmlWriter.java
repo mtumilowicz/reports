@@ -6,6 +6,8 @@ import org.w3c.dom.Document;
 import core.xml.builder.XmlDocumentBuilder;
 import core.xml.transformer.XmlTransformer;
 
+import java.util.Objects;
+
 /**
  * Created by mtumilowicz on 2017-06-01.
  */
@@ -14,13 +16,13 @@ public abstract class XmlWriter implements DomDocumentWriter {
     private final XmlDocumentBuilder documentBuilder;
 
     public XmlWriter(XmlDocumentBuilder documentBuilder) {
-        this.documentBuilder = documentBuilder;
+        this.documentBuilder = Objects.requireNonNull(documentBuilder);
     }
     
     public abstract Document prepare();
 
     public XmlDocumentBuilder getDocumentBuilder() {
-        return documentBuilder;
+        return Objects.requireNonNull(documentBuilder);
     }
 
     @Override

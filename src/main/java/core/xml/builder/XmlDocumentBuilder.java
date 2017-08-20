@@ -13,18 +13,4 @@ public interface XmlDocumentBuilder {
     XmlDocumentBuilder addElement(Element e);
 
     XmlElementBuilder getElementBuilder();
-
-    interface XmlElementBuilder {
-        XmlElementBuilder element(String name);
-
-        XmlElementBuilder attribute(String name, String value);
-
-        XmlElementBuilder up();
-
-        XmlElementBuilder addInnerElement(Element elem);
-
-        XmlElementBuilder addInnerElement(String name);
-
-        Element build();
-    }
 }

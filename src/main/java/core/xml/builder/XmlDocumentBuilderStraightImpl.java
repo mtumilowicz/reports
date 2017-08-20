@@ -11,13 +11,13 @@ import java.util.Objects;
  * Created by mtumilowicz on 2017-06-15.
  */
 public class XmlDocumentBuilderStraightImpl extends BaseXmlDocumentBuilderImpl {
-    
+
     public XmlDocumentBuilderStraightImpl(String name) {
-        super(name);
+        super(Objects.requireNonNull(name));
     }
 
     public XmlDocumentBuilderStraightImpl(Document document) {
-        super(document);
+        super(Objects.requireNonNull(document));
     }
 
     @Override
@@ -28,45 +28,40 @@ public class XmlDocumentBuilderStraightImpl extends BaseXmlDocumentBuilderImpl {
     private class XmlElementBuilderImpl extends BaseXmlElementBuilder {
 
         private final List<Element> innerElements = new LinkedList<>();
-        
+
         private XmlElementBuilderImpl() {
         }
 
         private XmlElementBuilderImpl(Element elem) {
-            super(elem);
+            super(Objects.requireNonNull(elem));
         }
 
         @Override
         public XmlElementBuilderImpl element(String name) {
-            Objects.requireNonNull(name);
-
-            return new XmlElementBuilderImpl(createElement(name));
+            return new XmlElementBuilderImpl(createElement(Objects.requireNonNull(name)));
         }
 
         @Override
         public XmlElementBuilderImpl attribute(String name, String value) {
-            super.addAttribute(name, value);
+            super.addAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
 
             return this;
         }
 
         @Override
         public XmlElementBuilderImpl up() {
-            return null;
+            throw new UnsupportedOperationException("This operation is not supported in this builder - " +
+                    "use addInnerElement(...) in the proper level.");
         }
 
         public XmlElementBuilderImpl addInnerElement(String name) {
-            Objects.requireNonNull(name);
-
-            innerElements.add(createElement(name));
+            innerElements.add(createElement(Objects.requireNonNull(name)));
 
             return this;
         }
 
         public XmlElementBuilderImpl addInnerElement(Element elem) {
-            Objects.requireNonNull(elem);
-
-            innerElements.add(elem);
+            innerElements.add(Objects.requireNonNull(elem));
 
             return this;
         }

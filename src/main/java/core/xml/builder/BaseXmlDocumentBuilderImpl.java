@@ -1,5 +1,6 @@
 package core.xml.builder;
 
+import com.google.common.base.Preconditions;
 import core.dom.StaticDomDocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -16,28 +17,22 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
     private XmlElementBuilder elementBuilder;
     
     public BaseXmlDocumentBuilderImpl(String name) {
-        Objects.requireNonNull(name);
-        
-        document = StaticDomDocumentBuilderFactory.create(name);
+        document = StaticDomDocumentBuilderFactory.create(Objects.requireNonNull(name));
     }
 
     public BaseXmlDocumentBuilderImpl(Document document) {
-        Objects.requireNonNull(document);
-        
-        this.document = document;
+        this.document = Objects.requireNonNull(document);
     }
     
     public BaseXmlDocumentBuilderImpl addElement(Element e) {
-        Objects.requireNonNull(e);
-        
-        document.getDocumentElement().appendChild(e);
+        document.getDocumentElement().appendChild(Objects.requireNonNull(e));
         
         return this;
     }
 
     @Override
     public Document getDocument() {
-        return document;
+        return Objects.requireNonNull(document);
     }
     
     @Override
@@ -45,14 +40,13 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
         if (elementBuilder == null) {
             elementBuilder = createElementBuilder();
         }
-        Objects.requireNonNull(elementBuilder);
         
-        return elementBuilder;
+        return Objects.requireNonNull(elementBuilder);
     }
     
     public abstract XmlElementBuilder createElementBuilder();
 
-    public abstract class BaseXmlElementBuilder implements XmlElementBuilder {
+    abstract class BaseXmlElementBuilder implements XmlElementBuilder {
 
         private final Element element;
 
@@ -61,15 +55,11 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
         }
 
         BaseXmlElementBuilder(Element elem) {
-            Objects.requireNonNull(elem);
-            
-            this.element = elem;
+            this.element = Objects.requireNonNull(elem);
         }
 
         BaseXmlElementBuilder(Element elem, Element parentElement) {
-            Objects.requireNonNull(elem);
-            
-            this.element = elem;
+            this.element = Objects.requireNonNull(elem);
             document.getDocumentElement().appendChild(elem);
             if (parentElement != null) {
                 parentElement.appendChild(elem);
@@ -77,27 +67,20 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
         }
 
         void addAttribute(String name, String value) {
-            Objects.requireNonNull(name);
-            Objects.requireNonNull(value);
-
-            element.setAttribute(name, value);
+            element.setAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
         }
 
         void appendChild(Element innerElement) {
-            Objects.requireNonNull(element);
-
-            element.appendChild(innerElement);
+            element.appendChild(Objects.requireNonNull(innerElement));
         }
 
         Element createElement(String name) {
-            Objects.requireNonNull(name);
-
-            return document.createElement(name);
+            return document.createElement(Objects.requireNonNull(name));
         }
 
         @Override
         public Element build() {
-            return element;
+            return Objects.requireNonNull(element);
         }
 
         Element getElement() {
@@ -105,13 +88,15 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
         }
 
         Element up(int steps) {
+            Preconditions.checkArgument(steps >= 0);
+            
             Node currNode = getElement();
             int stepCount = 0;
-            while (currNode.getParentNode() != document && stepCount <= steps) {
+            while (currNode.getParentNode() != Objects.requireNonNull(document) && stepCount <= steps) {
                 currNode = currNode.getParentNode();
                 stepCount++;
             }
-            return (Element) currNode;
+            return Objects.requireNonNull((Element) currNode);
         }
     }
 }

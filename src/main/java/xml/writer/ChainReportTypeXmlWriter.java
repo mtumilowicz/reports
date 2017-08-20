@@ -3,7 +3,7 @@ package xml.writer;
 import core.xml.writer.XmlWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import core.xml.builder.XmlDocumentBuilder.XmlElementBuilder;
+import core.xml.builder.XmlElementBuilder;
 import core.xml.builder.XmlDocumentBuilderChainImpl;
 
 /**

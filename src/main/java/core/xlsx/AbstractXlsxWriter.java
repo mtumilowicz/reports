@@ -31,7 +31,7 @@ public abstract class AbstractXlsxWriter implements DocumentWriter {
     }
     
     private void initDateFormat(XSSFWorkbook workbook) {
-        format = new XlsxDataFormat(workbook.createDataFormat());
+        format = XlsxDataFormat.Factory.get(workbook.createDataFormat());
     }
 
     public abstract void prepare(XSSFWorkbook workbook);

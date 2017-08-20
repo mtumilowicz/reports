@@ -3,6 +3,7 @@ package core.pdf.builder;
 import com.google.common.base.Preconditions;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.element.Image;
+import org.apache.commons.lang3.StringUtils;
 
 import java.net.MalformedURLException;
 
@@ -36,6 +37,7 @@ public class ImageBuilder {
     public Image build() {
         Image icon;
         try {
+            Preconditions.checkState(StringUtils.isNotEmpty(path));
             icon = new Image(ImageDataFactory.create(path));
         } catch (MalformedURLException e) {
             throw new ImageBuilderException(e.getLocalizedMessage());
@@ -63,7 +65,7 @@ public class ImageBuilder {
     
     public static final class Factory {
         public static final ImageBuilder get(String path) {
-            Preconditions.checkArgument(path != null);
+            Preconditions.checkArgument(StringUtils.isNotEmpty(path));
             
             return new ImageBuilder(path);
         }

@@ -9,7 +9,7 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
-import core.date.DateUtils;
+import core.date.CoreDateUtils;
 import core.pdf.utils.PdfFontsContainer;
 import org.apache.commons.lang3.StringUtils;
 
@@ -51,7 +51,7 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder value(Date value) {
-        return value(value == null ? StringUtils.EMPTY : DateUtils.ONLY_DATE.format(value));
+        return value(value == null ? StringUtils.EMPTY : CoreDateUtils.ONLY_DATE.format(value));
     }
 
     public PdfCellBuilder value(Integer value) {
