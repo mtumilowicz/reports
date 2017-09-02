@@ -2,9 +2,11 @@ package core.xml.writer;
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import core.dom.DomDocumentWriter;
-import org.w3c.dom.Document;
 import core.xml.builder.XmlDocumentBuilder;
+import core.xml.builder.XmlElementBuilder;
 import core.xml.transformer.XmlTransformer;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.util.Objects;
 
@@ -18,11 +20,19 @@ public abstract class XmlWriter implements DomDocumentWriter {
     public XmlWriter(XmlDocumentBuilder documentBuilder) {
         this.documentBuilder = Objects.requireNonNull(documentBuilder);
     }
+
+    public XmlElementBuilder createElement(String elementName) {
+        return documentBuilder.element(elementName);
+    }
+
+    public XmlDocumentBuilder addElement(Element e) {
+        return documentBuilder.addElement(e);
+    }
     
     public abstract Document prepare();
 
-    public XmlDocumentBuilder getDocumentBuilder() {
-        return Objects.requireNonNull(documentBuilder);
+    public Document getDocument() {
+        return Objects.requireNonNull(documentBuilder.getDocument());
     }
 
     @Override

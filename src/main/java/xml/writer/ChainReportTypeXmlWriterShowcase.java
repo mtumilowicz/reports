@@ -1,26 +1,22 @@
 package xml.writer;
 
+import core.xml.builder.XmlDocumentBuilderChainImpl;
 import core.xml.writer.XmlWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import core.xml.builder.XmlElementBuilder;
-import core.xml.builder.XmlDocumentBuilderChainImpl;
 
 /**
  * Created by mtumilowicz on 2017-06-15.
  */
-public class ChainReportTypeXmlWriter extends XmlWriter {
+public class ChainReportTypeXmlWriterShowcase extends XmlWriter {
 
-    private final XmlElementBuilder elementBuilder;
-
-    public ChainReportTypeXmlWriter(String firstNodeName) {
+    public ChainReportTypeXmlWriterShowcase(String firstNodeName) {
         super(new XmlDocumentBuilderChainImpl(firstNodeName));
-        this.elementBuilder = super.getDocumentBuilder().getElementBuilder();
     }
 
     @Override
     public Document prepare() {
-        Element node1 = elementBuilder.element("node1")
+        Element node1 = createElement("node1")
                                             .element("node1_1")
                                                 .attribute("node_1_1_a1", "node_1_1_v1")
                                                 .attribute("node_1_1_a2", "node_1_1_v2")
@@ -31,13 +27,13 @@ public class ChainReportTypeXmlWriter extends XmlWriter {
                                             .up()
                                         .element("node2")
                                     .build();
-        getDocumentBuilder().addElement(node1);
+        addElement(node1);
 
-        return getDocumentBuilder().getDocument();
+        return getDocument();
     }
 
     public static void main(String[] args) {
-        ChainReportTypeXmlWriter xmlWriter = new ChainReportTypeXmlWriter("node0");
+        ChainReportTypeXmlWriterShowcase xmlWriter = new ChainReportTypeXmlWriterShowcase("node0");
 
         xmlWriter.print();
     }

@@ -14,7 +14,7 @@ public class XmlDocumentBuilderChainImpl extends BaseXmlDocumentBuilderImpl {
     }
 
     @Override
-    public XmlElementBuilder createElementBuilder() {
+    XmlElementBuilder createElementBuilder() {
         return new XmlElementBuilderImpl();
     }
 
@@ -51,13 +51,13 @@ public class XmlDocumentBuilderChainImpl extends BaseXmlDocumentBuilderImpl {
         @Override
         public BaseXmlElementBuilder addInnerElement(Element elem) {
             throw new UnsupportedOperationException("This operation is not supported in this builder - " +
-                    "use chaining of element(...).");
+                    "use chaining of createElement(...).");
         }
 
         @Override
         public BaseXmlElementBuilder addInnerElement(String name) {
             throw new UnsupportedOperationException("This operation is not supported in this builder - " +
-                    "use chaining of element(...).");
+                    "use chaining of createElement(...).");
         }
     }
 }

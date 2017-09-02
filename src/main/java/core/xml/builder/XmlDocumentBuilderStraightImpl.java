@@ -1,6 +1,5 @@
 package core.xml.builder;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.util.LinkedList;
@@ -16,12 +15,8 @@ public class XmlDocumentBuilderStraightImpl extends BaseXmlDocumentBuilderImpl {
         super(Objects.requireNonNull(name));
     }
 
-    public XmlDocumentBuilderStraightImpl(Document document) {
-        super(Objects.requireNonNull(document));
-    }
-
     @Override
-    public XmlElementBuilder createElementBuilder() {
+    XmlElementBuilder createElementBuilder() {
         return new XmlElementBuilderImpl();
     }
 

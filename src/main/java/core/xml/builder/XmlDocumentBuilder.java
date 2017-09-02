@@ -13,4 +13,6 @@ public interface XmlDocumentBuilder {
     XmlDocumentBuilder addElement(Element e);
 
     XmlElementBuilder getElementBuilder();
+
+    XmlElementBuilder element(String elementName);
 }

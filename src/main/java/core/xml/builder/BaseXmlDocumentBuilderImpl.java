@@ -16,7 +16,7 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
     private final Document document;
     private XmlElementBuilder elementBuilder;
 
-    public BaseXmlDocumentBuilderImpl(String name) {
+    BaseXmlDocumentBuilderImpl(String name) {
         document = StaticDomDocumentBuilderFactory.create(Objects.requireNonNull(name));
     }
     
@@ -39,14 +39,19 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
         
         return Objects.requireNonNull(elementBuilder);
     }
-    
-    public abstract XmlElementBuilder createElementBuilder();
+
+    @Override
+    public XmlElementBuilder element(String elementName) {
+        return getElementBuilder().element(elementName);
+    }
+
+    abstract XmlElementBuilder createElementBuilder();
 
     abstract class BaseXmlElementBuilder implements XmlElementBuilder {
 
         private final Element element;
 
-        public BaseXmlElementBuilder() {
+        BaseXmlElementBuilder() {
             element = null;
         }
 
