@@ -1,6 +1,5 @@
-package xml.writer;
+package core.xml.builder;
 
-import core.xml.builder.XmlDocumentBuilderChainImpl;
 import core.xml.writer.XmlWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -10,7 +9,7 @@ import org.w3c.dom.Element;
  */
 public class ChainReportTypeXmlWriterShowcase extends XmlWriter {
 
-    public ChainReportTypeXmlWriterShowcase(String firstNodeName) {
+    ChainReportTypeXmlWriterShowcase(String firstNodeName) {
         super(new XmlDocumentBuilderChainImpl(firstNodeName));
     }
 
