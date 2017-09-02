@@ -9,6 +9,7 @@ import core.pdf.builder.ImageBuilder;
 import core.pdf.builder.PdfCellBuilder;
 import dao.BookDAO;
 import entity.Book;
+import org.apache.commons.collections4.ListUtils;
 
 import java.math.BigDecimal;
 
@@ -26,7 +27,8 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
     protected void prepare(Document document) {
         Image icon = ImageBuilder.Factory.get("src/main/resources/harvard.png")
                 .widthAndHeight(100, 100)
-                .position(document.getLeftMargin(), PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
+                .position(document.getLeftMargin(), 
+                        PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
                 .build();
         
         document.add(icon);
@@ -41,8 +43,8 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
 
         addSpacingTable(document);
         
-        addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(),
-                BookDAO.sumPriceOfAllEntities().get());
+        addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(), 
+                BookDAO.sumPriceOfAllEntities().orElse(BigDecimal.ZERO));
     }
 
     private void addSummaryBooksCollectionTable(Document doc, int quantity, BigDecimal value) {
@@ -130,7 +132,7 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
                 .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.type"))
                         .backgroundColorStrike()
                         .build());
-        BookDAO.getAllEntities().stream().forEach(book -> addRow(table, book));
+        ListUtils.emptyIfNull(BookDAO.getAllEntities()).forEach(book -> addRow(table, book));
         table.complete();
     }
 
