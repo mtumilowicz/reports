@@ -1,6 +1,7 @@
-package core.xml.builder;
+package core.xml.builder.chain;
 
 import core.dom.ControlXmlDocument;
+import core.xml.builder.XmlDocumentBuilderChainImpl;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 

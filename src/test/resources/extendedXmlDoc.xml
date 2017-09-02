@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <node0>
     <node1>
-        <node1_1 node_1_1_a1="node_1_1_v1" node_1_1_a2="node_1_1_v2">
-            <node1_1_2 node_1_2_a1="node_1_2_v1"/>
+        <node1_1 node1_1_a1="node1_1_v1" node1_1_a2="node1_1_v2">
+            <node1_1_2 node1_1_2_a1="node1_1_2_v1"/>
         </node1_1>
         <note1_2/>
     </node1>

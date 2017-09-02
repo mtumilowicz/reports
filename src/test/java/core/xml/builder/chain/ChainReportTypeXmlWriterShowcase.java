@@ -1,5 +1,6 @@
-package core.xml.builder;
+package core.xml.builder.chain;
 
+import core.xml.builder.XmlDocumentBuilderChainImpl;
 import core.xml.writer.XmlWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,10 +18,10 @@ public class ChainReportTypeXmlWriterShowcase extends XmlWriter {
     public Document prepare() {
         Element node1 = createElement("node1")
                                             .element("node1_1")
-                                                .attribute("node_1_1_a1", "node_1_1_v1")
-                                                .attribute("node_1_1_a2", "node_1_1_v2")
+                                                .attribute("node1_1_a1", "node1_1_v1")
+                                                .attribute("node1_1_a2", "node1_1_v2")
                                                 .element("node1_1_2")
-                                                    .attribute("node_1_2_a1", "node_1_2_v1")
+                                                    .attribute("node1_1_2_a1", "node1_1_2_v1")
                                                 .up()
                                             .element("note1_2")
                                             .up()
