@@ -23,7 +23,7 @@ public class ChainReportTypeXmlWriterShowcase extends XmlWriter {
                                                 .element("node1_1_2")
                                                     .attribute("node1_1_2_a1", "node1_1_2_v1")
                                                 .up()
-                                            .element("note1_2")
+                                            .element("node1_2")
                                             .up()
                                         .element("node2")
                                     .build();
