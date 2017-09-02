@@ -44,7 +44,7 @@ public class StaticDomDocumentBuilderFactory {
         }
     }
 
-    private static final class StaticDocumentBuilderFactoryException extends RuntimeException {
+    public static final class StaticDocumentBuilderFactoryException extends RuntimeException {
         private StaticDocumentBuilderFactoryException(String message) {
             super(message);
         }

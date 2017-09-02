@@ -17,8 +17,8 @@ public class PdfFontsFactory {
         }
     }
     
-    private static final class PdfFontFactoryException extends RuntimeException {
-        public PdfFontFactoryException(String message) {
+    public static final class PdfFontFactoryException extends RuntimeException {
+        private PdfFontFactoryException(String message) {
             super(message);
         }
     }

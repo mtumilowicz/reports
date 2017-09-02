@@ -71,8 +71,8 @@ public class ImageBuilder {
         }
     }
     
-    private static final class ImageBuilderException extends RuntimeException {
-        public ImageBuilderException(String message) {
+    public static final class ImageBuilderException extends RuntimeException {
+        private ImageBuilderException(String message) {
             super(message);
         }
     }
