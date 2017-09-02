@@ -1,5 +1,6 @@
 package core.xml.converter;
 
+import com.google.common.base.Preconditions;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -8,7 +9,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import core.date.CoreDateUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -17,8 +17,6 @@ import java.util.Date;
  * Created by mtumilowicz on 2017-06-25.
  */
 public class DateOnlyConverter implements Converter {
-    
-    private final FastDateFormat fdf = CoreDateUtils.DATE_ONLY;
 
     public DateOnlyConverter() {
         super();
@@ -30,8 +28,8 @@ public class DateOnlyConverter implements Converter {
 
     public void marshal(Object value, HierarchicalStreamWriter writer,
                         MarshallingContext context) {
-        Date date = (Date) value;
-        writer.setValue(fdf.format(date));
+        Preconditions.checkArgument(value instanceof Date);
+        writer.setValue(CoreDateUtils.DATE_ONLY.format((Date) value));
 }
 
     public Object unmarshal(HierarchicalStreamReader reader,
@@ -41,7 +39,7 @@ public class DateOnlyConverter implements Converter {
             return null;
         }
         try {
-            return fdf.parse(dateToParse);
+            return CoreDateUtils.DATE_ONLY.parse(dateToParse);
         } catch (ParseException e) {
             throw new ConversionException(e.getMessage(), e);
         }
