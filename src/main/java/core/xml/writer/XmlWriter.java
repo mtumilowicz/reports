@@ -21,8 +21,8 @@ public abstract class XmlWriter implements DomDocumentWriter {
         this.documentBuilder = Objects.requireNonNull(documentBuilder);
     }
 
-    public XmlElementBuilder createElement(String elementName) {
-        return documentBuilder.element(elementName);
+    public XmlElementBuilder createElement(String name) {
+        return documentBuilder.element(name);
     }
 
     public XmlDocumentBuilder addElement(Element e) {
