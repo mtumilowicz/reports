@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
  */
 public class StraightReportTypeXmlWriterShowcase extends XmlWriter {
 
-    public StraightReportTypeXmlWriterShowcase(String rootName) {
+    StraightReportTypeXmlWriterShowcase(String rootName) {
         super(new XmlDocumentBuilderStraightImpl(rootName));
     }
 
@@ -26,9 +26,10 @@ public class StraightReportTypeXmlWriterShowcase extends XmlWriter {
                                     .attribute("node1_1_2_a1", "node1_1_2_v1")
                                     .build())
                         .build())
+                .addInnerElement("node1_2")
                 .build();
         
-        Element node2 = createElement("node1").build();
+        Element node2 = createElement("node2").build();
         
         addElement(node1)
         .addElement(node2);
