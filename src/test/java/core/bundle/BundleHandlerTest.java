@@ -1,6 +1,5 @@
 package core.bundle;
 
-import core.bundle.BundleHandler;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -17,11 +16,15 @@ public class BundleHandlerTest {
     public void nullArgumentInConstructor() {
         new BundleHandler(null);
     }
+    
+    public void defaultConstructor_GeneralProperties() {
+        assertEquals(new BundleHandler().get("test.key"), "testValue");
+    }
 
     @Test
     public void stringBundleValue() {
         BundleHandler bundle = new BundleHandler(this.getClass());
-        assertEquals(bundle.get("stringTestValue"), "testValue");
+        assertEquals(bundle.get("test.key"), "testValue");
     }
 
     @Test
