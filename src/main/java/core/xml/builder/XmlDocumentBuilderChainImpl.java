@@ -1,6 +1,5 @@
 package core.xml.builder;
 
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.util.Objects;
@@ -12,10 +11,6 @@ public class XmlDocumentBuilderChainImpl extends BaseXmlDocumentBuilderImpl {
     
     public XmlDocumentBuilderChainImpl(String name) {
         super(Objects.requireNonNull(name));
-    }
-
-    public XmlDocumentBuilderChainImpl(Document document) {
-        super(Objects.requireNonNull(document));
     }
 
     @Override

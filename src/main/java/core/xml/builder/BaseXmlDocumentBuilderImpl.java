@@ -15,13 +15,9 @@ public abstract class BaseXmlDocumentBuilderImpl implements XmlDocumentBuilder {
     
     private final Document document;
     private XmlElementBuilder elementBuilder;
-    
+
     public BaseXmlDocumentBuilderImpl(String name) {
         document = StaticDomDocumentBuilderFactory.create(Objects.requireNonNull(name));
-    }
-
-    public BaseXmlDocumentBuilderImpl(Document document) {
-        this.document = Objects.requireNonNull(document);
     }
     
     public BaseXmlDocumentBuilderImpl addElement(Element e) {

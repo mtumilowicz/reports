@@ -1,13 +1,6 @@
 package core.dom;
 
 import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 
 import static org.custommonkey.xmlunit.XMLAssert.assertXMLEqual;
 import static org.custommonkey.xmlunit.XMLAssert.assertXMLNotEqual;
@@ -34,24 +27,26 @@ public class StaticDomDocumentBuilderFactoryTest {
     
     @Test
     public void createDocumentWithSameRootNameAsControlDocument() {
-        assertXMLEqual(StaticDomDocumentBuilderFactory.create(sameTestNodeName), getControlDocument(sameTestNodeName));
+        assertXMLEqual(StaticDomDocumentBuilderFactory.create(sameTestNodeName),
+                ControlXmlDocument.byName(sameTestNodeName));
     }
 
     @Test
     public void createDocumentWithDifferentRootNameAsControlDocument() {
-        assertXMLNotEqual(StaticDomDocumentBuilderFactory.create(testNodeName), getControlDocument(differentTestNodeName));
+        assertXMLNotEqual(StaticDomDocumentBuilderFactory.create(testNodeName), 
+                ControlXmlDocument.byName(differentTestNodeName));
     }
     
     @Test
     public void createDocumentSameAsImportedFromFile() {
-        assertXMLEqual(StaticDomDocumentBuilderFactory.create(testNodeName), 
-                getControlDocumentFromFile("src/test/resources/onlyRoot.xml"));
+        assertXMLEqual(StaticDomDocumentBuilderFactory.create(testNodeName),
+                ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"));
     }
 
     @Test
     public void createDocumentDifferentAsImportedFromFile() {
         assertXMLNotEqual(StaticDomDocumentBuilderFactory.create(differentTestNodeName),
-                getControlDocumentFromFile("src/test/resources/onlyRoot.xml"));
+                ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -68,54 +63,12 @@ public class StaticDomDocumentBuilderFactoryTest {
     @Test
     public void parseDocumentSameAsImportedFromFile() {
         assertXMLEqual(StaticDomDocumentBuilderFactory.parse("src/test/resources/onlyRoot.xml"),
-                getControlDocumentFromFile("src/test/resources/onlyRoot.xml"));
+                ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"));
     }
 
     @Test
     public void parseDocumentDifferentAsImportedFromFile() {
         assertXMLNotEqual(StaticDomDocumentBuilderFactory.parse("src/test/resources/onlyRoot2.xml"),
-                getControlDocumentFromFile("src/test/resources/onlyRoot.xml"));
-    }
-    
-    private Document getControlDocument(String name) { 
-        assertNotNull(name);
-        
-        Document control = createControlDocument();
-        assertNotNull(control);
-        
-        Element controlNode = prepareControlElement(control, name);
-        assertNotNull(controlNode);
-        
-        control.appendChild(controlNode);
-        assertNotNull(control);
-        
-        return control;
-    }
-    
-    private Document createControlDocument() {
-        try {
-            return DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-        } catch (ParserConfigurationException e) {
-            assertNotNull(e);
-        }
-        return null;
-    }
-
-    private Document getControlDocumentFromFile(String path) {
-        try {
-            return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(path);
-        } catch (IOException | ParserConfigurationException | SAXException e) {
-            assertNotNull(e);
-        }
-        return null;
-    }
-
-    private Element prepareControlElement(Document doc, String name) {
-        assertNotNull(name);
-        
-        Element element = doc.createElement(name);
-        assertNotNull(element);
-        
-        return element;
+                ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"));
     }
 }
