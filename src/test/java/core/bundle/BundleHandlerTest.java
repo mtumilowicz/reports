@@ -17,6 +17,7 @@ public class BundleHandlerTest {
         new BundleHandler(null);
     }
     
+    @Test
     public void defaultConstructor_GeneralProperties() {
         assertEquals(new BundleHandler().get("test.key"), "testValue");
     }
