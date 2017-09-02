@@ -68,7 +68,7 @@ public class XmlDocumentBuilderStraightImpl extends BaseXmlDocumentBuilderImpl {
 
         @Override
         public Element build() {
-            innerElements.stream().forEachOrdered(super::appendChild);
+            innerElements.forEach(super::appendChild);
             innerElements.clear();
 
             return super.build();
