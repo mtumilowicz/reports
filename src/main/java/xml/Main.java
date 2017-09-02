@@ -1,9 +1,8 @@
 package xml;
 
+import core.xml.validator.XmlValidatorWrapper;
 import entity.Book;
 import org.xml.sax.SAXException;
-import core.xml.parser.XmlFromFile;
-import core.xml.validator.XmlValidatorWrapper;
 
 import javax.xml.XMLConstants;
 import java.io.IOException;
@@ -32,8 +31,5 @@ public class Main {
 
         String s = book.toXmlString();
         System.out.println(s);
-        
-        Book bookFromXml = XmlFromFile.parse("src/main/resources/book.xml", Book.class);
-        System.out.println(bookFromXml);
     }
 }

@@ -114,12 +114,19 @@ public class Book extends XmlEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(id, book.id);
+        return Objects.equals(id, book.id) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(genre, book.genre) &&
+                Objects.equals(price, book.price) &&
+                Objects.equals(pubDate, book.pubDate) &&
+                Objects.equals(review, book.review) &&
+                type == book.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, author, title, genre, price, pubDate, review, type);
     }
 
     @Override
