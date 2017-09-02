@@ -51,7 +51,7 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder value(Date value) {
-        return value(value == null ? StringUtils.EMPTY : CoreDateUtils.ONLY_DATE.format(value));
+        return value(value == null ? StringUtils.EMPTY : CoreDateUtils.DATE_ONLY.format(value));
     }
 
     public PdfCellBuilder value(Integer value) {

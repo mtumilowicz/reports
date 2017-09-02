@@ -3,7 +3,7 @@ package entity;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import core.xml.converter.DateConverter;
+import core.xml.converter.DateOnlyConverter;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -26,7 +26,7 @@ public class Book extends XmlEntity {
     
     private BigDecimal price;
     
-    @XStreamConverter(DateConverter.class)
+    @XStreamConverter(DateOnlyConverter.class)
     @XStreamAlias("pub-date")
     private Date pubDate;
     
