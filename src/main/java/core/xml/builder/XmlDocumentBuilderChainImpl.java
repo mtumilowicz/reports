@@ -9,8 +9,8 @@ import java.util.Objects;
  */
 public class XmlDocumentBuilderChainImpl extends BaseXmlDocumentBuilderImpl {
     
-    public XmlDocumentBuilderChainImpl(String name) {
-        super(Objects.requireNonNull(name));
+    public XmlDocumentBuilderChainImpl(String rootName) {
+        super(Objects.requireNonNull(rootName));
     }
 
     @Override

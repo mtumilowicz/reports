@@ -9,8 +9,8 @@ import org.w3c.dom.Element;
  */
 public class ChainReportTypeXmlWriterShowcase extends XmlWriter {
 
-    ChainReportTypeXmlWriterShowcase(String firstNodeName) {
-        super(new XmlDocumentBuilderChainImpl(firstNodeName));
+    ChainReportTypeXmlWriterShowcase(String rootName) {
+        super(new XmlDocumentBuilderChainImpl(rootName));
     }
 
     @Override

@@ -29,7 +29,7 @@ public class XmlDocumentBuilderChainImplTest {
     @Test
     public void xmlDocumentBuilderChainImplFullMethodsTestFail() {
         XMLUnit.setNormalizeWhitespace(true);
-        assertXMLNotEqual(ControlXmlDocument.byPath("src/test/resources/extendedXmlDoc2.xml"),
+        assertXMLNotEqual(ControlXmlDocument.byPath("src/test/resources/extendedXmlDocWrongNode.xml"),
                 new ChainReportTypeXmlWriterShowcase("node0").prepare());
     }
 
