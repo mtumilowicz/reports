@@ -1,4 +1,4 @@
-package core.xml.validator;
+package core.xml.schema;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
@@ -57,7 +57,7 @@ public class XmlSchemaFactory {
         }
     }
 
-    private static class XmlSchemaFactoryException  extends RuntimeException  {
+    public static final class XmlSchemaFactoryException  extends RuntimeException  {
         private XmlSchemaFactoryException(String message) {
             super(message);
         }

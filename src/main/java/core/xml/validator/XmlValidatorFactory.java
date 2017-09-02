@@ -1,6 +1,7 @@
 package core.xml.validator;
 
 import com.google.common.base.Preconditions;
+import core.xml.schema.XmlSchemaFactory;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.validation.Validator;

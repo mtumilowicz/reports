@@ -1,4 +1,4 @@
-package core.xml;
+package core.xml.parser;
 
 /**
  * Created by mtumilowicz on 2017-08-20.

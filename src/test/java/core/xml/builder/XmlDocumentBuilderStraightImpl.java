@@ -1,4 +1,4 @@
-package core.xml;
+package core.xml.builder;
 
 /**
  * Created by mtumilowicz on 2017-06-15.
