@@ -1,7 +1,7 @@
 package dao;
 
-import com.google.common.base.Preconditions;
 import entity.Book;
+import org.apache.commons.collections4.ListUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,14 +19,11 @@ public class BookDAO {
     }
     
     public static Optional<BigDecimal> sumPrice(List<Book> books) {
-        Preconditions.checkArgument(books != null);
-        
-        return books.stream().map(Book::getPrice).filter(Objects::nonNull).reduce(BigDecimal::add);
+        return ListUtils.emptyIfNull(books).stream().map(Book::getPrice).filter(Objects::nonNull).reduce(BigDecimal::add);
     }
 
     public static Optional<BigDecimal> sumPriceOfAllEntities() {
-        List<Book> allEntities = getAllEntities();
-        Objects.requireNonNull(allEntities);
+        List<Book> allEntities = Objects.requireNonNull(getAllEntities());
 
         return sumPrice(allEntities);
     }
