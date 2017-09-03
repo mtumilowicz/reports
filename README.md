@@ -40,7 +40,7 @@
         │            │   │   ├── XlsxDataFormat
         │            │   │   └── XlsxDataFormatType
         │            │   └── writer
-        │            │        └── AbstractXlsxWriter
+        │            │       └── AbstractXlsxWriter
         │            └── xml
         │                ├── builder
         │                │   ├── BaseXmlDocumentBuilderImpl
@@ -69,11 +69,11 @@
                  │   └── xml
                  │       ├── builder
                  │       │   ├── chain
-                 │       │   │     ├── ChainReportTypeXmlWriterShowcase
-                 │       │   │     └── XmlDocumentBuilderChainImplTest
+                 │       │   │   ├── ChainReportTypeXmlWriterShowcase
+                 │       │   │   └── XmlDocumentBuilderChainImplTest
                  │       │   └── straight
-                 │       │         ├── StraightReportTypeXmlWriterShowcase
-                 │       │         └── XmlDocumentBuilderStraightImpl                 
+                 │       │       ├── StraightReportTypeXmlWriterShowcase
+                 │       │       └── XmlDocumentBuilderStraightImpl                 
                  │       ├── converter
                  │       │   └── DateConverterTest
                  │       └── parser
