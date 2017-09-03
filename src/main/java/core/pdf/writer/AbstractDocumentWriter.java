@@ -1,11 +1,11 @@
-package core.pdf;
+package core.pdf.writer;
 
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import core.bundle.BundleHandler;
-import core.DocumentWriter;
+import core.writer.DocumentWriter;
 import core.pdf.builder.PdfCellBuilder;
 
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package xlsx;
 
 import core.builder.GenericBuilder;
-import core.xlsx.AbstractXlsxWriter;
+import core.xlsx.writer.AbstractXlsxWriter;
 import dao.BookDAOMock;
 import entity.Book;
 import org.apache.poi.ss.usermodel.*;

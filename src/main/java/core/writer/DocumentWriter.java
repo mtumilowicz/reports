@@ -1,4 +1,4 @@
-package core;
+package core.writer;
 
 /**
  * Created by mtumilowicz on 2017-07-08.

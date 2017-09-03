@@ -4,7 +4,7 @@ import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Table;
-import core.pdf.AbstractDocumentWriter;
+import core.pdf.writer.AbstractDocumentWriter;
 import core.pdf.builder.ImageBuilder;
 import core.pdf.builder.PdfCellBuilder;
 import dao.BookDAOMock;

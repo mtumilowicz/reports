@@ -1,6 +1,6 @@
-package core.xlsx;
+package core.xlsx.writer;
 
-import core.DocumentWriter;
+import core.writer.DocumentWriter;
 import core.bundle.BundleHandler;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import core.xlsx.format.XlsxDataFormat;
