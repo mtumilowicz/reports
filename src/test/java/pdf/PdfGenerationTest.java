@@ -7,7 +7,7 @@ import com.itextpdf.layout.element.Table;
 import core.pdf.AbstractDocumentWriter;
 import core.pdf.builder.ImageBuilder;
 import core.pdf.builder.PdfCellBuilder;
-import dao.BookDAO;
+import dao.BookDAOMock;
 import entity.Book;
 import org.apache.commons.collections4.ListUtils;
 
@@ -43,8 +43,8 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
 
         addSpacingTable(document);
         
-        addSummaryBooksCollectionTable(document, BookDAO.getAllEntities().size(), 
-                BookDAO.sumPriceOfAllEntities().orElse(BigDecimal.ZERO));
+        addSummaryBooksCollectionTable(document, BookDAOMock.getAllEntities().size(),
+                BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO));
     }
 
     private void addSummaryBooksCollectionTable(Document doc, int quantity, BigDecimal value) {
@@ -132,7 +132,7 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
                 .addHeaderCell(cellBuilder.value(bundles.get("report.table.book.type"))
                         .backgroundColorStrike()
                         .build());
-        ListUtils.emptyIfNull(BookDAO.getAllEntities()).forEach(book -> addRow(table, book));
+        ListUtils.emptyIfNull(BookDAOMock.getAllEntities()).forEach(book -> addRow(table, book));
         table.complete();
     }
 

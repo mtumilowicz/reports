@@ -2,7 +2,7 @@ package xlsx;
 
 import core.builder.GenericBuilder;
 import core.xlsx.AbstractXlsxWriter;
-import dao.BookDAO;
+import dao.BookDAOMock;
 import entity.Book;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -11,6 +11,8 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.math.BigDecimal;
 
 /**
  * Created by mtumilowicz on 2017-08-14.
@@ -76,7 +78,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
 
     private void addBookCollectionTableContent(XSSFSheet sheet,
                                                       int rowCount) {
-        for (Book book : BookDAO.getAllEntities()) {
+        for (Book book : BookDAOMock.getAllEntities()) {
             XSSFRow row = sheet.createRow(rowCount++);
             int columnCount = 0;
 
@@ -148,11 +150,11 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
         int columnCount = 0;
         XSSFRow row = sheet.createRow(rowCount++);
         
-        Cell quantity = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAO.getAllEntities().size()));
+        Cell quantity = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAOMock.getAllEntities().size()));
         quantity.setCellType(CellType.NUMERIC);
         CellUtil.setAlignment(quantity, HorizontalAlignment.LEFT);
 
-        Cell value = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAO.sumPriceOfAllEntities().get()));
+        Cell value = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO)));
         value.setCellType(CellType.NUMERIC);
         CellUtil.setCellStyleProperty(value, CellUtil.DATA_FORMAT, format.money());
         CellUtil.setAlignment(value, HorizontalAlignment.RIGHT);
