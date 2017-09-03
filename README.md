@@ -7,10 +7,10 @@
     │    │    └── test.pdf
     │    └── xls
     │         └── test.xlsx
-    ├── src
+    └── src
         ├── main
-            ├── java
-                ├── core
+            └── java
+                └── core
                     ├── builder
                     │   └── GenericBuilder
                     ├── bundle
