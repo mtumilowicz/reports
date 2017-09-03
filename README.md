@@ -68,8 +68,16 @@
                  │   ├── dom
                  │   └── xml
                  │       ├── builder
+                 │       │   ├── chain
+                 │       │   │     ├── ChainReportTypeXmlWriterShowcase
+                 │       │   │     └── XmlDocumentBuilderChainImplTest
+                 │       │   └── straight
+                 │       │         ├── StraightReportTypeXmlWriterShowcase
+                 │       │         └── XmlDocumentBuilderStraightImpl                 
                  │       ├── converter
+                 │       │   └── DateConverterTest
                  │       └── parser
+                 │           └── XmlFromFileTest
                  ├── dao
                  │   └── BookDAOMock
                  ├── database
