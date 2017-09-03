@@ -33,17 +33,6 @@ public class Book extends XmlEntity {
     private String review;
     
     private BookType type;
-    
-    private Book(Builder builder) {
-        id = builder.id;
-        author = builder.author;
-        title = builder.title;
-        genre = builder.genre;
-        price = builder.price;
-        pubDate = builder.pubDate;
-        review = builder.review;
-        type = builder.type;
-    }
 
     public String getId() {
         return id;
@@ -141,69 +130,5 @@ public class Book extends XmlEntity {
                 ", review='" + review + '\'' +
                 ", type=" + type +
                 '}';
-    }
-    
-    public static final class Builder {
-        
-        private String id;
-        private String author;
-        private String title;
-        private String genre;
-        private BigDecimal price;
-        private Date pubDate;
-        private String review;
-        private BookType type;
-
-        public Builder id(String id) {
-            this.id = id;
-            
-            return this;
-        }
-
-        public Builder author(String author) {
-            this.author = author;
-            
-            return this;
-        }
-
-        public Builder title(String title) {
-            this.title = title;
-            
-            return this;
-        }
-
-        public Builder genre(String genre) {
-            this.genre = genre;
-            
-            return this;
-        }
-
-        public Builder price(BigDecimal price) {
-            this.price = price;
-            
-            return this;
-        }
-
-        public Builder pubDate(Date pubDate) {
-            this.pubDate = pubDate;
-            
-            return this;
-        }
-
-        public Builder review(String review) {
-            this.review = review;
-            
-            return this;
-        }
-
-        public Builder type(BookType type) {
-            this.type = type;
-            
-            return this;
-        }
-        
-        public Book build() {
-            return new Book(this);
-        }
     }
 }

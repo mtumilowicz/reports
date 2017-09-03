@@ -1,6 +1,7 @@
 package core.xml.parser;
 
 import com.thoughtworks.xstream.io.StreamException;
+import core.builder.GenericBuilder;
 import entity.Book;
 import entity.BookType;
 import org.junit.Test;
@@ -35,34 +36,33 @@ public class XmlFromFileTest {
     public void parsePathNotExists_NotNullClass() {
         XmlFromFile.parse("not/exists/path", Book.class);
     }
-    
+
     @Test
     public void parseFullSuccess() {
-        Book control = new Book.Builder()
-                .id("bk001")
-                .author("Writer")
-                .title("The First Book")
-                .genre("Fiction")
-                .price(new BigDecimal("44.45"))
-                .pubDate(new Date(Long.valueOf("1504303200000")))
-                .review("An amazing story of nothing.")
-                .type(BookType.PAPER)
+        Book control = GenericBuilder.of(Book::new)
+                .with(Book::setId, "bk001")
+                .with(Book::setAuthor, "Writer")
+                .with(Book::setTitle, "The First Book")
+                .with(Book::setGenre, "Fiction")
+                .with(Book::setPrice, new BigDecimal("44.45"))
+                .with(Book::setPubDate, new Date(Long.valueOf("1504303200000")))
+                .with(Book::setReview, "An amazing story of nothing.")
+                .with(Book::setType, BookType.PAPER)
                 .build();
-        
         assertEquals(control, XmlFromFile.parse("src/test/resources/book.xml", Book.class));
     }
 
     @Test
     public void parseFullFail() {
-        Book control = new Book.Builder()
-                .id("bk001")
-                .author("Writer")
-                .title("WRONG")
-                .genre("Fiction")
-                .price(new BigDecimal("44.45"))
-                .pubDate(new Date(Long.valueOf("1504303200000")))
-                .review("An amazing story of nothing.")
-                .type(BookType.PAPER)
+        Book control = GenericBuilder.of(Book::new)
+                .with(Book::setId, "bk001")
+                .with(Book::setAuthor, "WRONG")
+                .with(Book::setTitle, "The First Book")
+                .with(Book::setGenre, "Fiction")
+                .with(Book::setPrice, new BigDecimal("44.45"))
+                .with(Book::setPubDate, new Date(Long.valueOf("1504303200000")))
+                .with(Book::setReview, "An amazing story of nothing.")
+                .with(Book::setType, BookType.PAPER)
                 .build();
 
         assertNotEquals(control, XmlFromFile.parse("src/test/resources/book.xml", Book.class));
