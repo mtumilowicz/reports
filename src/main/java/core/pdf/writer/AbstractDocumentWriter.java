@@ -15,8 +15,8 @@ import java.io.IOException;
  */
 public abstract class AbstractDocumentWriter implements DocumentWriter {
 
-    protected final PdfCellBuilder cellBuilder = new PdfCellBuilder();
-    protected final BundleHandler bundles = new BundleHandler(this.getClass());
+    private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
+    private final BundleHandler bundles = new BundleHandler(getClass());
 
     public void save(String dest) {
         try {
@@ -25,7 +25,15 @@ public abstract class AbstractDocumentWriter implements DocumentWriter {
             System.out.println("Cannot save pdf: " + e.getLocalizedMessage());
         }
     }
-    
+
+    public PdfCellBuilder getCellBuilder() {
+        return cellBuilder;
+    }
+
+    public BundleHandler getBundles() {
+        return bundles;
+    }
+
     private void createPdf(String dest) throws IOException {
         try (PdfWriter writer = new PdfWriter(dest);
              PdfDocument pdf = new PdfDocument(writer);
