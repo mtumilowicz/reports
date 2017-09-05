@@ -58,11 +58,11 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
 
         rowCount++;
 
-        addSummaryTableHeaders(workbook, sheet, rowCount);
+        addSummaryTableHeaders(sheet, rowCount);
 
         rowCount++;
 
-        addSummaryTableContent(workbook, sheet, rowCount);
+        addSummaryTableContent(sheet, rowCount);
 
     }
     
@@ -76,8 +76,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
         CellUtil.setFont(titleCell, font);
     }
 
-    private void addBookCollectionTableContent(XSSFSheet sheet,
-                                                      int rowCount) {
+    private void addBookCollectionTableContent(XSSFSheet sheet, int rowCount) {
         for (Book book : BookDAOMock.getAllEntities()) {
             XSSFRow row = sheet.createRow(rowCount++);
             int columnCount = 0;
@@ -135,7 +134,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
         CellUtil.setAlignment(titleCell, HorizontalAlignment.CENTER);
     }
 
-    private void addSummaryTableHeaders(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
+    private void addSummaryTableHeaders(XSSFSheet sheet, int rowCount) {
         int columnCount = 0;
         XSSFRow row = sheet.createRow(rowCount);
         Cell quantityHeader = CellUtil.createCell(row, columnCount++, bundle.get("report.table.summary.quantity"));
@@ -146,7 +145,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
         addTableHeaderCell(valueHeader);
     }
 
-    private void addSummaryTableContent(XSSFWorkbook workbook, XSSFSheet sheet, int rowCount) {
+    private void addSummaryTableContent(XSSFSheet sheet, int rowCount) {
         int columnCount = 0;
         XSSFRow row = sheet.createRow(rowCount++);
         
