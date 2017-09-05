@@ -16,15 +16,15 @@ final class BooksCollectionTable {
     private final PdfCellBuilder cellBuilder;
     private final BundleHandler bundles;
 
-    private BooksCollectionTable(PdfCellBuilder cellBuilder, BundleHandler bundles) {
-        this.cellBuilder = cellBuilder;
-        this.bundles = bundles;
+    private BooksCollectionTable(AbstractDocumentWriter writer) {
+        this.cellBuilder = writer.getCellBuilder();
+        this.bundles = writer.getBundles();
     }
 
     static BooksCollectionTable initFor(AbstractDocumentWriter writer) {
-        return new BooksCollectionTable(writer.getCellBuilder(), writer.getBundles());
+        return new BooksCollectionTable(writer);
     }
-
+    
     void insertInto(Document document) {
         Table table = new Table(new float[]{1, 1, 1, 1, 1, 1, 1, 1})
                 .setFixedLayout()

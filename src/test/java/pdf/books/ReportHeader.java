@@ -14,13 +14,13 @@ final class ReportHeader {
     private final PdfCellBuilder cellBuilder;
     private final BundleHandler bundles;
 
-    private ReportHeader(PdfCellBuilder cellBuilder, BundleHandler bundles) {
-        this.cellBuilder = cellBuilder;
-        this.bundles = bundles;
+    private ReportHeader(AbstractDocumentWriter writer) {
+        this.cellBuilder = writer.getCellBuilder();
+        this.bundles = writer.getBundles();
     }
 
     static ReportHeader initFor(AbstractDocumentWriter writer) {
-        return new ReportHeader(writer.getCellBuilder(), writer.getBundles());
+        return new ReportHeader(writer);
     }
 
     void insertInto(Document document) {

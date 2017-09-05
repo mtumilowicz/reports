@@ -17,13 +17,13 @@ final class SummaryBooksCollectionTable {
     private final PdfCellBuilder cellBuilder;
     private final BundleHandler bundles;
 
-    private SummaryBooksCollectionTable(PdfCellBuilder cellBuilder, BundleHandler bundles) {
-        this.cellBuilder = cellBuilder;
-        this.bundles = bundles;
+    private SummaryBooksCollectionTable(AbstractDocumentWriter writer) {
+        this.cellBuilder = writer.getCellBuilder();
+        this.bundles = writer.getBundles();
     }
 
     static SummaryBooksCollectionTable initFor(AbstractDocumentWriter writer) {
-        return new SummaryBooksCollectionTable(writer.getCellBuilder(), writer.getBundles());
+        return new SummaryBooksCollectionTable(writer);
     }
 
     void insertInto(Document doc) {
