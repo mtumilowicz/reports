@@ -11,11 +11,10 @@ import core.pdf.writer.AbstractDocumentWriter;
  */
 final class ReportHeader {
 
-    private final PdfCellBuilder cellBuilder;
+    private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
     private final BundleHandler bundles;
 
     private ReportHeader(AbstractDocumentWriter writer) {
-        this.cellBuilder = writer.getCellBuilder();
         this.bundles = writer.getBundles();
     }
 

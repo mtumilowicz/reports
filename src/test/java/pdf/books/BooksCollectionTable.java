@@ -13,11 +13,10 @@ import org.apache.commons.collections4.ListUtils;
  * Created by mtumilowicz on 2017-09-05.
  */
 final class BooksCollectionTable {
-    private final PdfCellBuilder cellBuilder;
+    private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
     private final BundleHandler bundles;
 
     private BooksCollectionTable(AbstractDocumentWriter writer) {
-        this.cellBuilder = writer.getCellBuilder();
         this.bundles = writer.getBundles();
     }
 

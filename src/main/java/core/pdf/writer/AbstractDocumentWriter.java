@@ -6,7 +6,6 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import core.bundle.BundleHandler;
 import core.writer.DocumentWriter;
-import core.pdf.builder.PdfCellBuilder;
 
 import java.io.IOException;
 
@@ -14,8 +13,7 @@ import java.io.IOException;
  * Created by mtumilowicz on 2017-07-12.
  */
 public abstract class AbstractDocumentWriter implements DocumentWriter {
-
-    private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
+    
     private final BundleHandler bundles = new BundleHandler(getClass());
 
     public void save(String dest) {
@@ -24,10 +22,6 @@ public abstract class AbstractDocumentWriter implements DocumentWriter {
         } catch (IOException e) {
             System.out.println("Cannot save pdf: " + e.getLocalizedMessage());
         }
-    }
-
-    public PdfCellBuilder getCellBuilder() {
-        return cellBuilder;
     }
 
     public BundleHandler getBundles() {

@@ -13,12 +13,11 @@ import java.math.BigDecimal;
  * Created by mtumilowicz on 2017-09-05.
  */
 final class SummaryBooksCollectionTable {
-    
-    private final PdfCellBuilder cellBuilder;
+
+    private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
     private final BundleHandler bundles;
 
     private SummaryBooksCollectionTable(AbstractDocumentWriter writer) {
-        this.cellBuilder = writer.getCellBuilder();
         this.bundles = writer.getBundles();
     }
 
