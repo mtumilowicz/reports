@@ -1,6 +1,6 @@
 package core.entity;
 
-import com.thoughtworks.xstream.XStream;
+import core.xml.converter.EntityToXmlConverter;
 
 /**
  * Created by mtumilowicz on 2017-08-13.
@@ -8,9 +8,6 @@ import com.thoughtworks.xstream.XStream;
 public class XmlEntity {
     
     public String toXmlString() {
-        // it cannot be field (exception - Cannot marshal the XStream instance in action)
-        final XStream xstream = new XStream();
-        xstream.processAnnotations(this.getClass());
-        return xstream.toXML(this);
+        return EntityToXmlConverter.asString(this);
     }
 }

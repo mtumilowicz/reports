@@ -38,7 +38,7 @@ public class XmlFromFileTest {
     }
 
     @Test
-    public void parseFullSuccess() {
+    public void parseFullPositive() {
         Book control = GenericBuilder.of(Book::new)
                 .with(Book::setId, "bk001")
                 .with(Book::setAuthor, "Writer")
@@ -53,7 +53,7 @@ public class XmlFromFileTest {
     }
 
     @Test
-    public void parseFullFail() {
+    public void parseFullNegative() {
         Book control = GenericBuilder.of(Book::new)
                 .with(Book::setId, "bk001")
                 .with(Book::setAuthor, "WRONG")

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNull;
 /**
  * Created by mtumilowicz on 2017-09-03.
  */
-public class BookTest {
+public class EntityToXmlConverterTest {
     private String control = "<book id=\"bk001\">\n" +
             "        <author>Writer</author>\n" +
             "        <title>The First Book</title>\n" +
@@ -34,7 +34,7 @@ public class BookTest {
     }
     
     @Test
-    public void toXmlTestSuccess() {
+    public void toXmlTestPositive() {
         Book test = GenericBuilder.of(Book::new)
                 .with(Book::setId, "bk001")
                 .with(Book::setAuthor, "Writer")
@@ -55,7 +55,7 @@ public class BookTest {
     }
 
     @Test
-    public void toXmlTestFailure() {
+    public void toXmlTestNegative() {
         Book test = GenericBuilder.of(Book::new)
                 .with(Book::setId, "bk001")
                 .with(Book::setAuthor, "WRONG")

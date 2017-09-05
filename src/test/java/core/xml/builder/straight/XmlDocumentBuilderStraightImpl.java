@@ -27,13 +27,13 @@ public class XmlDocumentBuilderStraightImpl {
     }
 
     @Test
-    public void xmlDocumentBuilderChainImplFullMethodsTestSuccess() {
+    public void xmlDocumentBuilderChainImplFullMethodsTestPositive() {
         assertXMLEqual(ControlXmlDocument.byPath("src/test/resources/extendedXmlDoc.xml"),
                 new StraightReportTypeXmlWriterShowcase("node0").prepare());
     }
 
     @Test
-    public void xmlDocumentBuilderChainImplFullMethodsTestFail() {
+    public void xmlDocumentBuilderChainImplFullMethodsTestNegative() {
         assertXMLNotEqual(ControlXmlDocument.byPath("src/test/resources/extendedXmlDocWrongNode.xml"),
                 new StraightReportTypeXmlWriterShowcase("node0").prepare());
     }

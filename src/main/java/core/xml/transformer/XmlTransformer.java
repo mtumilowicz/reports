@@ -6,7 +6,6 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
@@ -23,7 +22,11 @@ public class XmlTransformer {
         Preconditions.checkArgument(doc != null);
         Preconditions.checkArgument(format != null);
 
-        return serialize(new XMLSerializer(format), doc);
+        try {
+            return serialize(new XMLSerializer(format), doc);
+        } catch (IOException e) {
+            throw new XmlTransformerException(e.getLocalizedMessage());
+        }
     }
 
     public static Document loadXMLFrom(String xml) {
@@ -36,17 +39,13 @@ public class XmlTransformer {
         }
     }
     
-    private static String serialize(XMLSerializer serializer, Document doc) {
+    private static String serialize(XMLSerializer serializer, Document doc) throws IOException {
         Preconditions.checkArgument(serializer != null);
         Preconditions.checkArgument(doc != null);
         
         StringWriter stringOut = new StringWriter();
         serializer.setOutputCharStream(stringOut);
-        try {
-            serializer.serialize(doc);
-        } catch (IOException e) {
-            throw new XmlTransformerException(e.getLocalizedMessage());
-        }
+        serializer.serialize(doc);
         return stringOut.toString();
     }
 
@@ -55,10 +54,8 @@ public class XmlTransformer {
         
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(is);
 
-        return doc;
+        return factory.newDocumentBuilder().parse(is);
     }
 
     private static class XmlTransformerException extends RuntimeException  {
