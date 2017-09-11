@@ -15,17 +15,18 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
 
     @Override
     protected void prepare(Document document) {
-        HarvardEmblem.insertInto(document);
+        
+        add(new HarvardEmblem(), document);
 
-        SpacingTable.insertInto(document);
+        add(new SpacingTable(), document);
 
         add(new ReportHeader(), document);
 
-        SpacingTable.insertInto(document);
+        add(new SpacingTable(), document);
 
         add(new BooksCollectionTable(), document);
 
-        SpacingTable.insertInto(document);
+        add(new SpacingTable(), document);
 
         add(new SummaryBooksCollectionTable(), document);
     }

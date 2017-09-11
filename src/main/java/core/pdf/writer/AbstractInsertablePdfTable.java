@@ -6,7 +6,7 @@ import core.pdf.builder.PdfCellBuilder;
 /**
  * Created by mtumilowicz on 2017-09-05.
  */
-public abstract class AbstractInsertablePdfTable implements InsertablePdfElement {
+public abstract class AbstractInsertablePdfTable implements InsertablePdfTable {
 
     private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
     private BundleHandler bundles = new BundleHandler();

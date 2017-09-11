@@ -24,8 +24,12 @@ public abstract class AbstractDocumentWriter implements DocumentWriter {
         }
     }
 
-    protected void add(InsertablePdfElement element, Document document) {
-        document.add(element.withBundles(bundles).get());
+    protected void add(InsertablePdfTable table, Document document) {
+        document.add(table.withBundles(bundles).get());
+    }
+
+    protected void add(InsertablePdfImage image, Document document) {
+        document.add(image.getScaledFor(document));
     }
 
     protected abstract void prepare(Document document);
