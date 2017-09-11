@@ -37,7 +37,7 @@ public class PdfCellBuilder {
     private boolean bold = false;
     private boolean border = true;
 
-    private BackgroundColor backgroundColor = new BackgroundColor();
+    private CellBackgroundColor cellBackgroundColor = new CellBackgroundColor();
     
     public PdfCellBuilder value(String text) {
         this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
@@ -70,15 +70,13 @@ public class PdfCellBuilder {
         return this;
     }
 
-    public PdfCellBuilder backgroundColor(Color backgroundColor) {
+    public void backgroundColor(Color backgroundColor) {
         Preconditions.checkArgument(backgroundColor != null);
-        this.backgroundColor = BackgroundColor.withBackgroundColor(backgroundColor);
-
-        return this;
+        CellBackgroundColor.backgroundColor(cellBackgroundColor, backgroundColor);
     }
 
     public PdfCellBuilder backgroundColorStrike() {
-        this.backgroundColor = BackgroundColor.withBackgroundColorStrike();
+        CellBackgroundColor.strike(cellBackgroundColor);
 
         return this;
     }
@@ -157,7 +155,7 @@ public class PdfCellBuilder {
     }
     
     private Color prepareBackgroundColor() {
-        return backgroundColor.backgroundColorStrike ? backgroundColor.backgroundColor : null;
+        return cellBackgroundColor.backgroundColorStrike ? cellBackgroundColor.backgroundColor : null;
     }
     
     private Cell prepareCell() {
@@ -170,32 +168,23 @@ public class PdfCellBuilder {
 
     private void resetFields() {
         this.bold = false;
-        this.backgroundColor = new BackgroundColor();
+        this.cellBackgroundColor = new CellBackgroundColor();
         this.singleCellStyle = null;
         this.textAlignment = TextAlignment.LEFT;
         this.singleCellFontSize = 0;
         this.border = true;
     }
     
-    private static final class BackgroundColor {
+    private static final class CellBackgroundColor {
         private Color backgroundColor = Color.LIGHT_GRAY;
         private boolean backgroundColorStrike = false;
 
-        private BackgroundColor() {
-        }
-
-        private static BackgroundColor withBackgroundColor(Color backgroundColor) {
-            BackgroundColor bc = new BackgroundColor();
+        private static void backgroundColor(CellBackgroundColor bc, Color backgroundColor) {
             bc.backgroundColor = backgroundColor;
-            
-            return bc;
         }
 
-        private static BackgroundColor withBackgroundColorStrike() {
-            BackgroundColor bc = new BackgroundColor();
+        private static void strike(CellBackgroundColor bc) {
             bc.backgroundColorStrike = true;
-
-            return bc;
         }
     }
 }
