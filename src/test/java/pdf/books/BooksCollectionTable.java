@@ -1,8 +1,7 @@
 package pdf.books;
 
-import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Table;
-import core.pdf.writer.AbstractDocumentWriter;
+import core.bundle.BundleHandler;
 import core.pdf.writer.AbstractInsertablePdfTable;
 import dao.BookDAOMock;
 import entity.Book;
@@ -13,17 +12,15 @@ import org.apache.commons.collections4.ListUtils;
  */
 final class BooksCollectionTable extends AbstractInsertablePdfTable {
 
-    BooksCollectionTable(AbstractDocumentWriter writer) {
-        super(writer);
+    BooksCollectionTable(BundleHandler bundles) {
+        super(bundles);
     }
 
     @Override
-    public void insertInto(Document document) {
+    public Table get() {
         Table table = new Table(new float[]{1, 1, 1, 1, 1, 1, 1, 1})
                 .setFixedLayout()
                 .setWidthPercent(100);
-
-        table.setDocument(document);
         
         table.addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.id"))
                 .backgroundColorStrike()
@@ -50,7 +47,8 @@ final class BooksCollectionTable extends AbstractInsertablePdfTable {
                         .backgroundColorStrike()
                         .build());
         ListUtils.emptyIfNull(BookDAOMock.getAllEntities()).forEach(book -> addRow(table, book));
-        table.complete();
+        
+        return table;
     }
 
     private void addRow(Table table, Book book) {

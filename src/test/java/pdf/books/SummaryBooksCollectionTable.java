@@ -1,9 +1,8 @@
 package pdf.books;
 
-import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Table;
+import core.bundle.BundleHandler;
 import core.pdf.builder.PdfCellBuilder;
-import core.pdf.writer.AbstractDocumentWriter;
 import core.pdf.writer.AbstractInsertablePdfTable;
 import dao.BookDAOMock;
 
@@ -15,13 +14,12 @@ import java.math.BigDecimal;
 final class SummaryBooksCollectionTable extends AbstractInsertablePdfTable {
 
 
-    SummaryBooksCollectionTable(AbstractDocumentWriter writer) {
-        super(writer);
+    SummaryBooksCollectionTable(BundleHandler bundles) {
+        super(bundles);
     }
 
-    public void insertInto(Document doc) {
+    public Table get() {
         Table table = new Table(new float[]{1, 1});
-        table.setDocument(doc);
 
         table.setWidthPercent(40)
                 .addHeaderCell(
@@ -46,7 +44,8 @@ final class SummaryBooksCollectionTable extends AbstractInsertablePdfTable {
                 .addCell(
                         getCellBuilder()
                                 .value(BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO))
-                                .build())
-                .complete();
+                                .build());
+        
+        return table;
     }
 }

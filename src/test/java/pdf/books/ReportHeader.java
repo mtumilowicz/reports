@@ -1,8 +1,7 @@
 package pdf.books;
 
-import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Table;
-import core.pdf.writer.AbstractDocumentWriter;
+import core.bundle.BundleHandler;
 import core.pdf.writer.AbstractInsertablePdfTable;
 
 /**
@@ -10,15 +9,13 @@ import core.pdf.writer.AbstractInsertablePdfTable;
  */
 final class ReportHeader extends AbstractInsertablePdfTable {
 
-    ReportHeader(AbstractDocumentWriter writer) {
-        super(writer);
+    ReportHeader(BundleHandler bundles) {
+        super(bundles);
     }
 
     @Override
-    public void insertInto(Document document) {
+    public Table get() {
         Table table = new Table(new float[]{1});
-
-        table.setDocument(document);
         table.setWidthPercent(100)
                 .addHeaderCell(
                         getCellBuilder()
@@ -26,7 +23,8 @@ final class ReportHeader extends AbstractInsertablePdfTable {
                                 .center()
                                 .noBorder()
                                 .singleCellFontSize(20)
-                                .build())
-                .complete();
+                                .build());
+        
+        return table;
     }
 }

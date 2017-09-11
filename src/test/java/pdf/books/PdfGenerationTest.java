@@ -19,14 +19,14 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
 
         SpacingTable.insertInto(document);
 
-        add(new ReportHeader(this), document);
+        add(new ReportHeader(getBundles()), document);
 
         SpacingTable.insertInto(document);
 
-        add(new BooksCollectionTable(this), document);
+        add(new BooksCollectionTable(getBundles()), document);
 
         SpacingTable.insertInto(document);
 
-        add(new SummaryBooksCollectionTable(this), document);
+        add(new SummaryBooksCollectionTable(getBundles()), document);
     }
 }

@@ -11,8 +11,8 @@ public abstract class AbstractInsertablePdfTable implements InsertablePdfElement
     private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
     private final BundleHandler bundles;
 
-    public AbstractInsertablePdfTable(AbstractDocumentWriter writer) {
-        this.bundles = writer.getBundles();
+    public AbstractInsertablePdfTable(BundleHandler bundles) {
+        this.bundles = bundles;
     }
 
     protected PdfCellBuilder getCellBuilder() {

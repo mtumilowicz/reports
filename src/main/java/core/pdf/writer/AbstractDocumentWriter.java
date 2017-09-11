@@ -24,12 +24,12 @@ public abstract class AbstractDocumentWriter implements DocumentWriter {
         }
     }
 
-    BundleHandler getBundles() {
+    protected BundleHandler getBundles() {
         return bundles;
     }
     
     protected void add(InsertablePdfElement element, Document document) {
-        element.insertInto(document);
+        document.add(element.get());
     }
 
     protected abstract void prepare(Document document);
