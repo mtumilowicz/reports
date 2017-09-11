@@ -27,11 +27,8 @@ public class PdfCellBuilder {
     private final static DecimalFormat DF = new DecimalFormat("#.00");
     private final static String EMPTY_STRING_VALUE = "-";
 
-    private Style defaultStyle = new Style().setFont(PdfFontsContainer.getHelvetica());
-    private Style singleCellStyle = null;
-    
-    private boolean border = true;
-
+    private CellBorder cellBorder = new CellBorder();
+    private CellStyle cellStyle = new CellStyle();
     private CellText cellText = new CellText();
     private CellBackgroundColor cellBackgroundColor = new CellBackgroundColor();
     
@@ -61,7 +58,7 @@ public class PdfCellBuilder {
 
     public PdfCellBuilder singleCellStyle(Style style) {
         Preconditions.checkArgument(style != null);
-        this.singleCellStyle = style;
+        CellStyle.singleCellStyle(cellStyle, style);
 
         return this;
     }
@@ -105,13 +102,13 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder border() {
-        this.border = true;
+        CellBorder.border(cellBorder);
 
         return this;
     }
 
     public PdfCellBuilder noBorder() {
-        this.border = false;
+        CellBorder.noBorder(cellBorder);
 
         return this;
     }
@@ -124,31 +121,19 @@ public class PdfCellBuilder {
         return cell;
     }
     
-    private Style prepareStyle() {
-        return singleCellStyle != null ?  singleCellStyle : defaultStyle;
-    }
-    
-    private Border prepareBorder() {
-        return border ? new SolidBorder(1) : Border.NO_BORDER;
-    }
-    
-    private Color prepareBackgroundColor() {
-        return cellBackgroundColor.backgroundColorStrike ? cellBackgroundColor.backgroundColor : null;
-    }
-    
     private Cell prepareCell() {
         return new Cell()
                 .add(CellText.prepareParagraph(cellText))
-                .addStyle(prepareStyle())
-                .setBorder(prepareBorder())
-                .setBackgroundColor(prepareBackgroundColor());
+                .addStyle(CellStyle.prepareStyle(cellStyle))
+                .setBorder(CellBorder.prepareBorder(cellBorder))
+                .setBackgroundColor(CellBackgroundColor.prepareBackgroundColor(cellBackgroundColor));
     }
 
     private void resetFields() {
         this.cellText = new CellText();
         this.cellBackgroundColor = new CellBackgroundColor();
-        this.singleCellStyle = null;
-        this.border = true;
+        this.cellStyle = new CellStyle();
+        this.cellBorder = new CellBorder();
     }
     
     private static final class CellBackgroundColor {
@@ -161,6 +146,10 @@ public class PdfCellBuilder {
 
         private static void strike(CellBackgroundColor bc) {
             bc.backgroundColorStrike = true;
+        }
+
+        private static Color prepareBackgroundColor(CellBackgroundColor bc) {
+            return bc.backgroundColorStrike ? bc.backgroundColor : null;
         }
     }
 
@@ -209,5 +198,35 @@ public class PdfCellBuilder {
             return text;
         }
 
+    }
+    
+    private static final class CellStyle {
+        private Style defaultStyle = new Style().setFont(PdfFontsContainer.getHelvetica());
+        private Style singleCellStyle = null;
+        
+        private static void singleCellStyle(CellStyle cs, Style singleCellStyle) {
+            cs.singleCellStyle = singleCellStyle;
+        }
+
+        private static Style prepareStyle(CellStyle cs) {
+            return cs.singleCellStyle != null ? cs.singleCellStyle : cs.defaultStyle;
+        }
+        
+    }
+    
+    private static final class CellBorder {
+        private boolean border = true;
+
+        private static void border(CellBorder cb) {
+            cb.border = true;
+        }
+
+        private static void noBorder(CellBorder cb) {
+            cb.border = false;
+        }
+
+        private static Border prepareBorder(CellBorder cb) {
+            return cb.border ? new SolidBorder(1) : Border.NO_BORDER;
+        }
     }
 }
