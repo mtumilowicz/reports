@@ -1,7 +1,6 @@
 package pdf.books;
 
 import com.itextpdf.layout.element.Table;
-import core.bundle.BundleHandler;
 import core.pdf.writer.AbstractInsertablePdfTable;
 import dao.BookDAOMock;
 import entity.Book;
@@ -11,10 +10,6 @@ import org.apache.commons.collections4.ListUtils;
  * Created by mtumilowicz on 2017-09-05.
  */
 final class BooksCollectionTable extends AbstractInsertablePdfTable {
-
-    BooksCollectionTable(BundleHandler bundles) {
-        super(bundles);
-    }
 
     @Override
     public Table get() {

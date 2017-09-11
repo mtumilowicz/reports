@@ -1,7 +1,6 @@
 package pdf.books;
 
 import com.itextpdf.layout.element.Table;
-import core.bundle.BundleHandler;
 import core.pdf.builder.PdfCellBuilder;
 import core.pdf.writer.AbstractInsertablePdfTable;
 import dao.BookDAOMock;
@@ -12,11 +11,6 @@ import java.math.BigDecimal;
  * Created by mtumilowicz on 2017-09-05.
  */
 final class SummaryBooksCollectionTable extends AbstractInsertablePdfTable {
-
-
-    SummaryBooksCollectionTable(BundleHandler bundles) {
-        super(bundles);
-    }
 
     public Table get() {
         Table table = new Table(new float[]{1, 1});

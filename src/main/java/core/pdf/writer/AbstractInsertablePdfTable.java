@@ -9,14 +9,16 @@ import core.pdf.builder.PdfCellBuilder;
 public abstract class AbstractInsertablePdfTable implements InsertablePdfElement {
 
     private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
-    private final BundleHandler bundles;
-
-    public AbstractInsertablePdfTable(BundleHandler bundles) {
-        this.bundles = bundles;
-    }
+    private BundleHandler bundles = new BundleHandler();
 
     protected PdfCellBuilder getCellBuilder() {
         return cellBuilder;
+    }
+
+    public AbstractInsertablePdfTable withBundles(BundleHandler bundles) {
+        this.bundles = bundles;
+        
+        return this;
     }
 
     protected BundleHandler getBundles() {
