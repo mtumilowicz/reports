@@ -29,18 +29,14 @@ public class PdfCellBuilder {
 
     private Style defaultStyle = new Style().setFont(PdfFontsContainer.getHelvetica());
     private Style singleCellStyle = null;
-
-    private String text = EMPTY_STRING_VALUE;
-    private TextAlignment textAlignment = TextAlignment.LEFT;
-    private int singleCellFontSize = 0;
-    private int defaultFontSize = 14;
-    private boolean bold = false;
+    
     private boolean border = true;
 
+    private CellText cellText = new CellText();
     private CellBackgroundColor cellBackgroundColor = new CellBackgroundColor();
     
     public PdfCellBuilder value(String text) {
-        this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
+        CellText.text(cellText, StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE);
 
         return this;
     }
@@ -58,7 +54,7 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder bold() {
-        this.bold = true;
+        CellText.bold(cellText);
 
         return this;
     }
@@ -83,14 +79,14 @@ public class PdfCellBuilder {
 
     public PdfCellBuilder singleCellFontSize(int fontSize) {
         Preconditions.checkArgument(fontSize > 0);
-        this.singleCellFontSize = fontSize;
+        CellText.singleCellFontSize(cellText, fontSize);
 
         return this;
     }
 
     public void defaultFontSize(int defaultFontSize) {
         Preconditions.checkArgument(defaultFontSize > 0);
-        this.defaultFontSize = defaultFontSize;
+        CellText.defaultFontSize(cellText, defaultFontSize);
     }
 
     public PdfCellBuilder center() {
@@ -103,7 +99,7 @@ public class PdfCellBuilder {
 
     private PdfCellBuilder setTextAlignment(TextAlignment textAlignment) {
         Preconditions.checkArgument(textAlignment != null);
-        this.textAlignment = textAlignment;
+        CellText.textAlignment(cellText, textAlignment);
 
         return this;
     }
@@ -129,19 +125,19 @@ public class PdfCellBuilder {
     }
     
     private Text prepareText() {
-        Text text = new Text(this.text);
-        if (bold) {
+        Text text = new Text(cellText.text);
+        if (cellText.bold) {
             text.setBold();
         }
 
-        text.setFontSize(singleCellFontSize > 0 ? singleCellFontSize : defaultFontSize);
+        text.setFontSize(cellText.singleCellFontSize > 0 ? cellText.singleCellFontSize : cellText.defaultFontSize);
         
         return text;
     }
     
     private Paragraph prepareParagraph() {
         Paragraph paragraph = new Paragraph(prepareText());
-        paragraph.setTextAlignment(textAlignment);
+        paragraph.setTextAlignment(cellText.textAlignment);
         
         return paragraph;
     }
@@ -167,11 +163,9 @@ public class PdfCellBuilder {
     }
 
     private void resetFields() {
-        this.bold = false;
+        this.cellText = new CellText();
         this.cellBackgroundColor = new CellBackgroundColor();
         this.singleCellStyle = null;
-        this.textAlignment = TextAlignment.LEFT;
-        this.singleCellFontSize = 0;
         this.border = true;
     }
     
@@ -186,5 +180,34 @@ public class PdfCellBuilder {
         private static void strike(CellBackgroundColor bc) {
             bc.backgroundColorStrike = true;
         }
+    }
+
+    private static final class CellText {
+        private String text = EMPTY_STRING_VALUE;
+        private TextAlignment textAlignment = TextAlignment.LEFT;
+        private int singleCellFontSize = 0;
+        private int defaultFontSize = 14;
+        private boolean bold = false;
+
+        private static void text(CellText ct, String text) {
+            ct.text = text;
+        }
+
+        private static void textAlignment(CellText ct, TextAlignment textAlignment) {
+            ct.textAlignment = textAlignment;
+        }
+
+        private static void singleCellFontSize(CellText ct, int singleCellFontSize) {
+            ct.singleCellFontSize = singleCellFontSize;
+        }
+
+        private static void defaultFontSize(CellText ct, int defaultFontSize) {
+            ct.defaultFontSize = defaultFontSize;
+        }
+
+        private static void bold(CellText ct) {
+            ct.bold = true;
+        }
+
     }
 }
