@@ -1,7 +1,7 @@
 package core.pdf.writer;
 
 import core.bundle.BundleHandler;
-import core.pdf.builder.PdfCellBuilder;
+import core.pdf.builder.cell.PdfCellBuilder;
 
 /**
  * Created by mtumilowicz on 2017-09-05.

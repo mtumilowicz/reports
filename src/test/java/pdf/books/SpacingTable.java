@@ -1,7 +1,7 @@
 package pdf.books;
 
 import com.itextpdf.layout.element.Table;
-import core.pdf.builder.PdfCellBuilder;
+import core.pdf.builder.cell.PdfCellBuilder;
 import core.pdf.writer.AbstractInsertablePdfTable;
 
 /**
