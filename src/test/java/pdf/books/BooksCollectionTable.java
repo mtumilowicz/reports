@@ -3,6 +3,7 @@ package pdf.books;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Table;
 import core.pdf.writer.AbstractDocumentWriter;
+import core.pdf.writer.AbstractInsertablePdfTable;
 import dao.BookDAOMock;
 import entity.Book;
 import org.apache.commons.collections4.ListUtils;

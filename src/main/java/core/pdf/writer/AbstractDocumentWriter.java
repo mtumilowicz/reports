@@ -24,9 +24,15 @@ public abstract class AbstractDocumentWriter implements DocumentWriter {
         }
     }
 
-    public BundleHandler getBundles() {
+    BundleHandler getBundles() {
         return bundles;
     }
+    
+    protected void add(InsertablePdfElement element, Document document) {
+        element.insertInto(document);
+    }
+
+    protected abstract void prepare(Document document);
 
     private void createPdf(String dest) throws IOException {
         try (PdfWriter writer = new PdfWriter(dest);
@@ -37,6 +43,4 @@ public abstract class AbstractDocumentWriter implements DocumentWriter {
             prepare(document);
         }
     }
-
-    protected abstract void prepare(Document document);
 }

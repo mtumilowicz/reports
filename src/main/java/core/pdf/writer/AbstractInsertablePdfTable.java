@@ -1,14 +1,12 @@
-package pdf.books;
+package core.pdf.writer;
 
-import com.itextpdf.layout.Document;
 import core.bundle.BundleHandler;
 import core.pdf.builder.PdfCellBuilder;
-import core.pdf.writer.AbstractDocumentWriter;
 
 /**
  * Created by mtumilowicz on 2017-09-05.
  */
-public abstract class AbstractInsertablePdfTable {
+public abstract class AbstractInsertablePdfTable implements InsertablePdfElement {
 
     private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
     private final BundleHandler bundles;
@@ -16,14 +14,12 @@ public abstract class AbstractInsertablePdfTable {
     public AbstractInsertablePdfTable(AbstractDocumentWriter writer) {
         this.bundles = writer.getBundles();
     }
-    
-    abstract void insertInto(Document document);
 
-    public PdfCellBuilder getCellBuilder() {
+    protected PdfCellBuilder getCellBuilder() {
         return cellBuilder;
     }
 
-    public BundleHandler getBundles() {
+    protected BundleHandler getBundles() {
         return bundles;
     }
 }

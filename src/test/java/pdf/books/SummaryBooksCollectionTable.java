@@ -4,6 +4,7 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Table;
 import core.pdf.builder.PdfCellBuilder;
 import core.pdf.writer.AbstractDocumentWriter;
+import core.pdf.writer.AbstractInsertablePdfTable;
 import dao.BookDAOMock;
 
 import java.math.BigDecimal;
