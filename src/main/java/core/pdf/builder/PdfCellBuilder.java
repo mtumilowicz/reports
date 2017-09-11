@@ -36,7 +36,7 @@ public class PdfCellBuilder {
     private CellBackgroundColor cellBackgroundColor = new CellBackgroundColor();
     
     public PdfCellBuilder value(String text) {
-        CellText.text(cellText, StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE);
+        CellText.text(cellText, text);
 
         return this;
     }
@@ -124,24 +124,6 @@ public class PdfCellBuilder {
         return cell;
     }
     
-    private Text prepareText() {
-        Text text = new Text(cellText.text);
-        if (cellText.bold) {
-            text.setBold();
-        }
-
-        text.setFontSize(cellText.singleCellFontSize > 0 ? cellText.singleCellFontSize : cellText.defaultFontSize);
-        
-        return text;
-    }
-    
-    private Paragraph prepareParagraph() {
-        Paragraph paragraph = new Paragraph(prepareText());
-        paragraph.setTextAlignment(cellText.textAlignment);
-        
-        return paragraph;
-    }
-    
     private Style prepareStyle() {
         return singleCellStyle != null ?  singleCellStyle : defaultStyle;
     }
@@ -156,7 +138,7 @@ public class PdfCellBuilder {
     
     private Cell prepareCell() {
         return new Cell()
-                .add(prepareParagraph())
+                .add(CellText.prepareParagraph(cellText))
                 .addStyle(prepareStyle())
                 .setBorder(prepareBorder())
                 .setBackgroundColor(prepareBackgroundColor());
@@ -190,7 +172,7 @@ public class PdfCellBuilder {
         private boolean bold = false;
 
         private static void text(CellText ct, String text) {
-            ct.text = text;
+            ct.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
         }
 
         private static void textAlignment(CellText ct, TextAlignment textAlignment) {
@@ -207,6 +189,24 @@ public class PdfCellBuilder {
 
         private static void bold(CellText ct) {
             ct.bold = true;
+        }
+
+        private static Paragraph prepareParagraph(CellText ct) {
+            Paragraph paragraph = new Paragraph(prepareText(ct));
+            paragraph.setTextAlignment(ct.textAlignment);
+
+            return paragraph;
+        }
+
+        private static Text prepareText(CellText ct) {
+            Text text = new Text(ct.text);
+            if (ct.bold) {
+                text.setBold();
+            }
+
+            text.setFontSize(ct.singleCellFontSize > 0 ? ct.singleCellFontSize : ct.defaultFontSize);
+
+            return text;
         }
 
     }
