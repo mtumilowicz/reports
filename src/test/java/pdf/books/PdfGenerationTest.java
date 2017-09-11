@@ -15,19 +15,14 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
 
     @Override
     protected void prepare(Document document) {
-        
-        add(new HarvardEmblem(), document);
 
-        add(new SpacingTable(), document);
-
-        add(new ReportHeader(), document);
-
-        add(new SpacingTable(), document);
-
-        add(new BooksCollectionTable(), document);
-
-        add(new SpacingTable(), document);
-
-        add(new SummaryBooksCollectionTable(), document);
+        new PdfDocumentBuilder(document)
+                .add(new HarvardEmblem())
+                .add(new SpacingTable())
+                .add(new ReportHeader())
+                .add(new SpacingTable())
+                .add(new BooksCollectionTable())
+                .add(new SpacingTable())
+                .add(new SummaryBooksCollectionTable());
     }
 }
