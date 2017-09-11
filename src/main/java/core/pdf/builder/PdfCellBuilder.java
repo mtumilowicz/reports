@@ -37,9 +37,8 @@ public class PdfCellBuilder {
     private boolean bold = false;
     private boolean border = true;
 
-    private Color backgroundColor = Color.LIGHT_GRAY;
-    private boolean backgroundColorStrike = false;
-
+    private BackgroundColor backgroundColor = new BackgroundColor();
+    
     public PdfCellBuilder value(String text) {
         this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
 
@@ -73,13 +72,13 @@ public class PdfCellBuilder {
 
     public PdfCellBuilder backgroundColor(Color backgroundColor) {
         Preconditions.checkArgument(backgroundColor != null);
-        this.backgroundColor = backgroundColor;
+        this.backgroundColor = BackgroundColor.withBackgroundColor(backgroundColor);
 
         return this;
     }
 
     public PdfCellBuilder backgroundColorStrike() {
-        this.backgroundColorStrike = true;
+        this.backgroundColor = BackgroundColor.withBackgroundColorStrike();
 
         return this;
     }
@@ -158,7 +157,7 @@ public class PdfCellBuilder {
     }
     
     private Color prepareBackgroundColor() {
-        return backgroundColorStrike ? backgroundColor : null;
+        return backgroundColor.backgroundColorStrike ? backgroundColor.backgroundColor : null;
     }
     
     private Cell prepareCell() {
@@ -171,10 +170,32 @@ public class PdfCellBuilder {
 
     private void resetFields() {
         this.bold = false;
-        this.backgroundColorStrike = false;
+        this.backgroundColor = new BackgroundColor();
         this.singleCellStyle = null;
         this.textAlignment = TextAlignment.LEFT;
         this.singleCellFontSize = 0;
         this.border = true;
+    }
+    
+    private static final class BackgroundColor {
+        private Color backgroundColor = Color.LIGHT_GRAY;
+        private boolean backgroundColorStrike = false;
+
+        private BackgroundColor() {
+        }
+
+        private static BackgroundColor withBackgroundColor(Color backgroundColor) {
+            BackgroundColor bc = new BackgroundColor();
+            bc.backgroundColor = backgroundColor;
+            
+            return bc;
+        }
+
+        private static BackgroundColor withBackgroundColorStrike() {
+            BackgroundColor bc = new BackgroundColor();
+            bc.backgroundColorStrike = true;
+
+            return bc;
+        }
     }
 }
