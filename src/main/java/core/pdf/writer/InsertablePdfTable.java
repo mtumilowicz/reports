@@ -12,7 +12,7 @@ public abstract class InsertablePdfTable {
     private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
     private BundleHandler bundles = new BundleHandler();
 
-    public abstract Table get();
+    protected abstract Table get();
 
     protected PdfCellBuilder getCellBuilder() {
         return cellBuilder;
