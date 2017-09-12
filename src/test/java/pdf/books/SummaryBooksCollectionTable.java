@@ -2,7 +2,7 @@ package pdf.books;
 
 import com.itextpdf.layout.element.Table;
 import core.pdf.builder.cell.PdfCellBuilder;
-import core.pdf.writer.AbstractInsertablePdfTable;
+import core.pdf.writer.InsertablePdfTable;
 import dao.BookDAOMock;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * Created by mtumilowicz on 2017-09-05.
  */
-final class SummaryBooksCollectionTable extends AbstractInsertablePdfTable {
+final class SummaryBooksCollectionTable extends InsertablePdfTable {
 
     public Table get() {
         Table table = new Table(new float[]{1, 1});

@@ -1,7 +1,7 @@
 package pdf.books;
 
 import com.itextpdf.layout.element.Table;
-import core.pdf.writer.AbstractInsertablePdfTable;
+import core.pdf.writer.InsertablePdfTable;
 import dao.BookDAOMock;
 import entity.Book;
 import org.apache.commons.collections4.ListUtils;
@@ -9,7 +9,7 @@ import org.apache.commons.collections4.ListUtils;
 /**
  * Created by mtumilowicz on 2017-09-05.
  */
-final class BooksCollectionTable extends AbstractInsertablePdfTable {
+final class BooksCollectionTable extends InsertablePdfTable {
 
     @Override
     public Table get() {
