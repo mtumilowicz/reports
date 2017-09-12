@@ -15,6 +15,7 @@ public abstract class AbstractInsertablePdfTable implements InsertablePdfTable {
         return cellBuilder;
     }
 
+    @Override
     public AbstractInsertablePdfTable withBundles(BundleHandler bundles) {
         this.bundles = bundles;
         
