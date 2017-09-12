@@ -71,7 +71,7 @@ public class PdfCellBuilder {
         return this;
     }
 
-    public void withDefaultFontSize(int defaultFontSize) {
+    public void setDefaultFontSize(int defaultFontSize) {
         Preconditions.checkArgument(defaultFontSize > 0);
         defaults.setDefaultFontSize(defaultFontSize);
     }
