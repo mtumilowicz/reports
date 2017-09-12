@@ -2,7 +2,6 @@ package core.pdf.builder.cell;
 
 import com.google.common.base.Preconditions;
 import com.itextpdf.kernel.color.Color;
-import com.itextpdf.layout.Style;
 import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.property.TextAlignment;
@@ -22,6 +21,7 @@ public class PdfCellBuilder {
     
     private final static DecimalFormat DF = new DecimalFormat("#.00");
 
+    private CellDefaults defaults = new CellDefaults();
     private CellBorder cellBorder = new CellBorder();
     private CellStyle cellStyle = new CellStyle();
     private CellText cellText = new CellText();
@@ -51,13 +51,6 @@ public class PdfCellBuilder {
         return this;
     }
 
-    public PdfCellBuilder singleCellStyle(Style style) {
-        Preconditions.checkArgument(style != null);
-        cellStyle.singleCellStyle(style);
-
-        return this;
-    }
-
     public PdfCellBuilder defaultBackgroundColor() {
         cellBackgroundColor.useDefaultBackgroundColor();
 
@@ -78,9 +71,11 @@ public class PdfCellBuilder {
         return this;
     }
 
-    public void defaultFontSize(int defaultFontSize) {
+    public PdfCellBuilder withDefaultFontSize(int defaultFontSize) {
         Preconditions.checkArgument(defaultFontSize > 0);
-        cellText.defaultFontSize(defaultFontSize);
+        defaults.setDefaultFontSize(defaultFontSize);
+        
+        return this;
     }
 
     public PdfCellBuilder center() {
@@ -120,7 +115,7 @@ public class PdfCellBuilder {
     
     private Cell prepareCell() {
         return new Cell()
-                .add(cellText.prepareParagraph())
+                .add(cellText.prepareParagraph(defaults))
                 .addStyle(cellStyle.prepareStyle())
                 .setBorder(cellBorder.prepareBorder())
                 .setBackgroundColor(cellBackgroundColor.prepareBackgroundColor());

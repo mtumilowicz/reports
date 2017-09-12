@@ -9,13 +9,6 @@ final class CellBackgroundColor {
     private Color defaultBackgroundColor = Color.LIGHT_GRAY;
     private Color backgroundColor;
 
-    static CellBackgroundColor withDefaultBackgroundColor(Color defaultBackgroundColor) {
-        CellBackgroundColor bc = new CellBackgroundColor();
-        bc.defaultBackgroundColor = defaultBackgroundColor;
-        
-        return bc;
-    }
-
     void backgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
     }

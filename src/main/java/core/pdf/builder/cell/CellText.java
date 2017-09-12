@@ -14,7 +14,6 @@ final class CellText {
     private String text = EMPTY_STRING_VALUE;
     private TextAlignment textAlignment = TextAlignment.LEFT;
     private int singleCellFontSize = 0;
-    private int defaultFontSize = 14;
     private boolean bold = false;
 
     void text(String text) {
@@ -29,28 +28,24 @@ final class CellText {
         this.singleCellFontSize = singleCellFontSize;
     }
 
-    void defaultFontSize(int defaultFontSize) {
-        this.defaultFontSize = defaultFontSize;
-    }
-
     void bold() {
         this.bold = true;
     }
 
-    Paragraph prepareParagraph() {
-        Paragraph paragraph = new Paragraph(prepareText());
+    Paragraph prepareParagraph(CellDefaults defaults) {
+        Paragraph paragraph = new Paragraph(prepareText(defaults));
         paragraph.setTextAlignment(textAlignment);
 
         return paragraph;
     }
 
-    private Text prepareText() {
+    private Text prepareText(CellDefaults defaults) {
         Text text = new Text(this.text);
         if (bold) {
             text.setBold();
         }
 
-        text.setFontSize(singleCellFontSize > 0 ? singleCellFontSize : defaultFontSize);
+        text.setFontSize(singleCellFontSize > 0 ? singleCellFontSize : defaults.getDefaultFontSize());
 
         return text;
     }

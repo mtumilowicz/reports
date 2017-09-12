@@ -8,14 +8,9 @@ import core.pdf.utils.PdfFontsContainer;
  */
 final class CellStyle {
     private Style defaultStyle = new Style().setFont(PdfFontsContainer.getHelvetica());
-    private Style singleCellStyle = null;
-
-    void singleCellStyle(Style singleCellStyle) {
-        this.singleCellStyle = singleCellStyle;
-    }
 
     Style prepareStyle() {
-        return singleCellStyle != null ? singleCellStyle : defaultStyle;
+        return defaultStyle;
     }
 
 }
