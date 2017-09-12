@@ -1,5 +1,6 @@
 package pdf.books;
 
+import com.itextpdf.kernel.color.Color;
 import com.itextpdf.layout.element.Table;
 import core.pdf.builder.cell.PdfCellBuilder;
 import core.pdf.writer.InsertablePdfTable;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 final class SummaryBooksCollectionTable extends InsertablePdfTable {
 
     public Table get() {
+        getCellBuilder().setDefaultFontSize(20);
         Table table = new Table(new float[]{1, 1});
 
         table.setWidthPercent(40)
@@ -20,7 +22,6 @@ final class SummaryBooksCollectionTable extends InsertablePdfTable {
                         getCellBuilder()
                                 .value(getBundles().get("report.table.summary.header"))
                                 .noBorder()
-                                .singleCellFontSize(20)
                                 .build())
                 .addHeaderCell(PdfCellBuilder.EMPTY_CELL)
                 .addCell(
@@ -34,10 +35,12 @@ final class SummaryBooksCollectionTable extends InsertablePdfTable {
                 .addCell(
                         getCellBuilder()
                                 .value(BookDAOMock.getAllEntities().size())
+                                .backgroundColor(Color.CYAN)
                                 .build())
                 .addCell(
                         getCellBuilder()
                                 .value(BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO))
+                                .backgroundColor(Color.CYAN)
                                 .build());
         
         return table;

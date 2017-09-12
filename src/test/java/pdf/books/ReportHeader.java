@@ -17,6 +17,7 @@ final class ReportHeader extends InsertablePdfTable {
                                 .value(getBundles().get("report.header"))
                                 .center()
                                 .noBorder()
+                                .bold()
                                 .singleCellFontSize(20)
                                 .build());
         
