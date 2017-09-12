@@ -26,13 +26,22 @@
     │            │   └── XmlEntity
     │            ├── pdf
     │            │   ├── builder
-    │            │   │   ├── ImageBuilder
-    │            │   │   └── PdfCellBuilder
+    │            │   │   ├── cell
+    │            │   │   │   ├── CellBackgroundColor
+    │            │   │   │   ├── CellBorder
+    │            │   │   │   ├── CellDefaults
+    │            │   │   │   ├── CellStyle
+    │            │   │   │   ├── CellText
+    │            │   │   │   └── PdfCellBuilder
+    │            │   │   ├── image
+    │            │   │   │   └── PdfCellBuilder
     │            │   ├── utils
     │            │   │   ├── PdfFontsContainer
     │            │   │   └── PdfFontsFactory
     │            │   └── writer
-    │            │       └── AbstractDocumentWriter
+    │            │       ├── AbstractDocumentWriter
+    │            │       ├── InsertablePdfImage
+    │            │       └── InsertablePdfTable
     │            ├── writer
     │            │   └── DocumentWriter
     │            ├── xlsx
@@ -49,7 +58,8 @@
     │                │   ├── XmlDocumentBuilderStraightImpl
     │                │   └── XmlElementBuilder
     │                ├── converter
-    │                │   └── DateOnlyConverter
+    │                │   ├── DateOnlyConverter
+    │                │   └── EntityToXmlConverter
     │                ├── parser
     │                │   └── XmlFromFile
     │                ├── schema
@@ -65,7 +75,10 @@
          └── java
              ├── core
              │   ├── bundle
+             │   │   └── BundleHandlerTest
              │   ├── dom
+             │   │   ├── ControlXmlDocument
+             │   │   └── StaticDomDocumentBuilderFactoryTest
              │   └── xml
              │       ├── builder
              │       │   ├── chain
@@ -84,10 +97,16 @@
              │   └── DatabaseMock
              ├── entity
              │   ├── Book
-             │   ├── BookTest
-             │   └── BookType
+             │   ├── BookType
+             │   └── EntityToXmlConverterTest
              ├── pdf
-             │   └── PdfGenerationTest
+             │   ├── books
+             │   │   ├── BooksCollectionTable
+             │   │   ├── HarvardEmblem
+             │   │   ├── PdfGenerationTest
+             │   │   ├── ReportHeader
+             │   │   ├── SpacingTable
+             │   │   ├── SummaryBooksCollectionTable
              └── xlsx
                  └── XlsxGenerationTest
 ```

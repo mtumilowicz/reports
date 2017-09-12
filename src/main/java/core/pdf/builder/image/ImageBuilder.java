@@ -1,4 +1,4 @@
-package core.pdf.builder;
+package core.pdf.builder.image;
 
 import com.google.common.base.Preconditions;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -91,7 +91,7 @@ public class ImageBuilder {
         private final float abscissa;
         private final float ordinate;
 
-        public Position(float abscissa, float ordinate) {
+        private Position(float abscissa, float ordinate) {
             this.abscissa = abscissa;
             this.ordinate = ordinate;
         }

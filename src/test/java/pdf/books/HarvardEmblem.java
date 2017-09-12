@@ -3,7 +3,7 @@ package pdf.books;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
-import core.pdf.builder.ImageBuilder;
+import core.pdf.builder.image.ImageBuilder;
 import core.pdf.writer.InsertablePdfImage;
 
 /**
