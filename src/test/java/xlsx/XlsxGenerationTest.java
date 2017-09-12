@@ -2,8 +2,8 @@ package xlsx;
 
 import core.xlsx.writer.AbstractXlsxWriter;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import xlsx.books.BookCollectionSheet;
-import xlsx.books.SummarySheet;
+import xlsx.books.sheet.first.BookCollectionSheet;
+import xlsx.books.sheet.second.SummarySheet;
 
 /**
  * Created by mtumilowicz on 2017-08-14.

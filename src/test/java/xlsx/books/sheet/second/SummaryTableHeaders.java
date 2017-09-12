@@ -1,4 +1,4 @@
-package xlsx.books;
+package xlsx.books.sheet.second;
 
 import core.builder.GenericBuilder;
 import core.bundle.BundleHandler;
@@ -10,36 +10,26 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 /**
  * Created by mtumilowicz on 2017-09-12.
  */
-final class BookCollectionTableHeaders {
+final class SummaryTableHeaders {
     private BundleHandler bundles = new BundleHandler();
     private XSSFSheet sheet;
     private int rowCount;
 
-    BookCollectionTableHeaders(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
+    SummaryTableHeaders(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
         this.bundles = bundles;
         this.sheet = sheet;
         this.rowCount = rowCount;
     }
 
     void create() {
-        String[] booksCollectionHeaders = {
-                "report.table.book.id",
-                "report.table.book.author",
-                "report.table.book.title",
-                "report.table.book.genre",
-                "report.table.book.price",
-                "report.table.book.pubDate",
-                "report.table.book.review",
-                "report.table.book.type"};
-
-        XSSFRow row = sheet.createRow(rowCount);
-
         int columnCount = 0;
+        XSSFRow row = sheet.createRow(rowCount);
+        Cell quantityHeader = CellUtil.createCell(row, columnCount++, bundles.get("report.table.summary.quantity"));
+        addTableHeaderCell(quantityHeader);
 
-        for (String header : booksCollectionHeaders) {
-            Cell headerCell = CellUtil.createCell(row, columnCount++, bundles.get(header));
-            addTableHeaderCell(headerCell);
-        }
+
+        Cell valueHeader = CellUtil.createCell(row, columnCount, bundles.get("report.table.summary.value"));
+        addTableHeaderCell(valueHeader);
     }
 
     private void addTableHeaderCell(Cell cell) {
@@ -51,5 +41,4 @@ final class BookCollectionTableHeaders {
                 .with(CellStyle::setFillPattern, FillPatternType.SOLID_FOREGROUND).build();
         cell.setCellStyle(style);
     }
-
 }
