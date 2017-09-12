@@ -17,40 +17,40 @@ final class CellText {
     private int defaultFontSize = 14;
     private boolean bold = false;
 
-    static void text(CellText ct, String text) {
-        ct.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
+    void text(String text) {
+        this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
     }
 
-    static void textAlignment(CellText ct, TextAlignment textAlignment) {
-        ct.textAlignment = textAlignment;
+    void textAlignment(TextAlignment textAlignment) {
+        this.textAlignment = textAlignment;
     }
 
-    static void singleCellFontSize(CellText ct, int singleCellFontSize) {
-        ct.singleCellFontSize = singleCellFontSize;
+    void singleCellFontSize(int singleCellFontSize) {
+        this.singleCellFontSize = singleCellFontSize;
     }
 
-    static void defaultFontSize(CellText ct, int defaultFontSize) {
-        ct.defaultFontSize = defaultFontSize;
+    void defaultFontSize(int defaultFontSize) {
+        this.defaultFontSize = defaultFontSize;
     }
 
-    static void bold(CellText ct) {
-        ct.bold = true;
+    void bold() {
+        this.bold = true;
     }
 
-    static Paragraph prepareParagraph(CellText ct) {
-        Paragraph paragraph = new Paragraph(prepareText(ct));
-        paragraph.setTextAlignment(ct.textAlignment);
+    Paragraph prepareParagraph() {
+        Paragraph paragraph = new Paragraph(prepareText());
+        paragraph.setTextAlignment(textAlignment);
 
         return paragraph;
     }
 
-    private static Text prepareText(CellText ct) {
-        Text text = new Text(ct.text);
-        if (ct.bold) {
+    private Text prepareText() {
+        Text text = new Text(this.text);
+        if (bold) {
             text.setBold();
         }
 
-        text.setFontSize(ct.singleCellFontSize > 0 ? ct.singleCellFontSize : ct.defaultFontSize);
+        text.setFontSize(singleCellFontSize > 0 ? singleCellFontSize : defaultFontSize);
 
         return text;
     }

@@ -28,7 +28,7 @@ public class PdfCellBuilder {
     private CellBackgroundColor cellBackgroundColor = new CellBackgroundColor();
     
     public PdfCellBuilder value(String text) {
-        CellText.text(cellText, text);
+        cellText.text(text);
 
         return this;
     }
@@ -46,39 +46,41 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder bold() {
-        CellText.bold(cellText);
+        cellText.bold();
 
         return this;
     }
 
     public PdfCellBuilder singleCellStyle(Style style) {
         Preconditions.checkArgument(style != null);
-        CellStyle.singleCellStyle(cellStyle, style);
+        cellStyle.singleCellStyle(style);
 
         return this;
     }
 
-    public void backgroundColor(Color backgroundColor) {
-        Preconditions.checkArgument(backgroundColor != null);
-        CellBackgroundColor.backgroundColor(cellBackgroundColor, backgroundColor);
+    public PdfCellBuilder defaultBackgroundColor() {
+        cellBackgroundColor.useDefaultBackgroundColor();
+
+        return this;
     }
 
-    public PdfCellBuilder backgroundColorStrike() {
-        CellBackgroundColor.strike(cellBackgroundColor);
+    public PdfCellBuilder backgroundColor(Color backgroundColor) {
+        Preconditions.checkArgument(backgroundColor != null);
+        cellBackgroundColor.backgroundColor(backgroundColor);
 
         return this;
     }
 
     public PdfCellBuilder singleCellFontSize(int fontSize) {
         Preconditions.checkArgument(fontSize > 0);
-        CellText.singleCellFontSize(cellText, fontSize);
+        cellText.singleCellFontSize(fontSize);
 
         return this;
     }
 
     public void defaultFontSize(int defaultFontSize) {
         Preconditions.checkArgument(defaultFontSize > 0);
-        CellText.defaultFontSize(cellText, defaultFontSize);
+        cellText.defaultFontSize(defaultFontSize);
     }
 
     public PdfCellBuilder center() {
@@ -91,19 +93,19 @@ public class PdfCellBuilder {
 
     private PdfCellBuilder setTextAlignment(TextAlignment textAlignment) {
         Preconditions.checkArgument(textAlignment != null);
-        CellText.textAlignment(cellText, textAlignment);
+        cellText.textAlignment(textAlignment);
 
         return this;
     }
 
     public PdfCellBuilder border() {
-        CellBorder.border(cellBorder);
+        cellBorder.border();
 
         return this;
     }
 
     public PdfCellBuilder noBorder() {
-        CellBorder.noBorder(cellBorder);
+        cellBorder.noBorder();
 
         return this;
     }
@@ -118,10 +120,10 @@ public class PdfCellBuilder {
     
     private Cell prepareCell() {
         return new Cell()
-                .add(CellText.prepareParagraph(cellText))
-                .addStyle(CellStyle.prepareStyle(cellStyle))
-                .setBorder(CellBorder.prepareBorder(cellBorder))
-                .setBackgroundColor(CellBackgroundColor.prepareBackgroundColor(cellBackgroundColor));
+                .add(cellText.prepareParagraph())
+                .addStyle(cellStyle.prepareStyle())
+                .setBorder(cellBorder.prepareBorder())
+                .setBackgroundColor(cellBackgroundColor.prepareBackgroundColor());
     }
 
     private void resetFields() {

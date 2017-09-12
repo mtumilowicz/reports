@@ -9,15 +9,15 @@ import com.itextpdf.layout.border.SolidBorder;
 final class CellBorder {
     private boolean border = true;
 
-    static void border(CellBorder cb) {
-        cb.border = true;
+    void border() {
+        border = true;
     }
 
-    static void noBorder(CellBorder cb) {
-        cb.border = false;
+    void noBorder() {
+        border = false;
     }
 
-    static Border prepareBorder(CellBorder cb) {
-        return cb.border ? new SolidBorder(1) : Border.NO_BORDER;
+    Border prepareBorder() {
+        return border ? new SolidBorder(1) : Border.NO_BORDER;
     }
 }

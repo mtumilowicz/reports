@@ -10,12 +10,12 @@ final class CellStyle {
     private Style defaultStyle = new Style().setFont(PdfFontsContainer.getHelvetica());
     private Style singleCellStyle = null;
 
-    static void singleCellStyle(CellStyle cs, Style singleCellStyle) {
-        cs.singleCellStyle = singleCellStyle;
+    void singleCellStyle(Style singleCellStyle) {
+        this.singleCellStyle = singleCellStyle;
     }
 
-    static Style prepareStyle(CellStyle cs) {
-        return cs.singleCellStyle != null ? cs.singleCellStyle : cs.defaultStyle;
+    Style prepareStyle() {
+        return singleCellStyle != null ? singleCellStyle : defaultStyle;
     }
 
 }

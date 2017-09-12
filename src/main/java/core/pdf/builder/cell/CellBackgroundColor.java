@@ -6,18 +6,25 @@ import com.itextpdf.kernel.color.Color;
  * Created by mtumilowicz on 2017-09-11.
  */
 final class CellBackgroundColor {
-    private Color backgroundColor = Color.LIGHT_GRAY;
-    private boolean backgroundColorStrike = false;
+    private Color defaultBackgroundColor = Color.LIGHT_GRAY;
+    private Color backgroundColor;
 
-    static void backgroundColor(CellBackgroundColor bc, Color backgroundColor) {
-        bc.backgroundColor = backgroundColor;
+    static CellBackgroundColor withDefaultBackgroundColor(Color defaultBackgroundColor) {
+        CellBackgroundColor bc = new CellBackgroundColor();
+        bc.defaultBackgroundColor = defaultBackgroundColor;
+        
+        return bc;
     }
 
-    static void strike(CellBackgroundColor bc) {
-        bc.backgroundColorStrike = true;
+    void backgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
-    static Color prepareBackgroundColor(CellBackgroundColor bc) {
-        return bc.backgroundColorStrike ? bc.backgroundColor : null;
+    Color prepareBackgroundColor() {
+        return backgroundColor;
+    }
+
+    void useDefaultBackgroundColor() {
+        this.backgroundColor = defaultBackgroundColor;
     }
 }
