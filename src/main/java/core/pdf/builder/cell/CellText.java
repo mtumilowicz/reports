@@ -17,7 +17,7 @@ final class CellText {
     private boolean bold = false;
 
     void text(String text) {
-        this.text = StringUtils.isNotEmpty(text) ? text : EMPTY_STRING_VALUE;
+        this.text = StringUtils.defaultIfEmpty(text, EMPTY_STRING_VALUE);
     }
 
     void textAlignment(TextAlignment textAlignment) {
