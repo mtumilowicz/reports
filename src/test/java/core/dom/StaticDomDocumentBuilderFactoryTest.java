@@ -27,26 +27,26 @@ public class StaticDomDocumentBuilderFactoryTest {
     
     @Test
     public void createDocumentWithSameRootNameAsControlDocument() {
-        assertXMLEqual(StaticDomDocumentBuilderFactory.create(sameTestNodeName),
-                ControlXmlDocument.byName(sameTestNodeName));
+        assertXMLEqual(ControlXmlDocument.byName(sameTestNodeName),
+                StaticDomDocumentBuilderFactory.create(sameTestNodeName));
     }
 
     @Test
     public void createDocumentWithDifferentRootNameAsControlDocument() {
-        assertXMLNotEqual(StaticDomDocumentBuilderFactory.create(testNodeName), 
-                ControlXmlDocument.byName(differentTestNodeName));
+        assertXMLNotEqual(ControlXmlDocument.byName(differentTestNodeName), 
+                StaticDomDocumentBuilderFactory.create(testNodeName));
     }
     
     @Test
     public void createDocumentSameAsImportedFromFile() {
-        assertXMLEqual(StaticDomDocumentBuilderFactory.create(testNodeName),
-                ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"));
+        assertXMLEqual(ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"),
+                StaticDomDocumentBuilderFactory.create(testNodeName));
     }
 
     @Test
     public void createDocumentDifferentAsImportedFromFile() {
-        assertXMLNotEqual(StaticDomDocumentBuilderFactory.create(differentTestNodeName),
-                ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"));
+        assertXMLNotEqual(ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"),
+                StaticDomDocumentBuilderFactory.create(differentTestNodeName));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -62,13 +62,13 @@ public class StaticDomDocumentBuilderFactoryTest {
 
     @Test
     public void parseDocumentSameAsImportedFromFile() {
-        assertXMLEqual(StaticDomDocumentBuilderFactory.parse("src/test/resources/onlyRoot.xml"),
-                ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"));
+        assertXMLEqual(ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"),
+                StaticDomDocumentBuilderFactory.parse("src/test/resources/onlyRoot.xml"));
     }
 
     @Test
     public void parseDocumentDifferentAsImportedFromFile() {
-        assertXMLNotEqual(StaticDomDocumentBuilderFactory.parse("src/test/resources/onlyRoot2.xml"),
-                ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"));
+        assertXMLNotEqual(ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"),
+                StaticDomDocumentBuilderFactory.parse("src/test/resources/onlyRoot2.xml"));
     }
 }

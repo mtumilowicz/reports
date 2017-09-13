@@ -19,18 +19,18 @@ public class BundleHandlerTest {
     
     @Test
     public void defaultConstructor_GeneralProperties() {
-        assertEquals(new BundleHandler().get("test.key"), "testValue");
+        assertEquals("testValue", new BundleHandler().get("test.key"));
     }
 
     @Test
     public void stringBundleValue() {
         BundleHandler bundle = new BundleHandler(this.getClass());
-        assertEquals(bundle.get("test.key"), "testValue");
+        assertEquals("testValue", bundle.get("test.key"));
     }
 
     @Test
     public void enumBundleValue() {
         BundleHandler bundle = new BundleHandler(this.getClass());
-        assertEquals(bundle.get(BundleHandlerTestEnum.TEST), "enumValue");
+        assertEquals("enumValue", bundle.get(BundleHandlerTestEnum.TEST));
     }
 }
