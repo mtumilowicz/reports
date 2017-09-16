@@ -2,7 +2,7 @@ package xlsx.books.sheet.second;
 
 import core.builder.GenericBuilder;
 import core.bundle.BundleHandler;
-import core.xlsx.writer.InsertableXlsTableContent;
+import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellUtil;
@@ -14,13 +14,14 @@ import java.math.BigDecimal;
 /**
  * Created by mtumilowicz on 2017-09-12.
  */
-final class SummaryTableContent extends InsertableXlsTableContent {
+final class SummarySheetContent extends InsertableXlsContent {
 
-    SummaryTableContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
+    SummarySheetContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
         super(bundles, sheet, rowCount);
     }
 
-    void create() {
+    @Override
+    public void create() {
         
         new SummaryTableHeaders().create();
 

@@ -8,18 +8,20 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  * Created by mtumilowicz on 2017-09-16.
  */
-public class InsertableXlsTableContent {
+public abstract class InsertableXlsContent {
     private BundleHandler bundles = new BundleHandler();
     private XSSFSheet sheet;
     private XlsxDataFormat format;
     private int rowCount;
 
-    public InsertableXlsTableContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
+    public InsertableXlsContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
         this.bundles = bundles;
         this.sheet = sheet;
         this.format = initDateFormat(sheet.getWorkbook());
         this.rowCount = rowCount;
     }
+    
+    public abstract void create();
 
     public BundleHandler getBundles() {
         return bundles;

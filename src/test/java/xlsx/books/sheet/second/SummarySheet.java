@@ -23,7 +23,7 @@ public class SummarySheet extends InsertableXlsSheet {
 
         rowCount++;
 
-        new SummaryTableContent(getBundles(), sheet, rowCount).create();
+        new SummarySheetContent(getBundles(), sheet, rowCount).create();
 
     }
 

@@ -2,7 +2,7 @@ package xlsx.books.sheet.first;
 
 import core.builder.GenericBuilder;
 import core.bundle.BundleHandler;
-import core.xlsx.writer.InsertableXlsTableContent;
+import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
 import entity.Book;
 import org.apache.poi.ss.usermodel.*;
@@ -13,13 +13,14 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 /**
  * Created by mtumilowicz on 2017-09-12.
  */
-final class BookCollectionTableContent extends InsertableXlsTableContent {
+final class BookCollectionSheetContent extends InsertableXlsContent {
 
-    BookCollectionTableContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
+    BookCollectionSheetContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
         super(bundles, sheet, rowCount);
     }
 
-    void create() {
+    @Override
+    public void create() {
         new BookCollectionTableHeaders().create();
 
         int rowCount = getRowCount();
