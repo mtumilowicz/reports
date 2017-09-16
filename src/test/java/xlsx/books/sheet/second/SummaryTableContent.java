@@ -1,11 +1,10 @@
 package xlsx.books.sheet.second;
 
+import core.builder.GenericBuilder;
 import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsTableContent;
 import dao.BookDAOMock;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -23,7 +22,7 @@ final class SummaryTableContent extends InsertableXlsTableContent {
 
     void create() {
         
-        new SummaryTableHeaders(getBundles(), getSheet(), getRowCount()).create();
+        new SummaryTableHeaders().create();
 
         int rowCount = getRowCount();
         rowCount++;
@@ -39,5 +38,29 @@ final class SummaryTableContent extends InsertableXlsTableContent {
         value.setCellType(CellType.NUMERIC);
         CellUtil.setCellStyleProperty(value, CellUtil.DATA_FORMAT, getFormat().money());
         CellUtil.setAlignment(value, HorizontalAlignment.RIGHT);
+    }
+
+    private class SummaryTableHeaders {
+
+        void create() {
+            int columnCount = 0;
+            XSSFRow row = getSheet().createRow(getRowCount());
+            Cell quantityHeader = CellUtil.createCell(row, columnCount++, getBundles().get("report.table.summary.quantity"));
+            addTableHeaderCell(quantityHeader);
+
+
+            Cell valueHeader = CellUtil.createCell(row, columnCount, getBundles().get("report.table.summary.value"));
+            addTableHeaderCell(valueHeader);
+        }
+
+        private void addTableHeaderCell(Cell cell) {
+            CellStyle style = cell.getSheet().getWorkbook().createCellStyle();
+            GenericBuilder.of(() -> style)
+                    .with(CellStyle::setBorderLeft, BorderStyle.THIN)
+                    .with(CellStyle::setBorderBottom, BorderStyle.THIN)
+                    .with(CellStyle::setFillForegroundColor, IndexedColors.GREY_40_PERCENT.getIndex())
+                    .with(CellStyle::setFillPattern, FillPatternType.SOLID_FOREGROUND).build();
+            cell.setCellStyle(style);
+        }
     }
 }
