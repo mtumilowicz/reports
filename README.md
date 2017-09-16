@@ -1,14 +1,14 @@
 # reports
 This project has 3 APIs:
 
-* **PDF** - cells and images builder, fonts handler, report files 
+* [PDF](#PDF) - cells and images builder, fonts handler, report files 
 creator
-* **XLS** - xls cell formats handler, report files creator
-* **XML** - two types of xml builders, xml to entity converter 
+* [XLS](#XLS) - xls cell formats handler, report files creator
+* [XML](#XML) - two types of xml builders, xml to entity converter 
 (using x-stream), entity to xml converter (using x-stream), 
 file parser, schema factory, validation by scheme, dom-document writer
 
-### project structure
+## project structure
 ```
 .
 ├── output
@@ -134,3 +134,39 @@ file parser, schema factory, validation by scheme, dom-document writer
                      │       └── SummaryTable
                      └── XlsxGenerationTest
 ```
+## description
+<a name="PDF"/>
+### PDF
+* PdfCellBuilder: CellBackgroundColor, CellBorder, CellDefaults, CellText
+* ImageBuilder
+* PdfFontsContainer
+* PdfFontsFactory
+* AbstractDocumentWriter
+* InsertablePdfImage
+* InsertablePdfTable
+
+<a name="XLS"/>
+### XLS
+* XlsxDataFormat
+* XlsxDataFormatType
+* AbstractXlsxWriter
+* InsertableXlsContent
+* InsertableXlsSheet
+
+<a name="XML"/>
+### XML
+* BaseXmlDocumentBuilderImpl
+* XmlDocumentBuilder
+* XmlDocumentBuilderChainImpl
+* XmlDocumentBuilderStraightImpl
+* XmlElementBuilder
+* DateOnlyConverter
+* EntityToXmlConverter
+* XmlFromFile
+* XmlSchemaFactory
+* XmlTransformer
+* XmlValidatorFactory
+* XmlValidatorWrapper
+* XmlWriter
+
+## examples
