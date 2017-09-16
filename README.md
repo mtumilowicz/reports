@@ -1,4 +1,13 @@
 # reports
+This project has 3 APIs:
+
+* **PDF** - cells and images builder, fonts handler, report files 
+creator
+* **XLS** - xls cell formats handler, report files creator
+* **XML** - two types of xml builders, xml to entity converter 
+(using x-stream), entity to xml converter (using x-stream), 
+file parser, schema factory, validation by scheme, dom-document writer
+
 ### project structure
 ```
 .
