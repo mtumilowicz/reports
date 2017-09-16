@@ -45,7 +45,7 @@ final class CellText {
             text.setBold();
         }
 
-        text.setFontSize(singleCellFontSize > 0 ? singleCellFontSize : defaults.getDefaultFontSize());
+        text.setFontSize(singleCellFontSize > 0 ? singleCellFontSize : defaults.getFontSize());
 
         return text;
     }

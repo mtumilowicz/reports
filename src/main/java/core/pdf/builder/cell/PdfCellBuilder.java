@@ -23,7 +23,6 @@ public class PdfCellBuilder {
 
     private CellDefaults defaults = new CellDefaults();
     private CellBorder cellBorder = new CellBorder();
-    private CellStyle cellStyle = new CellStyle();
     private CellText cellText = new CellText();
     private CellBackgroundColor cellBackgroundColor = new CellBackgroundColor();
     
@@ -52,7 +51,7 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder defaultBackgroundColor() {
-        cellBackgroundColor.useDefaultBackgroundColor();
+        cellBackgroundColor.backgroundColor(defaults.getBackgroundColor());
 
         return this;
     }
@@ -73,7 +72,12 @@ public class PdfCellBuilder {
 
     public void setDefaultFontSize(int defaultFontSize) {
         Preconditions.checkArgument(defaultFontSize > 0);
-        defaults.setDefaultFontSize(defaultFontSize);
+        defaults.setFontSize(defaultFontSize);
+    }
+
+    public void setDefaultBackgroundColor(Color defaultBackgroundColor) {
+        Preconditions.checkArgument(defaultBackgroundColor != null);
+        defaults.setBackgroundColor(defaultBackgroundColor);
     }
 
     public PdfCellBuilder center() {
@@ -114,7 +118,7 @@ public class PdfCellBuilder {
     private Cell prepareCell() {
         return new Cell()
                 .add(cellText.prepareParagraph(defaults))
-                .addStyle(cellStyle.prepareStyle())
+                .addStyle(defaults.getStyle())
                 .setBorder(cellBorder.prepareBorder())
                 .setBackgroundColor(cellBackgroundColor.prepareBackgroundColor());
     }
@@ -122,7 +126,6 @@ public class PdfCellBuilder {
     private void resetFields() {
         this.cellText = new CellText();
         this.cellBackgroundColor = new CellBackgroundColor();
-        this.cellStyle = new CellStyle();
         this.cellBorder = new CellBorder();
     }
 }
