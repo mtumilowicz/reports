@@ -1,6 +1,7 @@
 package xlsx.books.sheet.first;
 
 import core.bundle.BundleHandler;
+import core.xlsx.writer.InsertableXlsSheetTitle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -11,22 +12,17 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 /**
  * Created by mtumilowicz on 2017-09-12.
  */
-final class BookCollectionSheetTitle {
-
-    private BundleHandler bundles = new BundleHandler();
-    private XSSFSheet sheet;
-    private int rowCount;
+final class BookCollectionSheetTitle extends InsertableXlsSheetTitle {
 
     BookCollectionSheetTitle(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
-        this.bundles = bundles;
-        this.sheet = sheet;
-        this.rowCount = rowCount;
+        super(bundles, sheet, rowCount);
     }
 
-    void create() {
-        sheet.addMergedRegion(new CellRangeAddress(0,0,0,7));
+    @Override
+    public void create() {
+        getSheet().addMergedRegion(new CellRangeAddress(0,0,0,7));
 
-        Cell titleCell = CellUtil.createCell(sheet.createRow(rowCount), 0, bundles.get("report.header"));
+        Cell titleCell = CellUtil.createCell(getSheet().createRow(getRowCount()), 0, getBundles().get("report.header"));
         CellUtil.setAlignment(titleCell, HorizontalAlignment.CENTER);
         XSSFFont font = (XSSFFont) titleCell.getSheet().getWorkbook().createFont();
         font.setFontHeight((short) 500);

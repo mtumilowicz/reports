@@ -12,7 +12,7 @@ import java.io.IOException;
  * Created by mtumilowicz on 2017-08-19.
  */
 public abstract class AbstractXlsxWriter implements DocumentWriter {
-    protected final BundleHandler bundle = new BundleHandler(this.getClass());
+    protected final BundleHandler bundles = new BundleHandler(this.getClass());
     protected XlsxDataFormat format;
     
     public void save(String dest) {
