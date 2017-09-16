@@ -1,10 +1,10 @@
 # reports
 This project has 3 APIs:
 
-* [PDF](#PDF) - cells and images builder, fonts handler, report files 
+* [PDF](#pdf) - cells and images builder, fonts handler, report files 
 creator
-* [XLS](#XLS) - xls cell formats handler, report files creator
-* [XML](#XML) - two types of xml builders, xml to entity converter 
+* [XLS](#xls) - xls cell formats handler, report files creator
+* [XML](#xml) - two types of xml builders, xml to entity converter 
 (using x-stream), entity to xml converter (using x-stream), 
 file parser, schema factory, validation by scheme, dom-document writer
 
@@ -135,7 +135,7 @@ file parser, schema factory, validation by scheme, dom-document writer
                      └── XlsxGenerationTest
 ```
 ## description
-<a name="PDF"></a>
+<a name="pdf"></a>
 PDF
 ---
 * PdfCellBuilder: CellBackgroundColor, CellBorder, CellDefaults, CellText
@@ -146,7 +146,7 @@ PDF
 * InsertablePdfImage
 * InsertablePdfTable
 
-<a name="XLS"></a>
+<a name="xls"></a>
 XLS
 ---
 * XlsxDataFormat
@@ -155,7 +155,7 @@ XLS
 * InsertableXlsContent
 * InsertableXlsSheet
 
-<a name="XML"></a>
+<a name="xml"></a>
 XML
 ---
 * BaseXmlDocumentBuilderImpl
