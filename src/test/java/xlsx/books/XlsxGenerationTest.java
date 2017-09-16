@@ -1,4 +1,4 @@
-package xlsx;
+package xlsx.books;
 
 import core.xlsx.writer.AbstractXlsxWriter;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
