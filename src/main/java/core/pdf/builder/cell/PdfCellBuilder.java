@@ -2,6 +2,7 @@ package core.pdf.builder.cell;
 
 import com.google.common.base.Preconditions;
 import com.itextpdf.kernel.color.Color;
+import com.itextpdf.layout.Style;
 import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.property.TextAlignment;
@@ -78,6 +79,11 @@ public class PdfCellBuilder {
     public void setDefaultBackgroundColor(Color defaultBackgroundColor) {
         Preconditions.checkArgument(defaultBackgroundColor != null);
         defaults.setBackgroundColor(defaultBackgroundColor);
+    }
+    
+    public void setDefaultStyle(Style style) {
+        Preconditions.checkArgument(style != null);
+        defaults.setStyle(style);
     }
 
     public PdfCellBuilder center() {
