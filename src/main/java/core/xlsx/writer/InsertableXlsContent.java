@@ -10,9 +10,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public abstract class InsertableXlsContent {
     private BundleHandler bundles = new BundleHandler();
-    private XSSFSheet sheet;
-    private XlsxDataFormat format;
-    private int rowCount;
+    private final XSSFSheet sheet;
+    private final XlsxDataFormat format;
+    private final int rowCount;
 
     public InsertableXlsContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
         this.bundles = bundles;
@@ -31,7 +31,7 @@ public abstract class InsertableXlsContent {
         return sheet;
     }
 
-    protected XlsxDataFormat getFormat() {
+    public XlsxDataFormat getFormat() {
         return format;
     }
 

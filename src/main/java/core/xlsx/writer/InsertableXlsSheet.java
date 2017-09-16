@@ -12,6 +12,10 @@ public abstract class InsertableXlsSheet {
     private BundleHandler bundles = new BundleHandler();
     private final XSSFWorkbook workbook;
 
+    public abstract void setColumnWidthInSheet(Sheet sheet);
+
+    public abstract void create();
+
     public InsertableXlsSheet(XSSFWorkbook workbook) {
         this.workbook = workbook;
     }
@@ -20,7 +24,7 @@ public abstract class InsertableXlsSheet {
         return bundles;
     }
 
-    protected XSSFWorkbook getWorkbook() {
+    public XSSFWorkbook getWorkbook() {
         return workbook;
     }
 
@@ -29,8 +33,4 @@ public abstract class InsertableXlsSheet {
 
         return this;
     }
-
-    public abstract void setColumnWidthInSheet(Sheet sheet);
-
-    public abstract void create();
 }
