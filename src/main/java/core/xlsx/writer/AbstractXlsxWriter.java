@@ -1,9 +1,8 @@
 package core.xlsx.writer;
 
-import core.writer.DocumentWriter;
 import core.bundle.BundleHandler;
+import core.writer.DocumentWriter;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import core.xlsx.format.XlsxDataFormat;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,12 +12,10 @@ import java.io.IOException;
  */
 public abstract class AbstractXlsxWriter implements DocumentWriter {
     protected final BundleHandler bundles = new BundleHandler(this.getClass());
-    protected XlsxDataFormat format;
     
     public void save(String dest) {
         try (XSSFWorkbook workbook = new XSSFWorkbook();
              FileOutputStream outputStream = new FileOutputStream(dest)) {
-            initDateFormat(workbook);
             prepare(workbook);
             create(workbook, outputStream);
         } catch (IOException e) {
@@ -29,10 +26,5 @@ public abstract class AbstractXlsxWriter implements DocumentWriter {
     private void create(XSSFWorkbook workbook, FileOutputStream outputStream) throws IOException {
         workbook.write(outputStream);
     }
-    
-    private void initDateFormat(XSSFWorkbook workbook) {
-        format = XlsxDataFormat.Factory.get(workbook.createDataFormat());
-    }
-
     public abstract void prepare(XSSFWorkbook workbook);
 }
