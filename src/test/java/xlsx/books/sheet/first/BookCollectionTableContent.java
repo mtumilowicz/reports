@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * Created by mtumilowicz on 2017-09-12.
@@ -20,10 +21,10 @@ final class BookCollectionTableContent {
     private XlsxDataFormat format;
     private int rowCount;
 
-    BookCollectionTableContent(BundleHandler bundles, XSSFSheet sheet, XlsxDataFormat format, int rowCount) {
+    BookCollectionTableContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
         this.bundles = bundles;
         this.sheet = sheet;
-        this.format = format;
+        this.format = initDateFormat(sheet.getWorkbook());
         this.rowCount = rowCount;
     }
 
@@ -55,5 +56,9 @@ final class BookCollectionTableContent {
 
             CellUtil.createCell(row, columnCount, bundles.get(book.getType()));
         }
+    }
+
+    private XlsxDataFormat initDateFormat(XSSFWorkbook workbook) {
+        return XlsxDataFormat.Factory.get(workbook.createDataFormat());
     }
 }

@@ -1,7 +1,6 @@
 package xlsx.books.sheet.first;
 
 import core.bundle.BundleHandler;
-import core.xlsx.format.XlsxDataFormat;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,12 +10,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class BookCollectionSheet {
     private BundleHandler bundles = new BundleHandler();
-    private XlsxDataFormat format;
     private XSSFWorkbook workbook;
 
-    public BookCollectionSheet(BundleHandler bundles, XlsxDataFormat format, XSSFWorkbook workbook) {
+    public BookCollectionSheet(BundleHandler bundles, XSSFWorkbook workbook) {
         this.bundles = bundles;
-        this.format = format;
         this.workbook = workbook;
     }
 
@@ -34,7 +31,7 @@ public class BookCollectionSheet {
 
         rowCount++;
 
-        new BookCollectionTableContent(bundles, sheet, format, rowCount).create();
+        new BookCollectionTableContent(bundles, sheet, rowCount).create();
     }
 
     private void setColumnWidthInSheet(Sheet sheet) {

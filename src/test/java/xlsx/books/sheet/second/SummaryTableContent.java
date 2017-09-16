@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.math.BigDecimal;
 
@@ -18,13 +19,13 @@ import java.math.BigDecimal;
 final class SummaryTableContent {
     private BundleHandler bundles = new BundleHandler();
     private XSSFSheet sheet;
-    private XlsxDataFormat format;
+    private final XlsxDataFormat format;
     private int rowCount;
 
-    SummaryTableContent(BundleHandler bundles, XSSFSheet sheet, XlsxDataFormat format, int rowCount) {
+    SummaryTableContent(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
         this.bundles = bundles;
         this.sheet = sheet;
-        this.format = format;
+        this.format = initDateFormat(sheet.getWorkbook());
         this.rowCount = rowCount;
     }
 
@@ -40,5 +41,9 @@ final class SummaryTableContent {
         value.setCellType(CellType.NUMERIC);
         CellUtil.setCellStyleProperty(value, CellUtil.DATA_FORMAT, format.money());
         CellUtil.setAlignment(value, HorizontalAlignment.RIGHT);
+    }
+
+    private XlsxDataFormat initDateFormat(XSSFWorkbook workbook) {
+        return XlsxDataFormat.Factory.get(workbook.createDataFormat());
     }
 }
