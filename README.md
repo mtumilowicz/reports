@@ -30,7 +30,6 @@
     │            │   │   │   ├── CellBackgroundColor
     │            │   │   │   ├── CellBorder
     │            │   │   │   ├── CellDefaults
-    │            │   │   │   ├── CellStyle
     │            │   │   │   ├── CellText
     │            │   │   │   └── PdfCellBuilder
     │            │   │   ├── image
@@ -49,7 +48,9 @@
     │            │   │   ├── XlsxDataFormat
     │            │   │   └── XlsxDataFormatType
     │            │   └── writer
-    │            │       └── AbstractXlsxWriter
+    │            │       ├── AbstractXlsxWriter
+    │            │       ├── InsertableXlsContent
+    │            │       └── InsertableXlsSheet
     │            └── xml
     │                ├── builder
     │                │   ├── BaseXmlDocumentBuilderImpl
@@ -108,5 +109,17 @@
              │   │   ├── SpacingTable
              │   │   ├── SummaryBooksCollectionTable
              └── xlsx
+                 └── books
+                     └── sheet
+                         ├── first
+                         │   ├── BookCollectionSheet
+                         │   ├── BookCollectionSheetContent
+                         │   ├── BookCollectionSheetTitle
+                         │   └── BookCollectionTable
+                         └── second
+                             ├── SummarySheet
+                             ├── SummarySheetContent
+                             ├── SummarySheetTitle
+                             └── SummaryTable
                  └── XlsxGenerationTest
 ```
