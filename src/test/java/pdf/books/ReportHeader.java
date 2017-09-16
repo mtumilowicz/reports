@@ -1,12 +1,17 @@
 package pdf.books;
 
 import com.itextpdf.layout.element.Table;
+import core.bundle.BundleHandler;
 import core.pdf.writer.InsertablePdfTable;
 
 /**
  * Created by mtumilowicz on 2017-09-05.
  */
 final class ReportHeader extends InsertablePdfTable {
+
+    ReportHeader(BundleHandler bundles) {
+        super(bundles);
+    }
 
     @Override
     public Table get() {

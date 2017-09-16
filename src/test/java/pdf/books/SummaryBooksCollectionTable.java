@@ -2,6 +2,7 @@ package pdf.books;
 
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.layout.element.Table;
+import core.bundle.BundleHandler;
 import core.pdf.builder.cell.PdfCellBuilder;
 import core.pdf.writer.InsertablePdfTable;
 import dao.BookDAOMock;
@@ -12,6 +13,10 @@ import java.math.BigDecimal;
  * Created by mtumilowicz on 2017-09-05.
  */
 final class SummaryBooksCollectionTable extends InsertablePdfTable {
+
+    SummaryBooksCollectionTable(BundleHandler bundles) {
+        super(bundles);
+    }
 
     public Table get() {
         getCellBuilder().setDefaultFontSize(20);

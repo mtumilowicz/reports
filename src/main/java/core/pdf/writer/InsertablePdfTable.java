@@ -10,7 +10,11 @@ import core.pdf.builder.cell.PdfCellBuilder;
 public abstract class InsertablePdfTable {
 
     private final PdfCellBuilder cellBuilder = new PdfCellBuilder();
-    private BundleHandler bundles = new BundleHandler();
+    private final BundleHandler bundles;
+
+    protected InsertablePdfTable(BundleHandler bundles) {
+        this.bundles = bundles;
+    }
 
     protected abstract Table get();
 
@@ -20,11 +24,5 @@ public abstract class InsertablePdfTable {
 
     protected BundleHandler getBundles() {
         return bundles;
-    }
-
-    InsertablePdfTable withBundles(BundleHandler bundles) {
-        this.bundles = bundles;
-
-        return this;
     }
 }

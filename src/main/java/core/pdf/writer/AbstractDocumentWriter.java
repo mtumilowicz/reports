@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public abstract class AbstractDocumentWriter implements DocumentWriter {
     
-    private final BundleHandler bundles = new BundleHandler(getClass());
+    protected final BundleHandler bundles = new BundleHandler(getClass());
 
     public void save(String dest) {
         try {
@@ -44,7 +44,7 @@ public abstract class AbstractDocumentWriter implements DocumentWriter {
         }
 
         public PdfDocumentBuilder add(InsertablePdfTable table) {
-            document.add(table.withBundles(bundles).get());
+            document.add(table.get());
             
             return this;
         }

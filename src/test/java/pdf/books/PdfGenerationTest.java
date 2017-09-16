@@ -18,11 +18,11 @@ public class PdfGenerationTest extends AbstractDocumentWriter {
 
         new PdfDocumentBuilder(document)
                 .add(new HarvardEmblem())
-                .add(new SpacingTable())
-                .add(new ReportHeader())
-                .add(new SpacingTable())
-                .add(new BooksCollectionTable())
-                .add(new SpacingTable())
-                .add(new SummaryBooksCollectionTable());
+                .add(new SpacingTable(bundles))
+                .add(new ReportHeader(bundles))
+                .add(new SpacingTable(bundles))
+                .add(new BooksCollectionTable(bundles))
+                .add(new SpacingTable(bundles))
+                .add(new SummaryBooksCollectionTable(bundles));
     }
 }
