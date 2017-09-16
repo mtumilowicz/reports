@@ -90,8 +90,10 @@
              │       │       └── XmlDocumentBuilderStraightImpl                 
              │       ├── converter
              │       │   └── DateConverterTest
+             │       ├── parser
+             │       │   └── XmlFromFileTest
              │       └── parser
-             │           └── XmlFromFileTest
+             │           └── XmlValidatorWrapperTest
              ├── dao
              │   └── BookDAOMock
              ├── database
