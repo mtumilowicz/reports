@@ -24,11 +24,7 @@ public class BookCollectionSheet extends InsertableXlsSheet {
         new BookCollectionSheetTitle(getBundles(), sheet, rowCount).create();
 
         rowCount++;
-
-        new BookCollectionTableHeaders(getBundles(), sheet, rowCount).create();
-
-        rowCount++;
-
+        
         new BookCollectionTableContent(getBundles(), sheet, rowCount).create();
     }
 
