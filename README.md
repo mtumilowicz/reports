@@ -135,7 +135,7 @@ file parser, schema factory, validation by scheme, dom-document writer
                      └── XlsxGenerationTest
 ```
 ## description
-<a name="PDF"/>
+<a name="PDF"></a>
 ### PDF
 * PdfCellBuilder: CellBackgroundColor, CellBorder, CellDefaults, CellText
 * ImageBuilder
@@ -145,7 +145,7 @@ file parser, schema factory, validation by scheme, dom-document writer
 * InsertablePdfImage
 * InsertablePdfTable
 
-<a name="XLS"/>
+<a name="XLS"></a>
 ### XLS
 * XlsxDataFormat
 * XlsxDataFormatType
@@ -153,7 +153,7 @@ file parser, schema factory, validation by scheme, dom-document writer
 * InsertableXlsContent
 * InsertableXlsSheet
 
-<a name="XML"/>
+<a name="XML"></a>
 ### XML
 * BaseXmlDocumentBuilderImpl
 * XmlDocumentBuilder
