@@ -136,7 +136,8 @@ file parser, schema factory, validation by scheme, dom-document writer
 ```
 ## description
 <a name="PDF"></a>
-### PDF
+PDF
+---
 * PdfCellBuilder: CellBackgroundColor, CellBorder, CellDefaults, CellText
 * ImageBuilder
 * PdfFontsContainer
@@ -146,7 +147,8 @@ file parser, schema factory, validation by scheme, dom-document writer
 * InsertablePdfTable
 
 <a name="XLS"></a>
-### XLS
+XLS
+---
 * XlsxDataFormat
 * XlsxDataFormatType
 * AbstractXlsxWriter
@@ -154,7 +156,8 @@ file parser, schema factory, validation by scheme, dom-document writer
 * InsertableXlsSheet
 
 <a name="XML"></a>
-### XML
+XML
+---
 * BaseXmlDocumentBuilderImpl
 * XmlDocumentBuilder
 * XmlDocumentBuilderChainImpl
