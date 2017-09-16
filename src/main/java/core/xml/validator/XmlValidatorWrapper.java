@@ -19,9 +19,12 @@ public class XmlValidatorWrapper {
         this.validator = validator;
     }
     
-    public void validate(String filePath) throws SAXException, IOException {
-        validator.validate(new DOMSource(StaticDomDocumentBuilderFactory.parse(Objects.requireNonNull(filePath))));
-        System.out.println("Xml is correct!");
+    public void validate(String filePath) {
+        try {
+            validator.validate(new DOMSource(StaticDomDocumentBuilderFactory.parse(Objects.requireNonNull(filePath))));
+        } catch (SAXException | IOException e) {
+            throw new XmlValidatorWrapperException(e.getLocalizedMessage());
+        }
     }
     
     public static final class Factory {
@@ -29,6 +32,12 @@ public class XmlValidatorWrapper {
             return new XmlValidatorWrapper(
                     XmlValidatorFactory.newInstance(Objects.requireNonNull(schemaName), 
                             Objects.requireNonNull(schemaLanguage)));
+        }
+    }
+    
+    public static class XmlValidatorWrapperException extends RuntimeException {
+        public XmlValidatorWrapperException(String message) {
+            super(message);
         }
     }
 }
