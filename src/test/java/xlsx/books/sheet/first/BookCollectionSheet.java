@@ -1,8 +1,7 @@
 package xlsx.books.sheet.first;
 
+import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsSheet;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -10,29 +9,33 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class BookCollectionSheet extends InsertableXlsSheet {
 
-    public BookCollectionSheet(XSSFWorkbook workbook) {
-        super(workbook);
+    public BookCollectionSheet(BundleHandler bundles, XSSFWorkbook workbook) {
+        super(bundles, workbook);
     }
 
     @Override
     public void create() {
-        XSSFSheet sheet = getWorkbook().createSheet(getBundles().get("report.sheet.book.name"));
-        setColumnWidthInSheet(sheet);
+        setColumnWidthInSheet();
 
         int rowCount = 0;
 
-        new BookCollectionSheetTitle(getBundles(), sheet, rowCount).create();
+        new BookCollectionSheetTitle(getBundles(), getSheet(), rowCount).create();
 
         rowCount++;
         
-        new BookCollectionSheetContent(getBundles(), sheet, rowCount).create();
+        new BookCollectionSheetContent(getBundles(), getSheet(), rowCount).create();
     }
 
     @Override
-    public void setColumnWidthInSheet(Sheet sheet) {
-        sheet.setColumnWidth(1, 5000);
-        sheet.setColumnWidth(2, 8000);
-        sheet.setColumnWidth(5, 4500);
-        sheet.setColumnWidth(7, 3000);
+    public String getName() {
+        return "report.sheet.book.name";
+    }
+
+    @Override
+    public void setColumnWidthInSheet() {
+        getSheet().setColumnWidth(1, 5000);
+        getSheet().setColumnWidth(2, 8000);
+        getSheet().setColumnWidth(5, 4500);
+        getSheet().setColumnWidth(7, 3000);
     }
 }

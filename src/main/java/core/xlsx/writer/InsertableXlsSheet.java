@@ -1,7 +1,7 @@
 package core.xlsx.writer;
 
 import core.bundle.BundleHandler;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -9,28 +9,29 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public abstract class InsertableXlsSheet {
 
-    private BundleHandler bundles = new BundleHandler();
-    private final XSSFWorkbook workbook;
+    private final BundleHandler bundles;
+    private final XSSFSheet sheet;
 
-    public abstract void setColumnWidthInSheet(Sheet sheet);
+    protected InsertableXlsSheet(BundleHandler bundles, XSSFWorkbook workbook) {
+        this.bundles = bundles;
+        this.sheet = workbook.createSheet(loadNameFromBundles());
+    }
+
+    public abstract void setColumnWidthInSheet();
 
     public abstract void create();
-
-    public InsertableXlsSheet(XSSFWorkbook workbook) {
-        this.workbook = workbook;
-    }
+    
+    public abstract String getName();
 
     public BundleHandler getBundles() {
         return bundles;
     }
 
-    public XSSFWorkbook getWorkbook() {
-        return workbook;
+    public XSSFSheet getSheet() {
+        return sheet;
     }
-
-    public InsertableXlsSheet withBundles(BundleHandler bundles) {
-        this.bundles = bundles;
-
-        return this;
+    
+    private String loadNameFromBundles() {
+        return bundles.get(getName());
     }
 }

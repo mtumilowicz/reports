@@ -1,8 +1,7 @@
 package xlsx.books.sheet.second;
 
+import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsSheet;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -10,25 +9,28 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class SummarySheet extends InsertableXlsSheet {
 
-    public SummarySheet(XSSFWorkbook workbook) {
-        super(workbook);
+    public SummarySheet(BundleHandler bundles, XSSFWorkbook workbook) {
+        super(bundles, workbook);
     }
 
     public void create() {
-        XSSFSheet sheet = getWorkbook().createSheet(getBundles().get("report.sheet.summary.name"));
-
         int rowCount = 0;
 
-        new SummarySheetTitle(getBundles(), sheet, rowCount).create();
+        new SummarySheetTitle(getBundles(), getSheet(), rowCount).create();
 
         rowCount++;
 
-        new SummarySheetContent(getBundles(), sheet, rowCount).create();
+        new SummarySheetContent(getBundles(), getSheet(), rowCount).create();
 
     }
 
     @Override
-    public void setColumnWidthInSheet(Sheet sheet) {
+    public String getName() {
+        return "report.sheet.summary.name";
+    }
+
+    @Override
+    public void setColumnWidthInSheet() {
 
     }
 }
