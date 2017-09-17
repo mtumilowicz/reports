@@ -11,6 +11,7 @@ import core.pdf.writer.InsertablePdfImage;
  */
 final class HarvardEmblem implements InsertablePdfImage {
     
+    @Override
     public Image getScaledFor(Document document) {
         return ImageBuilder.Factory.get("src/main/resources/harvard.png")
                 .widthAndHeight(100, 100)

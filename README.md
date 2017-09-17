@@ -305,7 +305,23 @@ _add(InsertablePdfTable table)_ - for adding tables (wrapped in the
 _InsertablePdfTable_; more info in p. 8.)  
 more exemplary code of usages *PdfDocumentBuilder* in class (test package)
 : _PdfGenerationTest_  
-7. **InsertablePdfImage** -
+7. **InsertablePdfImage** - every image that is inserted into report 
+should be defined in separate class implementing _InsertablePdfImage_:
+```
+XXX implements InsertablePdfImage
+```
+ten we have to simply _@Override_ method 
+_Image getScaledFor(Document document)_
+```
+@Override
+public Image getScaledFor(Document document) {
+    return ImageBuilder.Factory.get("src/main/resources/harvard.png")
+            .widthAndHeight(100, 100)
+            .position(document.getLeftMargin(),
+                    PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
+            .build();
+}
+```
 more exemplary code of usages *InsertablePdfImage* in class (test package)
 : _HarvardEmblem_  
 8. **InsertablePdfTable** - every table that is inserted into report 
