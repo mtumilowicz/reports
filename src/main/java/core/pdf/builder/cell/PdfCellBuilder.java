@@ -27,8 +27,8 @@ public class PdfCellBuilder {
     private CellText cellText = new CellText();
     private CellBackgroundColor cellBackgroundColor = new CellBackgroundColor();
     
-    public PdfCellBuilder value(String text) {
-        cellText.text(text);
+    public PdfCellBuilder value(String value) {
+        cellText.text(value);
 
         return this;
     }
@@ -87,14 +87,14 @@ public class PdfCellBuilder {
     }
 
     public PdfCellBuilder center() {
-        return setTextAlignment(TextAlignment.CENTER);
+        return textAlignment(TextAlignment.CENTER);
     }
 
     public PdfCellBuilder right() {
-        return setTextAlignment(TextAlignment.RIGHT);
+        return textAlignment(TextAlignment.RIGHT);
     }
 
-    private PdfCellBuilder setTextAlignment(TextAlignment textAlignment) {
+    private PdfCellBuilder textAlignment(TextAlignment textAlignment) {
         Preconditions.checkArgument(textAlignment != null);
         cellText.textAlignment(textAlignment);
 

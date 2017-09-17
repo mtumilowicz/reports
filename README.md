@@ -140,7 +140,7 @@ PDF
 ---
 * _PdfCellBuilder: CellBackgroundColor, CellBorder, CellDefaults, 
 CellText_ - facilitates composing of pdf cells by chaining methods and
-handling basic features (e.x. borders)
+handling basic features (eq. borders)
 * _ImageBuilder_ - facilitates inserting images into pdf by setting size
 and position in one go
 * _PdfFontsContainer_ - it is actually a map containing fonts (cache);
@@ -155,7 +155,7 @@ XLS
 ---
 * _XlsxDataFormat_ - facilitates handling with different column date 
 formats during files generation
-* _XlsxDataFormatType_ - cache of format types (e.x. #.00 - money,
+* _XlsxDataFormatType_ - cache of format types (eg. #.00 - money,
 YYYY-MM-DD hh:mm - date with time)
 * _AbstractXlsxWriter_ - base class used in xls file generation
 * _InsertableXlsContent_ - base class used in building content of sheets
@@ -186,3 +186,69 @@ example: dom-document to string (using specific output format)
 * _XmlWriter_ - base class used in xml file generation
 
 ## examples
+Example of using api (and references to more in test package).
+
+PDF
+---
+1) PdfCellBuilder - we don't use this class directly but as a integral 
+part of InsertablePdfTable.  
+Methods description:  
+* value(XXX value) - used to set value of type XXX 
+(eg. String, BigDecimal, Date, Integer)  
+```
+getCellBuilder().value(value).build();
+```
+
+* bold(), text alignment: center(), right(), 
+textAlignment(TextAlignment textAlignment)
+```
+getCellBuilder().value(XXX).center().bold().build();
+getCellBuilder().value(XXX).right().build();
+getCellBuilder().value(XXX).textAlignment(TextAlignment.LEFT).build();
+```
+
+* singleCellFontSize(int fontSize), 
+backgroundColor(Color backgroundColor) - changes only in the cell we are
+working on (without any influence on the others)
+```
+getCellBuilder().value(value).singleCellFontSize(20).build()
+getCellBuilder().value(value).backgroundColor(Color.CYAN).build()
+```
+
+* setDefaultFontSize(int defaultFontSize), 
+setDefaultBackgroundColor(Color defaultBackgroundColor),
+setDefaultStyle(Style style) - changes permanently all cell constructed
+by instance of PdfCellBuilder (still can be outshouted by using 
+singleCellFontSize and so on...); changes are saved in CellDefaults;
+methods don't allow chaining
+```
+getCellBuilder().setDefaultFontSize(20);
+// constructing cells
+```
+
+* build() - after calling this method we construct cell with all set
+features then reset all fields to default, eg. CellBorder.border field
+is set to true;
+```
+public Cell build() {
+    Cell cell = prepareCell();
+
+    resetFields();
+
+    return cell;
+    }
+    
+private void resetFields() {
+    this.cellText = new CellText();
+    this.cellBackgroundColor = new CellBackgroundColor();
+    this.cellBorder = new CellBorder();
+}
+```
+more exemplary code of usages PdfCellBuilder in test package: ReportHeader, 
+SummaryBooksCollectionTable, BooksCollectionTable
+
+XLS
+---
+
+XML
+---
