@@ -118,7 +118,7 @@ file parser, schema factory, validation by scheme, dom-document writer
              │   │   ├── PdfGenerationTest
              │   │   ├── ReportHeader
              │   │   ├── SpacingTable
-             │   │   ├── SummaryBooksCollectionTable
+             │   │   └── SummaryBooksCollectionTable
              └── xlsx
                  └── books
                      ├── sheet
