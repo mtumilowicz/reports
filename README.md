@@ -190,17 +190,16 @@ Example of using api (and references to more in test package).
 
 PDF
 ---
-1. **PdfCellBuilder** - we don't use this class directly but as a integral 
-part of InsertablePdfTable.
+1. **PdfCellBuilder** - we don't use this class directly but as a 
+integral part of _InsertablePdfTable_.
 
-_Methods description:_  
-* _value(XXX value)_ - used to set value of type XXX 
+_value(XXX value)_ - used to set value of type XXX 
 (eg. String, BigDecimal, Date, Integer)  
 ```
 getCellBuilder().value(value).build();
 ```
 
-* _bold(), textAlignment(TextAlignment textAlignment), center(), 
+_bold(), textAlignment(TextAlignment textAlignment), center(), 
 right()_ 
 ```
 getCellBuilder().value(XXX).center().bold().build();
@@ -208,7 +207,7 @@ getCellBuilder().value(XXX).right().build();
 getCellBuilder().value(XXX).textAlignment(TextAlignment.LEFT).build();
 ```
 
-* _singleCellFontSize(int fontSize), 
+_singleCellFontSize(int fontSize), 
 backgroundColor(Color backgroundColor)_ - changes only in the cell we are
 working on (without any influence on the others)
 ```
@@ -216,7 +215,7 @@ getCellBuilder().value(value).singleCellFontSize(20).build()
 getCellBuilder().value(value).backgroundColor(Color.CYAN).build()
 ```
 
-* _setDefaultFontSize(int defaultFontSize), 
+_setDefaultFontSize(int defaultFontSize), 
 setDefaultBackgroundColor(Color defaultBackgroundColor),
 setDefaultStyle(Style style)_ - changes permanently all cell constructed
 by instance of PdfCellBuilder (still can be outshouted by using 
@@ -227,7 +226,7 @@ getCellBuilder().setDefaultFontSize(20);
 // constructing cells
 ```
 
-* _build()_ - after calling this method we construct cell with all set
+_build()_ - after calling this method we construct cell with all set
 features then reset all fields to default, eg. CellBorder.border field
 is set to true;
 ```
@@ -277,9 +276,60 @@ public static PdfFont getHelvetica() {
 }
 ```
 more exemplary code of usages *PdfFontsContainer* in class (test package)
-: CellDefaults  
-4. **PdfFontsFactory** - produces embedded fonts in Cp1250 encoding for
-PdfFontsContainer
+: _CellDefaults_  
+4. **PdfFontsFactory** - produces embedded fonts in _Cp1250_ encoding for
+_PdfFontsContainer_  
+5. **AbstractPdfWriter** - base class for creating pdf file; usage:
+```
+XXX extends AbstractPdfWriter
+```
+then we _@Override prepare(Document document)_, where we construct 
+document. We could use PdfDocumentBuilder to facilitate this activity 
+(for more info go to pt. 6.).
+```
+protected void prepare(Document document) {
+    Table table = new Table(new float[]{1});
+    table.setDocument(document);
+    table.setWidthPercent(100)
+          .addHeaderCell(new PdfCellBuilder().value("bomba").build())
+          .complete();
+    }
+```
+more exemplary code of usages *AbstractPdfWriter* in class (test package)
+: _PdfGenerationTest_  
+6. **PdfDocumentBuilder** - facilitates creating pdf documents, by 
+allowing chaining methods:  
+_add(InsertablePdfImage image)_ - for adding image (wrapped in the 
+InsertablePdfImage; more info in p. 7.)  
+_add(InsertablePdfTable table)_ - for adding tables (wrapped in the 
+InsertablePdfTable; more info in p. 8.)  
+more exemplary code of usages *PdfDocumentBuilder* in class (test package)
+: _PdfGenerationTest_  
+7. **InsertablePdfImage** -
+more exemplary code of usages *InsertablePdfImage* in class (test package)
+: _SummaryBooksCollectionTable, SpacingTable, ReportHeader, 
+BooksCollectionTable_  
+8. **InsertablePdfTable** - every table used to construct report should
+be defined in separate class extending InsertablePdfTable
+```
+XXX extends InsertablePdfTable
+```
+then we have to only _@Override_ method _Table get()_ (we have access 
+to PdfCellBuilder by getCellBuilder(), and BundleHandler by 
+getBundles()):
+```
+@Override
+public Table get() {
+    Table table = new Table(new float[]{1});
+    table.setWidthPercent(100)
+            .addHeaderCell(
+                    getCellBuilder().value(getBundles().get(key)).build());
+    
+    return table;
+}
+```
+more exemplary code of usages *InsertablePdfTable* in class (test package)
+: _HarvardEmblem_  
 
 XLS
 ---
