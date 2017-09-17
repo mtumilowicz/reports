@@ -13,7 +13,7 @@ final class HarvardEmblem implements InsertablePdfImage {
     
     @Override
     public Image getScaledFor(Document document) {
-        return ImageBuilder.Factory.get("src/main/resources/harvard.png")
+        return ImageBuilder.Factory.get("src/test/resources/harvard.png")
                 .widthAndHeight(100, 100)
                 .position(document.getLeftMargin(),
                         PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)

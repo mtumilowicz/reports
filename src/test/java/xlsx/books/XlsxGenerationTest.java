@@ -2,6 +2,7 @@ package xlsx.books;
 
 import core.xlsx.writer.AbstractXlsxWriter;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.Test;
 import xlsx.books.sheet.first.BookCollectionSheet;
 import xlsx.books.sheet.second.SummarySheet;
 
@@ -12,7 +13,8 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
     
     private static final String DEST = "output/xlsx/test.xlsx";
     
-    public static void main(String[] args) {
+    @Test
+    public void generate() {
         new XlsxGenerationTest().save(DEST);
     }
 
