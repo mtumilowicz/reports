@@ -190,7 +190,7 @@ Example of using api (and references to more in test package).
 
 PDF
 ---
-1) **PdfCellBuilder** - we don't use this class directly but as a integral 
+1. **PdfCellBuilder** - we don't use this class directly but as a integral 
 part of InsertablePdfTable.
 
 _Methods description:_  
@@ -246,7 +246,40 @@ private void resetFields() {
 }
 ```
 more exemplary code of usages *PdfCellBuilder* in classes (test package)
-: _ReportHeader, SummaryBooksCollectionTable, BooksCollectionTable_
+: _ReportHeader, SummaryBooksCollectionTable, BooksCollectionTable_  
+2. **ImageBuilder** - we use this class directly
+```
+ImageBuilder.Factory.get(path)
+                .widthAndHeight(100, 100)
+                .position(100, 100)
+                .build();
+```
+width and height we give in floats, position is set in order: firstly
+abscissa then ordinate (also floats).  
+When we have reference to the dom document, we could use it like that 
+(top left corner):
+```
+ImageBuilder.Factory.get("src/main/resources/harvard.png")
+                .widthAndHeight(100, 100)
+                .position(document.getLeftMargin(),
+                        PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
+                .build();
+```
+more exemplary code of usages *ImageBuilder* in class (test package)
+: HarvardEmblem  
+3. **PdfFontsContainer** - we don't have direct access to the cache map, if
+we want a new font, we have to declare method (as shown with helvetica),
+because number of fonts used in application should be as less as possible
+and strictly restricted:
+```
+public static PdfFont getHelvetica() {
+    return get(FontConstants.HELVETICA);
+}
+```
+more exemplary code of usages *PdfFontsContainer* in class (test package)
+: CellDefaults  
+4. **PdfFontsFactory** - produces embedded fonts in Cp1250 encoding for
+PdfFontsContainer
 
 XLS
 ---

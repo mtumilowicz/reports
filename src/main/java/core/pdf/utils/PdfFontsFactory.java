@@ -8,8 +8,8 @@ import java.io.IOException;
 /**
  * Created by mtumilowicz on 2017-08-20.
  */
-public class PdfFontsFactory {
-    public static PdfFont createFont(String fontName) {
+final class PdfFontsFactory {
+    final static PdfFont createFont(String fontName) {
         try {
             return PdfFontFactory.createFont(fontName, "Cp1250", true);
         } catch (IOException e) {
