@@ -153,27 +153,29 @@ into pdf)
 <a name="xls"></a>
 XLS
 ---
-* XlsxDataFormat
-* XlsxDataFormatType
-* AbstractXlsxWriter
-* InsertableXlsContent
-* InsertableXlsSheet
+* _XlsxDataFormat_ - facilitates handling with different column date 
+formats during files generation
+* _XlsxDataFormatType_ - cache of format types (e.x. #.00 - money,
+YYYY-MM-DD hh:mm - date with time)
+* _AbstractXlsxWriter_ - base class used in xls file generation
+* _InsertableXlsContent_ - base class used in building content of sheets
+* _InsertableXlsSheet_ - base class used in building sheets
 
 <a name="xml"></a>
 XML
 ---
-* BaseXmlDocumentBuilderImpl
-* XmlDocumentBuilder
-* XmlDocumentBuilderChainImpl
-* XmlDocumentBuilderStraightImpl
-* XmlElementBuilder
-* DateOnlyConverter
-* EntityToXmlConverter
-* XmlFromFile
-* XmlSchemaFactory
-* XmlTransformer
-* XmlValidatorFactory
-* XmlValidatorWrapper
-* XmlWriter
+* _BaseXmlDocumentBuilderImpl_ - 
+* _XmlDocumentBuilder_ - 
+* _XmlDocumentBuilderChainImpl_ - 
+* _XmlDocumentBuilderStraightImpl_ - 
+* _XmlElementBuilder_ - 
+* _DateOnlyConverter_ - 
+* _EntityToXmlConverter_ - 
+* _XmlFromFile_ - 
+* _XmlSchemaFactory_ - 
+* _XmlTransformer_ - 
+* _XmlValidatorFactory_ - 
+* _XmlValidatorWrapper_ - 
+* _XmlWriter_ - 
 
 ## examples
