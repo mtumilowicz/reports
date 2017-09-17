@@ -28,9 +28,9 @@ public class XmlValidatorWrapper {
     }
     
     public static final class Factory {
-        public static XmlValidatorWrapper newInstance(String schemaName, String schemaLanguage) {
+        public static XmlValidatorWrapper newInstance(String filePath, String schemaLanguage) {
             return new XmlValidatorWrapper(
-                    XmlValidatorFactory.newInstance(Objects.requireNonNull(schemaName), 
+                    XmlValidatorFactory.newInstance(Objects.requireNonNull(filePath), 
                             Objects.requireNonNull(schemaLanguage)));
         }
     }

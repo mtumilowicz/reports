@@ -9,15 +9,15 @@ import javax.xml.validation.Validator;
 /**
  * Created by mtumilowicz on 2017-06-25.
  */
-public class XmlValidatorFactory {
+final class XmlValidatorFactory {
     
-    public static Validator newInstance(String schemaFileName, String schemaLanguage) {
-        Preconditions.checkArgument(StringUtils.isNotEmpty(schemaFileName));
+    final static Validator newInstance(String filePath, String schemaLanguage) {
+        Preconditions.checkArgument(StringUtils.isNotEmpty(filePath));
         Preconditions.checkArgument(StringUtils.isNotEmpty(schemaLanguage));
         
         return new XmlSchemaFactory.Builder()
                 .schemaLanguage(schemaLanguage)
-                .schemaPath(schemaFileName)
+                .schemaPath(filePath)
                 .build()
                 .getSchema()
                 .newValidator();

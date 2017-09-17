@@ -164,18 +164,25 @@ YYYY-MM-DD hh:mm - date with time)
 <a name="xml"></a>
 XML
 ---
-* _BaseXmlDocumentBuilderImpl_ - 
-* _XmlDocumentBuilder_ - 
-* _XmlDocumentBuilderChainImpl_ - 
-* _XmlDocumentBuilderStraightImpl_ - 
-* _XmlElementBuilder_ - 
-* _DateOnlyConverter_ - 
-* _EntityToXmlConverter_ - 
-* _XmlFromFile_ - 
-* _XmlSchemaFactory_ - 
-* _XmlTransformer_ - 
-* _XmlValidatorFactory_ - 
-* _XmlValidatorWrapper_ - 
-* _XmlWriter_ - 
+* _BaseXmlDocumentBuilderImpl_ - consequence of two different approach 
+of composing xml: chain and straight (common abstractions is extracted 
+to that class)
+* _XmlDocumentBuilder_ - interface for xml document builder
+* _XmlDocumentBuilderChainImpl_ - implementation that allows to chain 
+methods
+* _XmlDocumentBuilderStraightImpl_ - orthodox implementation (every 
+element has to be created and then added)
+* _XmlElementBuilder_ - interface for element builder
+* _DateOnlyConverter_ - exemplary xstream converter
+* _EntityToXmlConverter_ - wrapper for xstream conversion from entity 
+to xml
+* _XmlFromFile_ - parse xml from file to a specific class
+* _XmlSchemaFactory_ - loads xml schema from file (given path + 
+language)
+* _XmlTransformer_ - couple useful methods for xml transforming, for 
+example: dom-document to string (using specific output format)
+* _XmlValidatorFactory_ - javax.xml.validation.Validator factory
+* _XmlValidatorWrapper_ - wrapper for xml validation (using schema)
+* _XmlWriter_ - base class used in xml file generation
 
 ## examples
