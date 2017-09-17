@@ -300,15 +300,14 @@ more exemplary code of usages *AbstractPdfWriter* in class (test package)
 6. **PdfDocumentBuilder** - facilitates creating pdf documents, by 
 allowing chaining methods:  
 _add(InsertablePdfImage image)_ - for adding image (wrapped in the 
-InsertablePdfImage; more info in p. 7.)  
+_InsertablePdfImage_; more info in p. 7.)  
 _add(InsertablePdfTable table)_ - for adding tables (wrapped in the 
-InsertablePdfTable; more info in p. 8.)  
+_InsertablePdfTable_; more info in p. 8.)  
 more exemplary code of usages *PdfDocumentBuilder* in class (test package)
 : _PdfGenerationTest_  
 7. **InsertablePdfImage** -
 more exemplary code of usages *InsertablePdfImage* in class (test package)
-: _SummaryBooksCollectionTable, SpacingTable, ReportHeader, 
-BooksCollectionTable_  
+: _HarvardEmblem_  
 8. **InsertablePdfTable** - every table used to construct report should
 be defined in separate class extending InsertablePdfTable
 ```
@@ -329,7 +328,8 @@ public Table get() {
 }
 ```
 more exemplary code of usages *InsertablePdfTable* in class (test package)
-: _HarvardEmblem_  
+: _SummaryBooksCollectionTable, SpacingTable, ReportHeader, 
+  BooksCollectionTable_  
 
 XLS
 ---
