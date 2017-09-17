@@ -265,7 +265,7 @@ ImageBuilder.Factory.get("src/main/resources/harvard.png")
                 .build();
 ```
 more exemplary code of usages *ImageBuilder* in class (test package)
-: HarvardEmblem  
+: _HarvardEmblem_  
 3. **PdfFontsContainer** - we don't have direct access to the cache map, if
 we want a new font, we have to declare method (as shown with helvetica),
 because number of fonts used in application should be as less as possible
