@@ -308,14 +308,14 @@ more exemplary code of usages *PdfDocumentBuilder* in class (test package)
 7. **InsertablePdfImage** -
 more exemplary code of usages *InsertablePdfImage* in class (test package)
 : _HarvardEmblem_  
-8. **InsertablePdfTable** - every table used to construct report should
-be defined in separate class extending InsertablePdfTable
+8. **InsertablePdfTable** - every table that is inserted into report 
+should be defined in separate class extending _InsertablePdfTable_:
 ```
 XXX extends InsertablePdfTable
 ```
 then we have to only _@Override_ method _Table get()_ (we have access 
-to PdfCellBuilder by getCellBuilder(), and BundleHandler by 
-getBundles()):
+to _PdfCellBuilder_ by _getCellBuilder()_, and _BundleHandler_ by 
+_getBundles()_):
 ```
 @Override
 public Table get() {
@@ -329,7 +329,7 @@ public Table get() {
 ```
 more exemplary code of usages *InsertablePdfTable* in class (test package)
 : _SummaryBooksCollectionTable, SpacingTable, ReportHeader, 
-  BooksCollectionTable_  
+BooksCollectionTable_  
 
 XLS
 ---
