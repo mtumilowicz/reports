@@ -310,7 +310,7 @@ should be defined in separate class implementing _InsertablePdfImage_:
 ```
 XXX implements InsertablePdfImage
 ```
-ten we have to simply _@Override_ method 
+then we have to simply _@Override_ method 
 _Image getScaledFor(Document document)_
 ```
 @Override
