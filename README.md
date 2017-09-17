@@ -190,34 +190,35 @@ Example of using api (and references to more in test package).
 
 PDF
 ---
-1) PdfCellBuilder - we don't use this class directly but as a integral 
-part of InsertablePdfTable.  
-Methods description:  
-* value(XXX value) - used to set value of type XXX 
+1) **PdfCellBuilder** - we don't use this class directly but as a integral 
+part of InsertablePdfTable.
+
+_Methods description:_  
+* _value(XXX value)_ - used to set value of type XXX 
 (eg. String, BigDecimal, Date, Integer)  
 ```
 getCellBuilder().value(value).build();
 ```
 
-* bold(), text alignment: center(), right(), 
-textAlignment(TextAlignment textAlignment)
+* _bold(), textAlignment(TextAlignment textAlignment), center(), 
+right()_ 
 ```
 getCellBuilder().value(XXX).center().bold().build();
 getCellBuilder().value(XXX).right().build();
 getCellBuilder().value(XXX).textAlignment(TextAlignment.LEFT).build();
 ```
 
-* singleCellFontSize(int fontSize), 
-backgroundColor(Color backgroundColor) - changes only in the cell we are
+* _singleCellFontSize(int fontSize), 
+backgroundColor(Color backgroundColor)_ - changes only in the cell we are
 working on (without any influence on the others)
 ```
 getCellBuilder().value(value).singleCellFontSize(20).build()
 getCellBuilder().value(value).backgroundColor(Color.CYAN).build()
 ```
 
-* setDefaultFontSize(int defaultFontSize), 
+* _setDefaultFontSize(int defaultFontSize), 
 setDefaultBackgroundColor(Color defaultBackgroundColor),
-setDefaultStyle(Style style) - changes permanently all cell constructed
+setDefaultStyle(Style style)_ - changes permanently all cell constructed
 by instance of PdfCellBuilder (still can be outshouted by using 
 singleCellFontSize and so on...); changes are saved in CellDefaults;
 methods don't allow chaining
@@ -226,7 +227,7 @@ getCellBuilder().setDefaultFontSize(20);
 // constructing cells
 ```
 
-* build() - after calling this method we construct cell with all set
+* _build()_ - after calling this method we construct cell with all set
 features then reset all fields to default, eg. CellBorder.border field
 is set to true;
 ```
@@ -244,8 +245,8 @@ private void resetFields() {
     this.cellBorder = new CellBorder();
 }
 ```
-more exemplary code of usages PdfCellBuilder in test package: ReportHeader, 
-SummaryBooksCollectionTable, BooksCollectionTable
+more exemplary code of usages *PdfCellBuilder* in classes (test package)
+: _ReportHeader, SummaryBooksCollectionTable, BooksCollectionTable_
 
 XLS
 ---
