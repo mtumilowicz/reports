@@ -173,8 +173,8 @@ methods
 * _XmlDocumentBuilderStraightImpl_ - orthodox implementation (every 
 element has to be created and then added)
 * _XmlElementBuilder_ - interface for element builder
-* _DateOnlyConverter_ - exemplary xstream converter
-* _EntityToXmlConverter_ - wrapper for xstream conversion from entity 
+* _DateOnlyConverter_ - exemplary x-stream converter
+* _EntityToXmlConverter_ - wrapper for x-stream conversion from entity 
 to xml
 * _XmlFromFile_ - parse xml from file to a specific class
 * _XmlSchemaFactory_ - loads xml schema from file (given path + 
