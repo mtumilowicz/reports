@@ -1,12 +1,12 @@
 package pdf.books;
 
 import com.itextpdf.layout.Document;
-import core.pdf.writer.AbstractDocumentWriter;
+import core.pdf.writer.AbstractPdfWriter;
 
 /**
  * Created by mtumilowicz on 2017-07-05.
  */
-public class PdfGenerationTest extends AbstractDocumentWriter {
+public class PdfGenerationTest extends AbstractPdfWriter {
     private static final String DEST = "output/pdf/test.pdf";
 
     public static void main(String args[]) {

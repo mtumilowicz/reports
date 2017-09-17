@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by mtumilowicz on 2017-07-12.
  */
-public abstract class AbstractDocumentWriter implements DocumentWriter {
+public abstract class AbstractPdfWriter implements DocumentWriter {
     
     protected final BundleHandler bundles = new BundleHandler(getClass());
 

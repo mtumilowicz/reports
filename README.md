@@ -42,12 +42,12 @@ file parser, schema factory, validation by scheme, dom-document writer
     │            │   │   │   ├── CellText
     │            │   │   │   └── PdfCellBuilder
     │            │   │   ├── image
-    │            │   │   │   └── PdfCellBuilder
+    │            │   │   │   └── ImageBuilder
     │            │   ├── utils
     │            │   │   ├── PdfFontsContainer
     │            │   │   └── PdfFontsFactory
     │            │   └── writer
-    │            │       ├── AbstractDocumentWriter
+    │            │       ├── AbstractPdfWriter
     │            │       ├── InsertablePdfImage
     │            │       └── InsertablePdfTable
     │            ├── writer
@@ -138,13 +138,17 @@ file parser, schema factory, validation by scheme, dom-document writer
 <a name="pdf"></a>
 PDF
 ---
-* PdfCellBuilder: CellBackgroundColor, CellBorder, CellDefaults, CellText
-* ImageBuilder
-* PdfFontsContainer
-* PdfFontsFactory
-* AbstractDocumentWriter
-* InsertablePdfImage
-* InsertablePdfTable
+* _PdfCellBuilder: CellBackgroundColor, CellBorder, CellDefaults, 
+CellText_ - facilitates composing of pdf cells by chaining methods and
+handling basic features (e.x. borders)
+* _ImageBuilder_ - facilitates inserting images into pdf by setting size
+and position in one go
+* _PdfFontsContainer_ - it is actually a map containing fonts (cache);
+* _PdfFontsContainer_ - produces embedded fonts in encoding Cp1250
+* _AbstractPdfWriter_ - base class used in pdf file generation
+* _InsertablePdfImage_ - interface used for inserting images
+* _InsertablePdfTable_ - base class used in building tables (inserted
+into pdf)
 
 <a name="xls"></a>
 XLS

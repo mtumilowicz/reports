@@ -19,10 +19,6 @@ public final class PdfFontsContainer {
     public static PdfFont getHelvetica() {
         return get(FontConstants.HELVETICA);
     }
-
-    public static PdfFont getHelveticaBold() {
-        return get(FontConstants.HELVETICA_BOLD);
-    }
     
     private static PdfFont get(String fontName) {
         if (!FONTS.containsKey(fontName)) {
