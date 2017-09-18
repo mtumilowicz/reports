@@ -19,11 +19,11 @@ public class BookCollectionSheet extends InsertableXlsSheet {
 
         int rowCount = 0;
 
-        new BookCollectionSheetTitle(getBundles(), getSheet(), rowCount).create();
+        add(new BookCollectionSheetTitle(getBundles(), getSheet(), rowCount));
 
         rowCount++;
         
-        new BookCollectionSheetContent(getBundles(), getSheet(), rowCount).create();
+        add(new BookCollectionSheetContent(getBundles(), getSheet(), rowCount));
     }
 
     @Override

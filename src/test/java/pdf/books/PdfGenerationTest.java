@@ -2,6 +2,7 @@ package pdf.books;
 
 import com.itextpdf.layout.Document;
 import core.pdf.writer.AbstractPdfWriter;
+import core.pdf.writer.PdfDocumentBuilder;
 import org.junit.Test;
 
 /**

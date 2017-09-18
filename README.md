@@ -49,7 +49,8 @@ file parser, schema factory, validation by scheme, dom-document writer
     │            │   └── writer
     │            │       ├── AbstractPdfWriter
     │            │       ├── InsertablePdfImage
-    │            │       └── InsertablePdfTable
+    │            │       ├── InsertablePdfTable
+    │            │       └── PdfDocumentBuilder
     │            ├── writer
     │            │   └── DocumentWriter
     │            ├── xlsx
@@ -149,6 +150,7 @@ and position in one go
 * _InsertablePdfImage_ - interface used for inserting images
 * _InsertablePdfTable_ - base class used in building tables (inserted
 into pdf)
+* _PdfDocumentBuilder_ - util class used in composing pdf files
 
 <a name="xls"></a>
 XLS
@@ -356,6 +358,30 @@ BooksCollectionTable_
 
 XLS
 ---
+1) **XlsxDataFormat** - cells in excel could have specific format (eg. 
+date: _YYYY-MM-DD_ or date with time: _YYYY-MM-DD hh:mm_ - take a look 
+at pt. 2)) - this class is simply the cache.  
+2) **XlsxDataFormatType** - enum for excel format types.   
+3) **AbstractXlsxWriter** - base class for creating pdf file; usage:
+```
+XXX extends AbstractXlsxWriter
+```
+then we _@Override prepare(Document document)_, where we construct 
+document. We could use PdfDocumentBuilder to facilitate this activity 
+(for more info go to pt. 6.).
+```
+protected void prepare(Document document) {
+    Table table = new Table(new float[]{1});
+    table.setDocument(document);
+    table.setWidthPercent(100)
+          .addHeaderCell(new PdfCellBuilder().value("bomba").build())
+          .complete();
+    }
+```
+more exemplary code of usages *AbstractPdfWriter* in class (test package)
+: _PdfGenerationTest_  
+4) **InsertableXlsContent** -   
+5) **InsertableXlsSheet** - 
 
 XML
 ---

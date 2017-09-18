@@ -12,6 +12,8 @@ import java.io.IOException;
  */
 public abstract class AbstractXlsxWriter implements DocumentWriter {
     protected final BundleHandler bundles = new BundleHandler(this.getClass());
+
+    public abstract void prepare(XSSFWorkbook workbook);
     
     public void save(String dest) {
         try (XSSFWorkbook workbook = new XSSFWorkbook();
@@ -23,8 +25,11 @@ public abstract class AbstractXlsxWriter implements DocumentWriter {
         }
     }
     
+    protected void add(InsertableXlsSheet sheet) {
+        sheet.create();
+    }
+    
     private void create(XSSFWorkbook workbook, FileOutputStream outputStream) throws IOException {
         workbook.write(outputStream);
     }
-    public abstract void prepare(XSSFWorkbook workbook);
 }

@@ -20,8 +20,8 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
 
     @Override
     public void prepare(XSSFWorkbook workbook) {
-        new BookCollectionSheet(bundles, workbook).create();
+        add(new BookCollectionSheet(bundles, workbook));
 
-        new SummarySheet(bundles, workbook).create();
+        add(new SummarySheet(bundles, workbook));
     }
 }

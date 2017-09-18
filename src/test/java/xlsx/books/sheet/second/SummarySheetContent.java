@@ -15,6 +15,6 @@ final class SummarySheetContent extends InsertableXlsContent {
 
     @Override
     public void create() {
-        new SummaryTable(getBundles(), getSheet(), getRowCount()).create();
+        add(new SummaryTable(getBundles(), getSheet(), getRowCount()));
     }
 }

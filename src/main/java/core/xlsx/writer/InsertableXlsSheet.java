@@ -31,6 +31,10 @@ public abstract class InsertableXlsSheet {
         return sheet;
     }
     
+    protected void add(InsertableXlsContent content) {
+        content.create();
+    }
+    
     private String loadNameFromBundles() {
         return bundles.get(getName());
     }

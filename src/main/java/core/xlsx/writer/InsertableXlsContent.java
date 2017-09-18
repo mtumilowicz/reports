@@ -39,6 +39,9 @@ public abstract class InsertableXlsContent {
         return rowCount;
     }
 
+    protected void add(InsertableXlsContent content) {
+        content.create();
+    }
 
     private XlsxDataFormat initDateFormat(XSSFWorkbook workbook) {
         return XlsxDataFormat.Factory.get(workbook.createDataFormat());

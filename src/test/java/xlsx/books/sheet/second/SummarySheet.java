@@ -16,11 +16,11 @@ public class SummarySheet extends InsertableXlsSheet {
     public void create() {
         int rowCount = 0;
 
-        new SummarySheetTitle(getBundles(), getSheet(), rowCount).create();
+        add(new SummarySheetTitle(getBundles(), getSheet(), rowCount));
 
         rowCount++;
 
-        new SummarySheetContent(getBundles(), getSheet(), rowCount).create();
+        add(new SummarySheetContent(getBundles(), getSheet(), rowCount));
 
     }
 

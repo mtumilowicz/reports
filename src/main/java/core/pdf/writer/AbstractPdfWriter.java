@@ -35,24 +35,4 @@ public abstract class AbstractPdfWriter implements DocumentWriter {
             prepare(document);
         }
     }
-
-    protected class PdfDocumentBuilder {
-        private final Document document;
-
-        public PdfDocumentBuilder(Document document) {
-            this.document = document;
-        }
-
-        public PdfDocumentBuilder add(InsertablePdfTable table) {
-            document.add(table.get());
-            
-            return this;
-        }
-
-        public PdfDocumentBuilder add(InsertablePdfImage image) {
-            document.add(image.getScaledFor(document));
-            
-            return this;
-        }
-    }
 }

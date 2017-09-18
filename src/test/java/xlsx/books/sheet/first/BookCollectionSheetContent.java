@@ -15,7 +15,7 @@ final class BookCollectionSheetContent extends InsertableXlsContent {
 
     @Override
     public void create() {
-        new BookCollectionTable(getBundles(), getSheet(), getRowCount()).create();
+        add(new BookCollectionTable(getBundles(), getSheet(), getRowCount()));
     }
 
 }
