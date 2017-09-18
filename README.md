@@ -378,7 +378,9 @@ public void prepare(Workbook workbook) {
 ```
 more exemplary code of usages *AbstractXlsxWriter* in class (test package)
 : _XlsxGenerationTest_  
+
 4) **InsertableXlsContent** -   
+
 5) **InsertableXlsSheet** - 
 
 XML
