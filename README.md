@@ -361,7 +361,9 @@ XLS
 1) **XlsxDataFormat** - cells in excel could have specific format (eg. 
 date: _YYYY-MM-DD_ or date with time: _YYYY-MM-DD hh:mm_ - take a look 
 at pt. 2)) - this class is simply the cache  
-2) **XlsxDataFormatType** - enum for excel format types   
+
+2) **XlsxDataFormatType** - enum for excel format types  
+
 3) **AbstractXlsxWriter** - base class for creating pdf file; usage:
 ```
 XXX extends AbstractXlsxWriter
@@ -379,9 +381,59 @@ public void prepare(Workbook workbook) {
 more exemplary code of usages *AbstractXlsxWriter* in class (test package)
 : _XlsxGenerationTest_  
 
-4) **InsertableXlsContent** -   
+4) **InsertableXlsContent** - every content that is inserted into sheet 
+should be defined in separate class extending _InsertableXlsContent_:  
+```
+XXX extends InsertableXlsContent
+```
+then we have to _@Override_ methods:  
+_void create()_ (we have access to _Sheet_ by _getSheet()_, 
+and _BundleHandler_ by _getBundles()_):
+```
+@Override
+public void create() {
+    int rowCount = 0;
+    add(new FirstTable(getBundles(), getSheet(), rowCount));
+    rowCount++;
+    add(new SecondTable(getBundles(), getSheet(), rowCount));
 
-5) **InsertableXlsSheet** - 
+}
+```
+more exemplary code of usages *InsertableXlsContent* in classes 
+(test package) : _BookCollectionSheetContent_, 
+_BookCollectionSheetTitle_, _BookCollectionTable_, 
+_SummarySheetContent_, _SummarySheetTitle_, _SummaryTable_  
+
+5) **InsertableXlsSheet** - every sheet that is inserted into report 
+should be defined in separate class extending _InsertableXlsSheet_:
+```
+XXX extends InsertableXlsSheet
+```
+then we have to _@Override_ methods:  
+_void create()_ (we have access to _Sheet_ by _getSheet()_, 
+and _BundleHandler_ by _getBundles()_),  
+_String getBundleKeySheetName()_ and  
+_void setColumnWidthInSheet()_:
+```
+@Override
+public void create() {
+    int rowCount = 0;
+    add(new SheetTitle(getBundles(), getSheet(), rowCount));
+
+}
+
+@Override
+public String getBundleKeySheetName() {
+    return "keyFromBundles";
+}
+
+@Override
+public void setColumnWidthInSheet() {
+
+}
+```
+more exemplary code of usages *InsertableXlsSheet* in classes (test package)
+: _SummarySheet_, _BookCollectionSheet_  
 
 XML
 ---

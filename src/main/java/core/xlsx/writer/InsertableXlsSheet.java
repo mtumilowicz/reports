@@ -21,7 +21,7 @@ public abstract class InsertableXlsSheet {
 
     public abstract void create();
     
-    public abstract String getName();
+    public abstract String getBundleKeySheetName();
 
     public BundleHandler getBundles() {
         return bundles;
@@ -36,6 +36,6 @@ public abstract class InsertableXlsSheet {
     }
     
     private String loadNameFromBundles() {
-        return bundles.get(getName());
+        return bundles.get(getBundleKeySheetName());
     }
 }

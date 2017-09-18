@@ -13,6 +13,7 @@ public class SummarySheet extends InsertableXlsSheet {
         super(bundles, workbook);
     }
 
+    @Override
     public void create() {
         int rowCount = 0;
 
@@ -25,7 +26,7 @@ public class SummarySheet extends InsertableXlsSheet {
     }
 
     @Override
-    public String getName() {
+    public String getBundleKeySheetName() {
         return "report.sheet.summary.name";
     }
 

@@ -3,7 +3,6 @@ package xlsx.books.sheet.first;
 import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsSheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * Created by mtumilowicz on 2017-09-12.
@@ -28,7 +27,7 @@ public class BookCollectionSheet extends InsertableXlsSheet {
     }
 
     @Override
-    public String getName() {
+    public String getBundleKeySheetName() {
         return "report.sheet.book.name";
     }
 
