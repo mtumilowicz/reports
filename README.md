@@ -356,6 +356,6 @@ BooksCollectionTable_
 
 XLS
 ---
-z
+
 XML
 ---
