@@ -366,20 +366,18 @@ at pt. 2)) - this class is simply the cache.
 ```
 XXX extends AbstractXlsxWriter
 ```
-then we _@Override prepare(Document document)_, where we construct 
-document. We could use PdfDocumentBuilder to facilitate this activity 
-(for more info go to pt. 6.).
+then we _@Override prepare(Workbook workbook)_, where we construct 
+document. Use method:  
+_add(InsertableXlsSheet sheet)_ to add sheet:
 ```
-protected void prepare(Document document) {
-    Table table = new Table(new float[]{1});
-    table.setDocument(document);
-    table.setWidthPercent(100)
-          .addHeaderCell(new PdfCellBuilder().value("bomba").build())
-          .complete();
-    }
+@Override
+public void prepare(Workbook workbook) {
+    add(new FirstSheet(bundles, workbook));
+    add(new SecondSheet(bundles, workbook));
+}
 ```
 more exemplary code of usages *AbstractPdfWriter* in class (test package)
-: _PdfGenerationTest_  
+: _XlsxGenerationTest_  
 4) **InsertableXlsContent** -   
 5) **InsertableXlsSheet** - 
 
