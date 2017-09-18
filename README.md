@@ -190,10 +190,10 @@ Example of using api (and references to more in test package).
 
 PDF
 ---
-1. **PdfCellBuilder** - we don't use this class directly but as a 
+1) **PdfCellBuilder** - we don't use this class directly but as a 
 integral part of _InsertablePdfTable_.
 
-⋅⋅⋅ _value(XXX value)_ - used to set value of type XXX 
+_value(XXX value)_ - used to set value of type XXX 
 (eg. String, BigDecimal, Date, Integer)  
 ```
 getCellBuilder().value(value).build();
@@ -246,7 +246,8 @@ private void resetFields() {
 ```
 more exemplary code of usages *PdfCellBuilder* in classes (test package)
 : _ReportHeader, SummaryBooksCollectionTable, BooksCollectionTable_  
-2. **ImageBuilder** - we use this class directly
+
+2) **ImageBuilder** - we use this class directly
 ```
 ImageBuilder.Factory.get(path)
                 .widthAndHeight(100, 100)
@@ -266,7 +267,8 @@ ImageBuilder.Factory.get("src/main/resources/harvard.png")
 ```
 more exemplary code of usages *ImageBuilder* in class (test package)
 : _HarvardEmblem_  
-3. **PdfFontsContainer** - we don't have direct access to the cache map, if
+
+3) **PdfFontsContainer** - we don't have direct access to the cache map, if
 we want a new font, we have to declare method (as shown with helvetica),
 because number of fonts used in application should be as less as possible
 and strictly restricted:
@@ -277,9 +279,11 @@ public static PdfFont getHelvetica() {
 ```
 more exemplary code of usages *PdfFontsContainer* in class (test package)
 : _CellDefaults_  
-4. **PdfFontsFactory** - produces embedded fonts in _Cp1250_ encoding for
+
+4) **PdfFontsFactory** - produces embedded fonts in _Cp1250_ encoding for
 _PdfFontsContainer_  
-5. **AbstractPdfWriter** - base class for creating pdf file; usage:
+
+5) **AbstractPdfWriter** - base class for creating pdf file; usage:
 ```
 XXX extends AbstractPdfWriter
 ```
@@ -297,7 +301,8 @@ protected void prepare(Document document) {
 ```
 more exemplary code of usages *AbstractPdfWriter* in class (test package)
 : _PdfGenerationTest_  
-6. **PdfDocumentBuilder** - facilitates creating pdf documents, by 
+
+6) **PdfDocumentBuilder** - facilitates creating pdf documents, by 
 allowing chaining methods:  
 _add(InsertablePdfImage image)_ - for adding image (wrapped in the 
 _InsertablePdfImage_; more info in p. 7.)  
@@ -305,7 +310,8 @@ _add(InsertablePdfTable table)_ - for adding tables (wrapped in the
 _InsertablePdfTable_; more info in p. 8.)  
 more exemplary code of usages *PdfDocumentBuilder* in class (test package)
 : _PdfGenerationTest_  
-7. **InsertablePdfImage** - every image that is inserted into report 
+
+7) **InsertablePdfImage** - every image that is inserted into report 
 should be defined in separate class implementing _InsertablePdfImage_:
 ```
 XXX implements InsertablePdfImage
@@ -324,7 +330,8 @@ public Image getScaledFor(Document document) {
 ```
 more exemplary code of usages *InsertablePdfImage* in class (test package)
 : _HarvardEmblem_  
-8. **InsertablePdfTable** - every table that is inserted into report 
+
+8) **InsertablePdfTable** - every table that is inserted into report 
 should be defined in separate class extending _InsertablePdfTable_:
 ```
 XXX extends InsertablePdfTable
