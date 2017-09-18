@@ -193,7 +193,7 @@ PDF
 1. **PdfCellBuilder** - we don't use this class directly but as a 
 integral part of _InsertablePdfTable_.
 
-_value(XXX value)_ - used to set value of type XXX 
+⋅⋅⋅ _value(XXX value)_ - used to set value of type XXX 
 (eg. String, BigDecimal, Date, Integer)  
 ```
 getCellBuilder().value(value).build();
@@ -349,6 +349,6 @@ BooksCollectionTable_
 
 XLS
 ---
-
+z
 XML
 ---
