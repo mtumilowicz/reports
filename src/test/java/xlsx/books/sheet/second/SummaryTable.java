@@ -6,8 +6,6 @@ import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellUtil;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import java.math.BigDecimal;
 
@@ -15,7 +13,7 @@ import java.math.BigDecimal;
  * Created by mtumilowicz on 2017-09-16.
  */
 public class SummaryTable extends InsertableXlsContent {
-    SummaryTable(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
+    SummaryTable(BundleHandler bundles, Sheet sheet, int rowCount) {
         super(bundles, sheet, rowCount);
     }
 
@@ -27,7 +25,7 @@ public class SummaryTable extends InsertableXlsContent {
         rowCount++;
 
         int columnCount = 0;
-        XSSFRow row = getSheet().createRow(rowCount);
+        Row row = getSheet().createRow(rowCount);
 
         Cell quantity = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAOMock.getAllEntities().size()));
         quantity.setCellType(CellType.NUMERIC);
@@ -43,7 +41,7 @@ public class SummaryTable extends InsertableXlsContent {
 
         void create() {
             int columnCount = 0;
-            XSSFRow row = getSheet().createRow(getRowCount());
+            Row row = getSheet().createRow(getRowCount());
             Cell quantityHeader = CellUtil.createCell(row, columnCount++, getBundles().get("report.table.summary.quantity"));
             addTableHeaderCell(quantityHeader);
 

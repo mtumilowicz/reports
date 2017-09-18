@@ -2,14 +2,14 @@ package xlsx.books.sheet.second;
 
 import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * Created by mtumilowicz on 2017-09-12.
  */
 public class SummarySheet extends InsertableXlsSheet {
 
-    public SummarySheet(BundleHandler bundles, XSSFWorkbook workbook) {
+    public SummarySheet(BundleHandler bundles, Workbook workbook) {
         super(bundles, workbook);
     }
 

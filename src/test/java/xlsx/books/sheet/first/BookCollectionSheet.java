@@ -2,6 +2,7 @@ package xlsx.books.sheet.first;
 
 import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsSheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -9,7 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class BookCollectionSheet extends InsertableXlsSheet {
 
-    public BookCollectionSheet(BundleHandler bundles, XSSFWorkbook workbook) {
+    public BookCollectionSheet(BundleHandler bundles, Workbook workbook) {
         super(bundles, workbook);
     }
 

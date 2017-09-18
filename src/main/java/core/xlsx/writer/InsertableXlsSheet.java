@@ -1,8 +1,8 @@
 package core.xlsx.writer;
 
 import core.bundle.BundleHandler;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * Created by mtumilowicz on 2017-09-16.
@@ -10,9 +10,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public abstract class InsertableXlsSheet {
 
     private final BundleHandler bundles;
-    private final XSSFSheet sheet;
+    private final Sheet sheet;
 
-    protected InsertableXlsSheet(BundleHandler bundles, XSSFWorkbook workbook) {
+    protected InsertableXlsSheet(BundleHandler bundles, Workbook workbook) {
         this.bundles = bundles;
         this.sheet = workbook.createSheet(loadNameFromBundles());
     }
@@ -27,7 +27,7 @@ public abstract class InsertableXlsSheet {
         return bundles;
     }
 
-    public XSSFSheet getSheet() {
+    public Sheet getSheet() {
         return sheet;
     }
     

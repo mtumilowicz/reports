@@ -2,6 +2,7 @@ package core.xlsx.writer;
 
 import core.bundle.BundleHandler;
 import core.writer.DocumentWriter;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public abstract class AbstractXlsxWriter implements DocumentWriter {
     protected final BundleHandler bundles = new BundleHandler(this.getClass());
 
-    public abstract void prepare(XSSFWorkbook workbook);
+    public abstract void prepare(Workbook workbook);
     
     public void save(String dest) {
         try (XSSFWorkbook workbook = new XSSFWorkbook();
@@ -29,7 +30,7 @@ public abstract class AbstractXlsxWriter implements DocumentWriter {
         sheet.create();
     }
     
-    private void create(XSSFWorkbook workbook, FileOutputStream outputStream) throws IOException {
+    private void create(Workbook workbook, FileOutputStream outputStream) throws IOException {
         workbook.write(outputStream);
     }
 }

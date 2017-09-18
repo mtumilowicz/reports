@@ -7,14 +7,12 @@ import dao.BookDAOMock;
 import entity.Book;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellUtil;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 /**
  * Created by mtumilowicz on 2017-09-16.
  */
 public class BookCollectionTable extends InsertableXlsContent {
-    BookCollectionTable(BundleHandler bundles, XSSFSheet sheet, int rowCount) {
+    BookCollectionTable(BundleHandler bundles, Sheet sheet, int rowCount) {
         super(bundles, sheet, rowCount);
     }
 
@@ -26,7 +24,7 @@ public class BookCollectionTable extends InsertableXlsContent {
         rowCount++;
 
         for (Book book : BookDAOMock.getAllEntities()) {
-            XSSFRow row = getSheet().createRow(rowCount++);
+            Row row = getSheet().createRow(rowCount++);
             int columnCount = 0;
 
             CellUtil.createCell(row, columnCount++, book.getId());
@@ -59,7 +57,7 @@ public class BookCollectionTable extends InsertableXlsContent {
         void create() {
             int columnCount = 0;
 
-            XSSFRow row = getSheet().createRow(getRowCount());
+            Row row = getSheet().createRow(getRowCount());
 
             for (String header : getHeaders()) {
                 Cell headerCell = CellUtil.createCell(row, columnCount++, getBundles().get(header));

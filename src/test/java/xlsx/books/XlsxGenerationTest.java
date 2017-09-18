@@ -1,6 +1,7 @@
 package xlsx.books;
 
 import core.xlsx.writer.AbstractXlsxWriter;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import xlsx.books.sheet.first.BookCollectionSheet;
@@ -19,7 +20,7 @@ public class XlsxGenerationTest extends AbstractXlsxWriter {
     }
 
     @Override
-    public void prepare(XSSFWorkbook workbook) {
+    public void prepare(Workbook workbook) {
         add(new BookCollectionSheet(bundles, workbook));
 
         add(new SummarySheet(bundles, workbook));
