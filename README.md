@@ -289,7 +289,7 @@ _PdfFontsContainer_
 ```
 XXX extends AbstractPdfWriter
 ```
-then we _@Override prepare(Document document)_, where we construct 
+then we _@Override_ method _prepare(Document document)_, where we construct 
 document. We could use PdfDocumentBuilder to facilitate this activity 
 (for more info go to pt. 6.).
 ```
@@ -360,13 +360,13 @@ XLS
 ---
 1) **XlsxDataFormat** - cells in excel could have specific format (eg. 
 date: _YYYY-MM-DD_ or date with time: _YYYY-MM-DD hh:mm_ - take a look 
-at pt. 2)) - this class is simply the cache.  
-2) **XlsxDataFormatType** - enum for excel format types.   
+at pt. 2)) - this class is simply the cache  
+2) **XlsxDataFormatType** - enum for excel format types   
 3) **AbstractXlsxWriter** - base class for creating pdf file; usage:
 ```
 XXX extends AbstractXlsxWriter
 ```
-then we _@Override prepare(Workbook workbook)_, where we construct 
+then we _@Override_ method _prepare(Workbook workbook)_, where we construct 
 document. Use method:  
 _add(InsertableXlsSheet sheet)_ to add sheet:
 ```
@@ -376,7 +376,7 @@ public void prepare(Workbook workbook) {
     add(new SecondSheet(bundles, workbook));
 }
 ```
-more exemplary code of usages *AbstractPdfWriter* in class (test package)
+more exemplary code of usages *AbstractXlsxWriter* in class (test package)
 : _XlsxGenerationTest_  
 4) **InsertableXlsContent** -   
 5) **InsertableXlsSheet** - 
