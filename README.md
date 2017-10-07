@@ -139,53 +139,53 @@ file parser, schema factory, validation by scheme, dom-document writer
 <a name="pdf"></a>
 PDF
 ---
-* _PdfCellBuilder: CellBackgroundColor, CellBorder, CellDefaults, 
-CellText_ - facilitates composing of pdf cells by chaining methods and
+* `PdfCellBuilder`: `CellBackgroundColor`, `CellBorder`, `CellDefaults`, 
+`CellText` - facilitates composing of pdf cells by chaining methods and
 handling basic features (eq. borders)
-* _ImageBuilder_ - facilitates inserting images into pdf by setting size
+* `ImageBuilder` - facilitates inserting images into pdf by setting size
 and position in one go
-* _PdfFontsContainer_ - it is actually a map containing fonts (cache);
-* _PdfFontsContainer_ - produces embedded fonts in encoding Cp1250
-* _AbstractPdfWriter_ - base class used in pdf file generation
-* _InsertablePdfImage_ - interface used for inserting images
-* _InsertablePdfTable_ - base class used in building tables (inserted
+* `PdfFontsContainer` - it is actually a map containing fonts (cache);
+* `PdfFontsContainer` - produces embedded fonts in encoding Cp1250
+* `AbstractPdfWriter` - base class used in pdf file generation
+* `InsertablePdfImage` - interface used for inserting images
+* `InsertablePdfTable` - base class used in building tables (inserted
 into pdf)
-* _PdfDocumentBuilder_ - util class used in composing pdf files
+* `PdfDocumentBuilder` - util class used in composing pdf files
 
 <a name="xls"></a>
 XLS
 ---
-* _XlsxDataFormat_ - facilitates handling with different column date 
+* `XlsxDataFormat` - facilitates handling with different column date 
 formats during files generation
-* _XlsxDataFormatType_ - cache of format types (eg. #.00 - money,
+* `XlsxDataFormatType` - cache of format types (eg. #.00 - money,
 YYYY-MM-DD hh:mm - date with time)
-* _AbstractXlsxWriter_ - base class used in xls file generation
-* _InsertableXlsContent_ - base class used in building content of sheets
-* _InsertableXlsSheet_ - base class used in building sheets
+* `AbstractXlsxWriter` - base class used in xls file generation
+* `InsertableXlsContent` - base class used in building content of sheets
+* `InsertableXlsSheet` - base class used in building sheets
 
 <a name="xml"></a>
 XML
 ---
-* _BaseXmlDocumentBuilderImpl_ - consequence of two different approach 
+* `BaseXmlDocumentBuilderImpl` - consequence of two different approach 
 of composing xml: chain and straight (common abstractions is extracted 
 to that class)
-* _XmlDocumentBuilder_ - interface for xml document builder
-* _XmlDocumentBuilderChainImpl_ - implementation that allows to chain 
+* `XmlDocumentBuilder` - interface for xml document builder
+* `XmlDocumentBuilderChainImpl` - implementation that allows to chain 
 methods
-* _XmlDocumentBuilderStraightImpl_ - orthodox implementation (every 
+* `XmlDocumentBuilderStraightImpl` - orthodox implementation (every 
 element has to be created and then added)
-* _XmlElementBuilder_ - interface for element builder
-* _DateOnlyConverter_ - exemplary x-stream converter
-* _EntityToXmlConverter_ - wrapper for x-stream conversion from entity 
+* `XmlElementBuilder` - interface for element builder
+* `DateOnlyConverter` - exemplary x-stream converter
+* `EntityToXmlConverter` - wrapper for x-stream conversion from entity 
 to xml
-* _XmlFromFile_ - parse xml from file to a specific class
-* _XmlSchemaFactory_ - loads xml schema from file (given path + 
+* `XmlFromFile` - parse xml from file to a specific class
+* `XmlSchemaFactory` - loads xml schema from file (given path + 
 language)
-* _XmlTransformer_ - couple useful methods for xml transforming, for 
+* `XmlTransformer` - couple useful methods for xml transforming, for 
 example: dom-document to string (using specific output format)
-* _XmlValidatorFactory_ - javax.xml.validation.Validator factory
-* _XmlValidatorWrapper_ - wrapper for xml validation (using schema)
-* _XmlWriter_ - base class used in xml file generation
+* `XmlValidatorFactory` - javax.xml.validation.Validator factory
+* `XmlValidatorWrapper` - wrapper for xml validation (using schema)
+* `XmlWriter` - base class used in xml file generation
 
 ## examples
 Example of using api (and references to more in test package).
@@ -193,42 +193,42 @@ Example of using api (and references to more in test package).
 PDF
 ---
 1) **PdfCellBuilder** - we don't use this class directly but as a 
-integral part of _InsertablePdfTable_.
+integral part of `InsertablePdfTable`.
 
-_value(XXX value)_ - used to set value of type XXX 
+`value(XXX value)` - used to set value of type XXX 
 (eg. String, BigDecimal, Date, Integer)  
 ```
 getCellBuilder().value(value).build();
 ```
 
-_bold(), textAlignment(TextAlignment textAlignment), center(), 
-right()_ 
+`bold()`, `textAlignment(TextAlignment textAlignment)`, `center()`, 
+`right()` 
 ```
 getCellBuilder().value(XXX).center().bold().build();
 getCellBuilder().value(XXX).right().build();
 getCellBuilder().value(XXX).textAlignment(TextAlignment.LEFT).build();
 ```
 
-_singleCellFontSize(int fontSize), 
-backgroundColor(Color backgroundColor)_ - changes only in the cell we are
+`singleCellFontSize(int fontSize)`, 
+`backgroundColor(Color backgroundColor)` - changes only in the cell we are
 working on (without any influence on the others)
 ```
 getCellBuilder().value(value).singleCellFontSize(20).build()
 getCellBuilder().value(value).backgroundColor(Color.CYAN).build()
 ```
 
-_setDefaultFontSize(int defaultFontSize), 
-setDefaultBackgroundColor(Color defaultBackgroundColor),
-setDefaultStyle(Style style)_ - changes permanently all cell constructed
-by instance of PdfCellBuilder (still can be outshouted by using 
-singleCellFontSize and so on...); changes are saved in CellDefaults;
+`setDefaultFontSize(int defaultFontSize)`, 
+`setDefaultBackgroundColor(Color defaultBackgroundColor)`,
+`setDefaultStyle(Style style)` - changes permanently all cell constructed
+by instance of `PdfCellBuilder` (still can be outshouted by using 
+`singleCellFontSize` and so on...); changes are saved in `CellDefaults`;
 methods don't allow chaining
 ```
 getCellBuilder().setDefaultFontSize(20);
 // constructing cells
 ```
 
-_build()_ - after calling this method we construct cell with all set
+`build()` - after calling this method we construct cell with all set
 features then reset all fields to default, eg. CellBorder.border field
 is set to true;
 ```
@@ -268,7 +268,7 @@ ImageBuilder.Factory.get("src/main/resources/harvard.png")
                 .build();
 ```
 more exemplary code of usages *ImageBuilder* in class (test package)
-: _HarvardEmblem_  
+: `HarvardEmblem`  
 
 3) **PdfFontsContainer** - we don't have direct access to the cache map, if
 we want a new font, we have to declare method (as shown with helvetica),
@@ -280,16 +280,16 @@ public static PdfFont getHelvetica() {
 }
 ```
 more exemplary code of usages *PdfFontsContainer* in class (test package)
-: _CellDefaults_  
+: `CellDefaults`  
 
-4) **PdfFontsFactory** - produces embedded fonts in _Cp1250_ encoding for
-_PdfFontsContainer_  
+4) **PdfFontsFactory** - produces embedded fonts in `Cp1250` encoding for
+`PdfFontsContainer`  
 
 5) **AbstractPdfWriter** - base class for creating pdf file; usage:
 ```
 XXX extends AbstractPdfWriter
 ```
-then we _@Override_ method _prepare(Document document)_, where we construct 
+then we `@Override` method `prepare(Document document)`, where we construct 
 document. We could use PdfDocumentBuilder to facilitate this activity 
 (for more info go to pt. 6.).
 ```
@@ -302,24 +302,24 @@ protected void prepare(Document document) {
     }
 ```
 more exemplary code of usages *AbstractPdfWriter* in class (test package)
-: _PdfGenerationTest_  
+: `PdfGenerationTest`  
 
 6) **PdfDocumentBuilder** - facilitates creating pdf documents, by 
 allowing chaining methods:  
-_add(InsertablePdfImage image)_ - for adding image (wrapped in the 
-_InsertablePdfImage_; more info in p. 7.)  
-_add(InsertablePdfTable table)_ - for adding tables (wrapped in the 
-_InsertablePdfTable_; more info in p. 8.)  
+`add(InsertablePdfImage image)` - for adding image (wrapped in the 
+`InsertablePdfImage`; more info in p. 7.)  
+`add(InsertablePdfTable table)` - for adding tables (wrapped in the 
+`InsertablePdfTable`; more info in p. 8.)  
 more exemplary code of usages *PdfDocumentBuilder* in class (test package)
-: _PdfGenerationTest_  
+: `PdfGenerationTest`  
 
 7) **InsertablePdfImage** - every image that is inserted into report 
-should be defined in separate class implementing _InsertablePdfImage_:
+should be defined in separate class implementing `InsertablePdfImage`:
 ```
 XXX implements InsertablePdfImage
 ```
-then we have to simply _@Override_ method 
-_Image getScaledFor(Document document)_
+then we have to simply `@Override` method 
+`Image getScaledFor(Document document)`
 ```
 @Override
 public Image getScaledFor(Document document) {
@@ -331,16 +331,16 @@ public Image getScaledFor(Document document) {
 }
 ```
 more exemplary code of usages *InsertablePdfImage* in class (test package)
-: _HarvardEmblem_  
+: `HarvardEmblem`  
 
 8) **InsertablePdfTable** - every table that is inserted into report 
-should be defined in separate class extending _InsertablePdfTable_:
+should be defined in separate class extending `InsertablePdfTable`:
 ```
 XXX extends InsertablePdfTable
 ```
-then we have to only _@Override_ method _Table get()_ (we have access 
-to _PdfCellBuilder_ by _getCellBuilder()_, and _BundleHandler_ by 
-_getBundles()_):
+then we have to only `@Override` method `Table get()` (we have access 
+to `PdfCellBuilder` by `getCellBuilder()`, and `BundleHandler` by 
+`getBundles()`):
 ```
 @Override
 public Table get() {
@@ -359,7 +359,7 @@ BooksCollectionTable_
 XLS
 ---
 1) **XlsxDataFormat** - cells in excel could have specific format (eg. 
-date: _YYYY-MM-DD_ or date with time: _YYYY-MM-DD hh:mm_ - take a look 
+date: `YYYY-MM-DD` or date with time: `YYYY-MM-DD hh:mm` - take a look 
 at pt. 2)) - this class is simply the cache  
 
 2) **XlsxDataFormatType** - enum for excel format types  
@@ -368,9 +368,9 @@ at pt. 2)) - this class is simply the cache
 ```
 XXX extends AbstractXlsxWriter
 ```
-then we _@Override_ method _prepare(Workbook workbook)_, where we construct 
+then we `@Override` method `prepare(Workbook workbook)`, where we construct 
 document. Use method:  
-_add(InsertableXlsSheet sheet)_ to add sheet:
+`add(InsertableXlsSheet sheet)` to add sheet:
 ```
 @Override
 public void prepare(Workbook workbook) {
@@ -379,16 +379,16 @@ public void prepare(Workbook workbook) {
 }
 ```
 more exemplary code of usages *AbstractXlsxWriter* in class (test package)
-: _XlsxGenerationTest_  
+: `XlsxGenerationTest`  
 
 4) **InsertableXlsContent** - every content that is inserted into sheet 
-should be defined in separate class extending _InsertableXlsContent_:  
+should be defined in separate class extending `InsertableXlsContent`:  
 ```
 XXX extends InsertableXlsContent
 ```
-then we have to _@Override_ methods:  
-_void create()_ (we have access to _Sheet_ by _getSheet()_, 
-and _BundleHandler_ by _getBundles()_):
+then we have to `@Override` methods:  
+`void create()` (we have access to `Sheet` by `getSheet()`, 
+and `BundleHandler` by `getBundles()`):
 ```
 @Override
 public void create() {
@@ -400,20 +400,20 @@ public void create() {
 }
 ```
 more exemplary code of usages *InsertableXlsContent* in classes 
-(test package): _BookCollectionSheetContent_, 
-_BookCollectionSheetTitle_, _BookCollectionTable_, 
-_SummarySheetContent_, _SummarySheetTitle_, _SummaryTable_  
+(test package): `BookCollectionSheetContent`, 
+`BookCollectionSheetTitle`, `BookCollectionTable`, 
+`SummarySheetContent`, `SummarySheetTitle`, `SummaryTable`  
 
 5) **InsertableXlsSheet** - every sheet that is inserted into report 
-should be defined in separate class extending _InsertableXlsSheet_:
+should be defined in separate class extending `InsertableXlsSheet`:
 ```
 XXX extends InsertableXlsSheet
 ```
-then we have to _@Override_ methods:  
-_void create()_ (we have access to _Sheet_ by _getSheet()_, 
-and _BundleHandler_ by _getBundles()_),  
-_String getBundleKeySheetName()_ and  
-_void setColumnWidthInSheet()_:
+then we have to `@Override` methods:  
+`void create()` (we have access to `Sheet` by `getSheet()`, 
+and `BundleHandler` by `getBundles()`),  
+`String getBundleKeySheetName()` and  
+`void setColumnWidthInSheet()`:
 ```
 @Override
 public void create() {
@@ -433,7 +433,7 @@ public void setColumnWidthInSheet() {
 }
 ```
 more exemplary code of usages *InsertableXlsSheet* in classes (test 
-package): _SummarySheet_, _BookCollectionSheet_  
+package): `SummarySheet`, `BookCollectionSheet`  
 
 XML
 ---
@@ -464,7 +464,7 @@ calling element("name1").element("innerElementOfName1") produces chain:
     <innerElementOfName1/>
 <name1>
 ```
-so we have to provide method _up()_ to escape from inside of the tag, so:  
+so we have to provide method `up()` to escape from inside of the tag, so:  
 calling element("name1").element("innerElementOfName1").up()
 .element("name2") 
 produces:
@@ -474,5 +474,7 @@ produces:
 <name2>
 ```
 more exemplary code of usages *XmlDocumentBuilderChainImpl* in class 
-(test package): _ChainReportTypeXmlWriterShowcase_, 
-_XmlDocumentBuilderChainImplTest_
+(test package): `ChainReportTypeXmlWriterShowcase`, 
+`XmlDocumentBuilderChainImplTest`
+
+2) **XmlDocumentBuilderStraightImpl**
