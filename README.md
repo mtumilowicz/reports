@@ -194,13 +194,12 @@ Example of using api (and references to more in test package).
 1) **PdfCellBuilder** - we don't use this class directly but as a 
 integral part of `InsertablePdfTable`.
 
----
 `value(XXX value)` - used to set value of type XXX 
 (eg. String, BigDecimal, Date, Integer)  
 ```
 getCellBuilder().value(value).build();
 ```
----
+
 `bold()`, `textAlignment(TextAlignment textAlignment)`, `center()`, 
 `right()` 
 ```
@@ -208,7 +207,6 @@ getCellBuilder().value(XXX).center().bold().build();
 getCellBuilder().value(XXX).right().build();
 getCellBuilder().value(XXX).textAlignment(TextAlignment.LEFT).build();
 ```
----
 
 `singleCellFontSize(int fontSize)`, 
 `backgroundColor(Color backgroundColor)` - changes only in the cell we are
@@ -217,7 +215,6 @@ working on (without any influence on the others)
 getCellBuilder().value(value).singleCellFontSize(20).build()
 getCellBuilder().value(value).backgroundColor(Color.CYAN).build()
 ```
----
 
 `setDefaultFontSize(int defaultFontSize)`, 
 `setDefaultBackgroundColor(Color defaultBackgroundColor)`,
@@ -229,7 +226,6 @@ methods don't allow chaining
 getCellBuilder().setDefaultFontSize(20);
 // constructing cells
 ```
----
 
 `build()` - after calling this method we construct cell with all set
 features then reset all fields to default, eg. `CellBorder.border field`
