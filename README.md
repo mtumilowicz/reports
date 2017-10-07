@@ -190,8 +190,7 @@ example: dom-document to string (using specific output format)
 ## examples
 Example of using api (and references to more in test package).
 
-PDF
----
+## PDF
 1) **PdfCellBuilder** - we don't use this class directly but as a 
 integral part of `InsertablePdfTable`.
 
