@@ -365,10 +365,12 @@ more exemplary code of usages `InsertablePdfTable` in class (test package)
 ## XLS
 1) **XlsxDataFormat** - cells in excel could have specific format (eg. 
 date: `YYYY-MM-DD` or date with time: `YYYY-MM-DD hh:mm` - take a look 
-at pt. 2)) - this class is simply the cache  
+at pt. 2)) - this class is simply the cache
 
+---
 2) **XlsxDataFormatType** - enum for excel format types  
 
+---
 3) **AbstractXlsxWriter** - base class for creating pdf file; usage:
 ```
 XXX extends AbstractXlsxWriter
@@ -386,6 +388,7 @@ public void prepare(Workbook workbook) {
 more exemplary code of usages `AbstractXlsxWriter` in class (test package)
 : `XlsxGenerationTest`  
 
+---
 4) **InsertableXlsContent** - every content that is inserted into sheet 
 should be defined in separate class extending `InsertableXlsContent`:  
 ```
@@ -409,6 +412,7 @@ more exemplary code of usages `InsertableXlsContent` in classes
 `BookCollectionSheetTitle`, `BookCollectionTable`, 
 `SummarySheetContent`, `SummarySheetTitle`, `SummaryTable`  
 
+---
 5) **InsertableXlsSheet** - every sheet that is inserted into report 
 should be defined in separate class extending `InsertableXlsSheet`:
 ```
@@ -481,4 +485,5 @@ more exemplary code of usages `XmlDocumentBuilderChainImpl` in class
 (test package): `ChainReportTypeXmlWriterShowcase`, 
 `XmlDocumentBuilderChainImplTest`
 
+---
 2) **XmlDocumentBuilderStraightImpl**
