@@ -195,11 +195,14 @@ PDF
 1) **PdfCellBuilder** - we don't use this class directly but as a 
 integral part of `InsertablePdfTable`.
 
+---
+
 `value(XXX value)` - used to set value of type XXX 
 (eg. String, BigDecimal, Date, Integer)  
 ```
 getCellBuilder().value(value).build();
 ```
+---
 
 `bold()`, `textAlignment(TextAlignment textAlignment)`, `center()`, 
 `right()` 
@@ -208,6 +211,7 @@ getCellBuilder().value(XXX).center().bold().build();
 getCellBuilder().value(XXX).right().build();
 getCellBuilder().value(XXX).textAlignment(TextAlignment.LEFT).build();
 ```
+---
 
 `singleCellFontSize(int fontSize)`, 
 `backgroundColor(Color backgroundColor)` - changes only in the cell we are
@@ -216,6 +220,7 @@ working on (without any influence on the others)
 getCellBuilder().value(value).singleCellFontSize(20).build()
 getCellBuilder().value(value).backgroundColor(Color.CYAN).build()
 ```
+---
 
 `setDefaultFontSize(int defaultFontSize)`, 
 `setDefaultBackgroundColor(Color defaultBackgroundColor)`,
@@ -227,6 +232,7 @@ methods don't allow chaining
 getCellBuilder().setDefaultFontSize(20);
 // constructing cells
 ```
+---
 
 `build()` - after calling this method we construct cell with all set
 features then reset all fields to default, eg. `CellBorder.border field`
@@ -247,8 +253,9 @@ private void resetFields() {
 }
 ```
 more exemplary code of usages `PdfCellBuilder` in classes (test package)
-: `ReportHeader`, `SummaryBooksCollectionTable`, `BooksCollectionTable`  
-
+: `ReportHeader`, `SummaryBooksCollectionTable`, `BooksCollectionTable`
+  
+---
 2) **ImageBuilder** - we use this class directly
 ```
 ImageBuilder.Factory.get(path)
@@ -270,6 +277,7 @@ ImageBuilder.Factory.get("src/main/resources/harvard.png")
 more exemplary code of usages `ImageBuilder` in class (test package)
 : `HarvardEmblem`  
 
+---
 3) **PdfFontsContainer** - we don't have direct access to the cache map, if
 we want a new font, we have to declare method (as shown with helvetica),
 because number of fonts used in application should be as less as possible
@@ -282,9 +290,11 @@ public static PdfFont getHelvetica() {
 more exemplary code of usages `PdfFontsContainer` in class (test package)
 : `CellDefaults`  
 
+---
 4) **PdfFontsFactory** - produces embedded fonts in `Cp1250` encoding for
 `PdfFontsContainer`  
 
+---
 5) **AbstractPdfWriter** - base class for creating pdf file; usage:
 ```
 XXX extends AbstractPdfWriter
@@ -304,6 +314,7 @@ protected void prepare(Document document) {
 more exemplary code of usages `AbstractPdfWriter` in class (test package)
 : `PdfGenerationTest`  
 
+---
 6) **PdfDocumentBuilder** - facilitates creating pdf documents, by 
 allowing chaining methods:  
 `add(InsertablePdfImage image)` - for adding image (wrapped in the 
@@ -313,6 +324,7 @@ allowing chaining methods:
 more exemplary code of usages `PdfDocumentBuilder` in class (test package)
 : `PdfGenerationTest`  
 
+---
 7) **InsertablePdfImage** - every image that is inserted into report 
 should be defined in separate class implementing `InsertablePdfImage`:
 ```
@@ -333,6 +345,7 @@ public Image getScaledFor(Document document) {
 more exemplary code of usages `InsertablePdfImage` in class (test package)
 : `HarvardEmblem`  
 
+---
 8) **InsertablePdfTable** - every table that is inserted into report 
 should be defined in separate class extending `InsertablePdfTable`:
 ```
