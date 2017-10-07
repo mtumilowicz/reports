@@ -195,15 +195,13 @@ PDF
 1) **PdfCellBuilder** - we don't use this class directly but as a 
 integral part of `InsertablePdfTable`.
 
-----
-
+---
 `value(XXX value)` - used to set value of type XXX 
 (eg. String, BigDecimal, Date, Integer)  
 ```
 getCellBuilder().value(value).build();
 ```
-----
-
+---
 `bold()`, `textAlignment(TextAlignment textAlignment)`, `center()`, 
 `right()` 
 ```
