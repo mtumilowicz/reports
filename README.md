@@ -400,7 +400,7 @@ public void create() {
 }
 ```
 more exemplary code of usages *InsertableXlsContent* in classes 
-(test package) : _BookCollectionSheetContent_, 
+(test package): _BookCollectionSheetContent_, 
 _BookCollectionSheetTitle_, _BookCollectionTable_, 
 _SummarySheetContent_, _SummarySheetTitle_, _SummaryTable_  
 
@@ -432,8 +432,47 @@ public void setColumnWidthInSheet() {
 
 }
 ```
-more exemplary code of usages *InsertableXlsSheet* in classes (test package)
-: _SummarySheet_, _BookCollectionSheet_  
+more exemplary code of usages *InsertableXlsSheet* in classes (test 
+package): _SummarySheet_, _BookCollectionSheet_  
 
 XML
 ---
+1) **XmlDocumentBuilderChainImpl** - allows to create xml (by chaining
+feature)  
+to adding new elements / attributes we use three methods:  
+```
+@Override
+public XmlElementBuilderImpl element(String name) {
+    return new XmlElementBuilderImpl(createElement(Objects.requireNonNull(name)), getElement());
+}
+
+@Override
+public XmlElementBuilderImpl attribute(String name, String value) {
+    super.addAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
+
+    return this;
+}
+
+@Override
+public XmlElementBuilderImpl up() {
+    return new XmlElementBuilderImpl(super.up(1));
+}
+```
+calling element("name1").element("innerElementOfName1") produces chain:
+```
+<name1>
+    <innerElementOfName1/>
+<name1>
+```
+so we have to provide method _up()_ to escape from inside of the tag, so:  
+calling element("name1").element("innerElementOfName1").up()
+.element("name2") 
+produces:
+```
+<name1>
+    <innerElementOfName1/>
+<name2>
+```
+more exemplary code of usages *XmlDocumentBuilderChainImpl* in class 
+(test package): _ChainReportTypeXmlWriterShowcase_, 
+_XmlDocumentBuilderChainImplTest_
