@@ -145,7 +145,7 @@ handling basic features (eq. borders)
 * `ImageBuilder` - facilitates inserting images into pdf by setting size
 and position in one go
 * `PdfFontsContainer` - it is actually a map containing fonts (cache);
-* `PdfFontsContainer` - produces embedded fonts in encoding Cp1250
+* `PdfFontsContainer` - produces embedded fonts in encoding `Cp1250`
 * `AbstractPdfWriter` - base class used in pdf file generation
 * `InsertablePdfImage` - interface used for inserting images
 * `InsertablePdfTable` - base class used in building tables (inserted
@@ -157,8 +157,8 @@ XLS
 ---
 * `XlsxDataFormat` - facilitates handling with different column date 
 formats during files generation
-* `XlsxDataFormatType` - cache of format types (eg. #.00 - money,
-YYYY-MM-DD hh:mm - date with time)
+* `XlsxDataFormatType` - cache of format types (eg. `#.00` - money,
+`YYYY-MM-DD hh:mm` - date with time)
 * `AbstractXlsxWriter` - base class used in xls file generation
 * `InsertableXlsContent` - base class used in building content of sheets
 * `InsertableXlsSheet` - base class used in building sheets
@@ -229,7 +229,7 @@ getCellBuilder().setDefaultFontSize(20);
 ```
 
 `build()` - after calling this method we construct cell with all set
-features then reset all fields to default, eg. CellBorder.border field
+features then reset all fields to default, eg. `CellBorder.border field`
 is set to true;
 ```
 public Cell build() {
@@ -246,8 +246,8 @@ private void resetFields() {
     this.cellBorder = new CellBorder();
 }
 ```
-more exemplary code of usages *PdfCellBuilder* in classes (test package)
-: _ReportHeader, SummaryBooksCollectionTable, BooksCollectionTable_  
+more exemplary code of usages `PdfCellBuilder` in classes (test package)
+: `ReportHeader`, `SummaryBooksCollectionTable`, `BooksCollectionTable`  
 
 2) **ImageBuilder** - we use this class directly
 ```
@@ -267,7 +267,7 @@ ImageBuilder.Factory.get("src/main/resources/harvard.png")
                         PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
                 .build();
 ```
-more exemplary code of usages *ImageBuilder* in class (test package)
+more exemplary code of usages `ImageBuilder` in class (test package)
 : `HarvardEmblem`  
 
 3) **PdfFontsContainer** - we don't have direct access to the cache map, if
@@ -279,7 +279,7 @@ public static PdfFont getHelvetica() {
     return get(FontConstants.HELVETICA);
 }
 ```
-more exemplary code of usages *PdfFontsContainer* in class (test package)
+more exemplary code of usages `PdfFontsContainer` in class (test package)
 : `CellDefaults`  
 
 4) **PdfFontsFactory** - produces embedded fonts in `Cp1250` encoding for
@@ -290,7 +290,7 @@ more exemplary code of usages *PdfFontsContainer* in class (test package)
 XXX extends AbstractPdfWriter
 ```
 then we `@Override` method `prepare(Document document)`, where we construct 
-document. We could use PdfDocumentBuilder to facilitate this activity 
+document. We could use `PdfDocumentBuilder` to facilitate this activity 
 (for more info go to pt. 6.).
 ```
 protected void prepare(Document document) {
@@ -301,7 +301,7 @@ protected void prepare(Document document) {
           .complete();
     }
 ```
-more exemplary code of usages *AbstractPdfWriter* in class (test package)
+more exemplary code of usages `AbstractPdfWriter` in class (test package)
 : `PdfGenerationTest`  
 
 6) **PdfDocumentBuilder** - facilitates creating pdf documents, by 
@@ -310,7 +310,7 @@ allowing chaining methods:
 `InsertablePdfImage`; more info in p. 7.)  
 `add(InsertablePdfTable table)` - for adding tables (wrapped in the 
 `InsertablePdfTable`; more info in p. 8.)  
-more exemplary code of usages *PdfDocumentBuilder* in class (test package)
+more exemplary code of usages `PdfDocumentBuilder` in class (test package)
 : `PdfGenerationTest`  
 
 7) **InsertablePdfImage** - every image that is inserted into report 
@@ -330,7 +330,7 @@ public Image getScaledFor(Document document) {
             .build();
 }
 ```
-more exemplary code of usages *InsertablePdfImage* in class (test package)
+more exemplary code of usages `InsertablePdfImage` in class (test package)
 : `HarvardEmblem`  
 
 8) **InsertablePdfTable** - every table that is inserted into report 
@@ -352,9 +352,9 @@ public Table get() {
     return table;
 }
 ```
-more exemplary code of usages *InsertablePdfTable* in class (test package)
-: _SummaryBooksCollectionTable, SpacingTable, ReportHeader, 
-BooksCollectionTable_  
+more exemplary code of usages `InsertablePdfTable` in class (test package)
+: `SummaryBooksCollectionTable`, `SpacingTable`, `ReportHeader`, 
+`BooksCollectionTable`  
 
 XLS
 ---
@@ -378,7 +378,7 @@ public void prepare(Workbook workbook) {
     add(new SecondSheet(bundles, workbook));
 }
 ```
-more exemplary code of usages *AbstractXlsxWriter* in class (test package)
+more exemplary code of usages `AbstractXlsxWriter` in class (test package)
 : `XlsxGenerationTest`  
 
 4) **InsertableXlsContent** - every content that is inserted into sheet 
@@ -399,7 +399,7 @@ public void create() {
 
 }
 ```
-more exemplary code of usages *InsertableXlsContent* in classes 
+more exemplary code of usages `InsertableXlsContent` in classes 
 (test package): `BookCollectionSheetContent`, 
 `BookCollectionSheetTitle`, `BookCollectionTable`, 
 `SummarySheetContent`, `SummarySheetTitle`, `SummaryTable`  
@@ -432,7 +432,7 @@ public void setColumnWidthInSheet() {
 
 }
 ```
-more exemplary code of usages *InsertableXlsSheet* in classes (test 
+more exemplary code of usages `InsertableXlsSheet` in classes (test 
 package): `SummarySheet`, `BookCollectionSheet`  
 
 XML
@@ -458,22 +458,22 @@ public XmlElementBuilderImpl up() {
     return new XmlElementBuilderImpl(super.up(1));
 }
 ```
-calling element("name1").element("innerElementOfName1") produces chain:
+calling `element("name1").element("innerElementOfName1")` produces chain:
 ```
 <name1>
     <innerElementOfName1/>
 <name1>
 ```
 so we have to provide method `up()` to escape from inside of the tag, so:  
-calling element("name1").element("innerElementOfName1").up()
-.element("name2") 
+calling `element("name1").element("innerElementOfName1").up()
+.element("name2")`
 produces:
 ```
 <name1>
     <innerElementOfName1/>
 <name2>
 ```
-more exemplary code of usages *XmlDocumentBuilderChainImpl* in class 
+more exemplary code of usages `XmlDocumentBuilderChainImpl` in class 
 (test package): `ChainReportTypeXmlWriterShowcase`, 
 `XmlDocumentBuilderChainImplTest`
 
