@@ -519,7 +519,13 @@ public XmlElementBuilderImpl addInnerElement(Element elem) {
 }
 ```
 Examples:  
-calling 
+to get
+```
+<name1>
+    <innerElementOfName1/>
+</name1>
+```
+we should call
 ```
 Element node1 = createElement("node1")
                 .addInnerElement(
@@ -527,9 +533,6 @@ Element node1 = createElement("node1")
                         .build())
                 .build();
 ```
-we get
-```
-<name1>
-    <innerElementOfName1/>
-</name1>
-```
+more exemplary code of usages `XmlDocumentBuilderStraightImpl` in class 
+(test package): `StraightReportTypeXmlWriterShowcase`, 
+`XmlDocumentBuilderStraightImpl`
