@@ -366,8 +366,7 @@ more exemplary code of usages `InsertablePdfTable` in class (test package)
 : `SummaryBooksCollectionTable`, `SpacingTable`, `ReportHeader`, 
 `BooksCollectionTable`  
 
-XLS
----
+## XLS
 1) **XlsxDataFormat** - cells in excel could have specific format (eg. 
 date: `YYYY-MM-DD` or date with time: `YYYY-MM-DD hh:mm` - take a look 
 at pt. 2)) - this class is simply the cache  
@@ -445,8 +444,7 @@ public void setColumnWidthInSheet() {
 more exemplary code of usages `InsertableXlsSheet` in classes (test 
 package): `SummarySheet`, `BookCollectionSheet`  
 
-XML
----
+## XML
 1) **XmlDocumentBuilderChainImpl** - allows to create xml (by chaining
 feature)  
 to adding new elements / attributes we use three methods:  
