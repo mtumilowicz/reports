@@ -447,7 +447,7 @@ package): `SummarySheet`, `BookCollectionSheet`
 ## XML
 1) **XmlDocumentBuilderChainImpl** - allows to create xml (by chaining
 feature)  
-to adding new elements / attributes we use three methods:  
+to adding new elements / attributes we use methods:  
 ```
 @Override
 public XmlElementBuilderImpl element(String name) {
@@ -470,20 +470,66 @@ calling `element("name1").element("innerElementOfName1")` produces chain:
 ```
 <name1>
     <innerElementOfName1/>
-<name1>
+</name1>
 ```
 so we have to provide method `up()` to escape from inside of the tag, so:  
-calling `element("name1").element("innerElementOfName1").up()
-.element("name2")`
+calling `element("name1").element("innerElementOfName1").up().element("name2")`
 produces:
 ```
 <name1>
     <innerElementOfName1/>
-<name2>
+</name1>
+<name2/>
 ```
+after all we called `build()`
+
 more exemplary code of usages `XmlDocumentBuilderChainImpl` in class 
 (test package): `ChainReportTypeXmlWriterShowcase`, 
 `XmlDocumentBuilderChainImplTest`
 
 ---
-2) **XmlDocumentBuilderStraightImpl**
+2) **XmlDocumentBuilderStraightImpl** - allows to create xml in a 
+"straight" way:  
+Creating elements / attributes:
+```
+@Override
+public XmlElementBuilderImpl element(String name) {
+    return new XmlElementBuilderImpl(createElement(Objects.requireNonNull(name)));
+}
+
+@Override
+public XmlElementBuilderImpl attribute(String name, String value) {
+    super.addAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
+
+    return this;
+}
+```
+inner elements:
+```
+public XmlElementBuilderImpl addInnerElement(String name) {
+    innerElements.add(createElement(Objects.requireNonNull(name)));
+
+    return this;
+}
+
+public XmlElementBuilderImpl addInnerElement(Element elem) {
+    innerElements.add(Objects.requireNonNull(elem));
+
+    return this;
+}
+```
+Examples:  
+calling 
+```
+Element node1 = createElement("node1")
+                .addInnerElement(
+                        createElement("innerElementOfName1")
+                        .build())
+                .build();
+```
+we get
+```
+<name1>
+    <innerElementOfName1/>
+</name1>
+```
