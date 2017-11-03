@@ -12,7 +12,7 @@ final class CellBackgroundColor {
         this.backgroundColor = backgroundColor;
     }
 
-    Color prepareBackgroundColor() {
-        return backgroundColor;
+    Color prepareBackgroundColor(CellDefaults defaults) {
+        return backgroundColor != null ? backgroundColor : defaults.getBackgroundColor();
     }
 }

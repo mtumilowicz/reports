@@ -77,7 +77,6 @@ public class PdfCellBuilder {
     }
 
     public void setDefaultBackgroundColor(Color defaultBackgroundColor) {
-        Preconditions.checkArgument(defaultBackgroundColor != null);
         defaults.setBackgroundColor(defaultBackgroundColor);
     }
     
@@ -126,7 +125,7 @@ public class PdfCellBuilder {
                 .add(cellText.prepareParagraph(defaults))
                 .addStyle(defaults.getStyle())
                 .setBorder(cellBorder.prepareBorder())
-                .setBackgroundColor(cellBackgroundColor.prepareBackgroundColor());
+                .setBackgroundColor(cellBackgroundColor.prepareBackgroundColor(defaults));
     }
 
     private void resetFields() {

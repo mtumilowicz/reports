@@ -9,7 +9,7 @@ import core.pdf.utils.PdfFontsContainer;
  */
 final class CellDefaults {
     private int fontSize = 14;
-    private Color backgroundColor = Color.LIGHT_GRAY;
+    private Color backgroundColor = null;
     private Style style = new Style().setFont(PdfFontsContainer.getHelvetica());
 
     int getFontSize() {

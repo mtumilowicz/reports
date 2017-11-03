@@ -1,5 +1,6 @@
 package pdf.books;
 
+import com.itextpdf.kernel.color.Color;
 import com.itextpdf.layout.element.Table;
 import core.bundle.BundleHandler;
 import core.pdf.writer.InsertablePdfTable;
@@ -21,31 +22,18 @@ final class BooksCollectionTable extends InsertablePdfTable {
         Table table = new Table(new float[]{1, 1, 1, 1, 1, 1, 1, 1})
                 .setFixedLayout()
                 .setWidthPercent(100);
+        getCellBuilder().setDefaultBackgroundColor(Color.LIGHT_GRAY);
         
-        table.addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.id"))
-                .defaultBackgroundColor()
-                .build())
-                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.author"))
-                        .defaultBackgroundColor()
-                        .build())
-                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.title"))
-                        .defaultBackgroundColor()
-                        .build())
-                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.genre"))
-                        .defaultBackgroundColor()
-                        .build())
-                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.price"))
-                        .defaultBackgroundColor()
-                        .build())
-                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.pubDate"))
-                        .defaultBackgroundColor()
-                        .build())
-                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.review"))
-                        .defaultBackgroundColor()
-                        .build())
-                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.type"))
-                        .defaultBackgroundColor()
-                        .build());
+        table.addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.id")).build())
+                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.author")).build())
+                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.title")).build())
+                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.genre")).build())
+                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.price")).build())
+                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.pubDate")).build())
+                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.review")).build())
+                .addHeaderCell(getCellBuilder().value(getBundles().get("report.table.book.type")).build());
+
+        getCellBuilder().setDefaultBackgroundColor(null);
         ListUtils.emptyIfNull(BookDAOMock.getAllEntities()).forEach(book -> addRow(table, book));
         
         return table;
