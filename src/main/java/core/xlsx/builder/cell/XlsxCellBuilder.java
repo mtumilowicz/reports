@@ -8,21 +8,18 @@ import org.apache.poi.ss.util.CellUtil;
  * Created by mtumilowicz on 2017-11-08.
  */
 public class XlsxCellBuilder {
-    private final Sheet sheet;
     private Row row;
+    private int colCount;
     private String value;
+    
     private HorizontalAlignment alignment;
     private int singleCellFontSize;
     private int setDefaultFontSize;
-    private int colCount;
+    
     private Short dataFormat;
     private CellType cellType;
+    
     private CellStyle cellStyle;
-
-
-    public XlsxCellBuilder(Sheet sheet) {
-        this.sheet = sheet;
-    }
     
     public XlsxCellBuilder row(Row row, int colCount, String value) {
         this.row = row;
@@ -32,7 +29,7 @@ public class XlsxCellBuilder {
         return this;
     }
     
-    public XlsxCellBuilder alignments(HorizontalAlignment alignment) {
+    public XlsxCellBuilder alignment(HorizontalAlignment alignment) {
         this.alignment = alignment;
         
         return this;
@@ -70,12 +67,28 @@ public class XlsxCellBuilder {
     
     public Cell build() {
         Cell cell = CellUtil.createCell(row, colCount, value);
+
+        prepareAlignment(cell);
+
+        singleCellFontSize(cell);
+
+        prepareDataFormat(cell);
+
+        prepareCellType(cell);
         
+        prepareCellStyle(cell);
+        
+        return cell;
+    }
+    
+    private void prepareAlignment(Cell cell) {
         if (alignment != null) {
             CellUtil.setAlignment(cell, alignment);
             alignment = null;
         }
-        
+    }
+
+    private void singleCellFontSize(Cell cell) {
         if (singleCellFontSize > 0) {
             Font font = cell.getSheet().getWorkbook().createFont();
             font.setFontHeight((short) singleCellFontSize);
@@ -83,25 +96,29 @@ public class XlsxCellBuilder {
 
             singleCellFontSize=0;
         }
-        
+    }
+    
+    private void prepareDataFormat(Cell cell) {
         if (dataFormat != null) {
             CellUtil.setCellStyleProperty(cell, CellUtil.DATA_FORMAT, dataFormat);
 
             dataFormat=null;
         }
-        
+    }
+    
+    private void prepareCellType(Cell cell) {
         if (cellType != null) {
             cell.setCellType(cellType);
 
             cellType=null;
         }
-        
+    }
+    
+    private void prepareCellStyle(Cell cell) {
         if (cellStyle != null) {
             cell.setCellStyle(cellStyle);
 
             cellStyle=null;
         }
-        
-        return cell;
     }
 }

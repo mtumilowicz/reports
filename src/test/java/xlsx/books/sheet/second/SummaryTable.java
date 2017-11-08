@@ -27,14 +27,14 @@ public class SummaryTable extends InsertableXlsContent {
         Row row = getSheet().createRow(rowCount);
 
         getCellBuilder().row(row, columnCount++, String.valueOf(BookDAOMock.getAllEntities().size()))
-                .alignments(HorizontalAlignment.LEFT)
+                .alignment(HorizontalAlignment.LEFT)
                 .cellType(CellType.NUMERIC)
                 .build();
 
         getCellBuilder().row(row, columnCount, String.valueOf(BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO)))
                 .cellType(CellType.NUMERIC)
                 .dataFormat(getFormat().money())
-                .alignments(HorizontalAlignment.RIGHT)
+                .alignment(HorizontalAlignment.RIGHT)
                 .build();
     }
 

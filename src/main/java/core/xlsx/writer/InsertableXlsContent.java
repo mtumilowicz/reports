@@ -21,7 +21,7 @@ public abstract class InsertableXlsContent {
         this.sheet = sheet;
         this.format = initDateFormat(sheet.getWorkbook());
         this.rowCount = rowCount;
-        this.cellBuilder = new XlsxCellBuilder(sheet);
+        this.cellBuilder = new XlsxCellBuilder();
     }
     
     public abstract void create();
