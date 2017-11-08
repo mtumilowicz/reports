@@ -121,7 +121,7 @@ public class PdfCellBuilder {
     }
 
     public static Cell getEmptyCell() {
-        return EMPTY_CELL.clone(true);
+        return EMPTY_CELL.clone(false);
     }
 
     private Cell prepareCell() {
