@@ -5,7 +5,6 @@ import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellUtil;
 
 import java.math.BigDecimal;
 
@@ -27,37 +26,39 @@ public class SummaryTable extends InsertableXlsContent {
         int columnCount = 0;
         Row row = getSheet().createRow(rowCount);
 
-        Cell quantity = CellUtil.createCell(row, columnCount++, String.valueOf(BookDAOMock.getAllEntities().size()));
-        quantity.setCellType(CellType.NUMERIC);
-        CellUtil.setAlignment(quantity, HorizontalAlignment.LEFT);
+        getCellBuilder().row(row, columnCount++, String.valueOf(BookDAOMock.getAllEntities().size()))
+                .alignments(HorizontalAlignment.LEFT)
+                .cellType(CellType.NUMERIC)
+                .build();
 
-        Cell value = CellUtil.createCell(row, columnCount, String.valueOf(BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO)));
-        value.setCellType(CellType.NUMERIC);
-        CellUtil.setCellStyleProperty(value, CellUtil.DATA_FORMAT, getFormat().money());
-        CellUtil.setAlignment(value, HorizontalAlignment.RIGHT);
+        getCellBuilder().row(row, columnCount, String.valueOf(BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO)))
+                .cellType(CellType.NUMERIC)
+                .dataFormat(getFormat().money())
+                .alignments(HorizontalAlignment.RIGHT)
+                .build();
     }
 
     private class SummaryTableHeaders {
 
         void create() {
-            int columnCount = 0;
-            Row row = getSheet().createRow(getRowCount());
-            Cell quantityHeader = CellUtil.createCell(row, columnCount++, getBundles().get("report.table.summary.quantity"));
-            addTableHeaderCell(quantityHeader);
-
-
-            Cell valueHeader = CellUtil.createCell(row, columnCount, getBundles().get("report.table.summary.value"));
-            addTableHeaderCell(valueHeader);
-        }
-
-        private void addTableHeaderCell(Cell cell) {
-            CellStyle style = cell.getSheet().getWorkbook().createCellStyle();
-            GenericBuilder.of(() -> style)
+            CellStyle style = GenericBuilder.of(() -> getSheet().getWorkbook().createCellStyle())
                     .with(CellStyle::setBorderLeft, BorderStyle.THIN)
                     .with(CellStyle::setBorderBottom, BorderStyle.THIN)
                     .with(CellStyle::setFillForegroundColor, IndexedColors.GREY_40_PERCENT.getIndex())
                     .with(CellStyle::setFillPattern, FillPatternType.SOLID_FOREGROUND).build();
-            cell.setCellStyle(style);
+
+            int columnCount = 0;
+
+            Row row = getSheet().createRow(getRowCount());
+
+            getCellBuilder().row(row, columnCount++, getBundles().get("report.table.summary.quantity"))
+                    .cellStyle(style)
+                    .build();
+
+
+            getCellBuilder().row(row, columnCount, getBundles().get("report.table.summary.value"))
+                    .cellStyle(style)
+                    .build();
         }
     }
 }

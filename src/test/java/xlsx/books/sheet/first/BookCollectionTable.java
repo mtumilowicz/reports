@@ -5,8 +5,8 @@ import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
 import entity.Book;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellUtil;
 
 /**
  * Created by mtumilowicz on 2017-09-16.
@@ -27,28 +27,27 @@ public class BookCollectionTable extends InsertableXlsContent {
             Row row = getSheet().createRow(rowCount++);
             int columnCount = 0;
 
-            CellUtil.createCell(row, columnCount++, book.getId());
+            getCellBuilder().row(row, columnCount++, book.getId()).build();
+            getCellBuilder().row(row, columnCount++, book.getAuthor()).build();
+            getCellBuilder().row(row, columnCount++, book.getTitle()).build();
+            getCellBuilder().row(row, columnCount++, book.getGenre()).build();
 
-            CellUtil.createCell(row, columnCount++, book.getAuthor());
-
-            CellUtil.createCell(row, columnCount++, book.getTitle());
-
-            CellUtil.createCell(row, columnCount++, book.getGenre());
-
-            Cell cell1 = CellUtil.createCell(row, columnCount++, String.valueOf(book.getPrice()));
-            CellUtil.setAlignment(cell1, HorizontalAlignment.RIGHT);
-            CellUtil.setCellStyleProperty(cell1, CellUtil.DATA_FORMAT, getFormat().money());
-            cell1.setCellType(CellType.NUMERIC);
+            getCellBuilder().row(row, columnCount++, String.valueOf(book.getPrice()))
+                    .alignments(HorizontalAlignment.RIGHT)
+                    .dataFormat(getFormat().money())
+                    .cellType(CellType.NUMERIC)
+                    .build();
 
 
-            Cell cell2 = CellUtil.createCell(row, columnCount++, "");
+            Cell cell2 = getCellBuilder().row(row, columnCount++, StringUtils.EMPTY)
+                    .alignments(HorizontalAlignment.CENTER)
+                    .dataFormat(getFormat().dateHours())
+                    .build();
             cell2.setCellValue(book.getPubDate());
-            CellUtil.setCellStyleProperty(cell2, CellUtil.DATA_FORMAT, getFormat().dateHours());
-            CellUtil.setAlignment(cell2, HorizontalAlignment.CENTER);
 
-            CellUtil.createCell(row, columnCount++, book.getReview());
+            getCellBuilder().row(row, columnCount++, book.getReview()).build();
 
-            CellUtil.createCell(row, columnCount, getBundles().get(book.getType()));
+            getCellBuilder().row(row, columnCount, getBundles().get(book.getType())).build();
         }
     }
 
@@ -59,20 +58,16 @@ public class BookCollectionTable extends InsertableXlsContent {
 
             Row row = getSheet().createRow(getRowCount());
 
-            for (String header : getHeaders()) {
-                Cell headerCell = CellUtil.createCell(row, columnCount++, getBundles().get(header));
-                addTableHeaderCell(headerCell);
-            }
-        }
-
-        private void addTableHeaderCell(Cell cell) {
-            CellStyle style = cell.getSheet().getWorkbook().createCellStyle();
-            GenericBuilder.of(() -> style)
+            CellStyle style = GenericBuilder.of(() -> getSheet().getWorkbook().createCellStyle())
                     .with(CellStyle::setBorderLeft, BorderStyle.THIN)
                     .with(CellStyle::setBorderBottom, BorderStyle.THIN)
                     .with(CellStyle::setFillForegroundColor, IndexedColors.GREY_40_PERCENT.getIndex())
                     .with(CellStyle::setFillPattern, FillPatternType.SOLID_FOREGROUND).build();
-            cell.setCellStyle(style);
+            
+            for (String header : getHeaders()) {
+                getCellBuilder().row(row, columnCount++, getBundles().get(header))
+                        .cellStyle(style).build();
+            }
         }
 
         private String[] getHeaders() {

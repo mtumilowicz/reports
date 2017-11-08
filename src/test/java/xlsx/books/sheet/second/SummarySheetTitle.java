@@ -2,11 +2,9 @@ package xlsx.books.sheet.second;
 
 import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsContent;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.CellUtil;
 
 /**
  * Created by mtumilowicz on 2017-09-12.
@@ -20,7 +18,12 @@ final class SummarySheetTitle extends InsertableXlsContent {
     public void create() {
         getSheet().addMergedRegion(new CellRangeAddress(0,0,0,7));
 
-        Cell titleCell = CellUtil.createCell(getSheet().createRow(getRowCount()), 0, getBundles().get("report.table.summary.header"));
-        CellUtil.setAlignment(titleCell, HorizontalAlignment.CENTER);
+        getCellBuilder().row(getSheet().createRow(getRowCount()),0, getBundles().get(getHeader()))
+                .alignments(HorizontalAlignment.CENTER)
+                .build();
+    }
+    
+    private String getHeader() {
+        return "report.table.summary.header";
     }
 }
