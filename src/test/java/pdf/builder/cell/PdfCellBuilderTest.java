@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by mtumilowicz on 2017-11-03.
@@ -93,5 +94,10 @@ public class PdfCellBuilderTest {
         Object property = Objects.requireNonNull(cell.getProperty(9));
         assertEquals(SolidBorder.class, property.getClass());
         assertEquals(((Border) property).getType(), Border.SOLID);
+    }
+    
+    @Test
+    public void immutableEmptyCell() {
+        assertNotEquals(PdfCellBuilder.getEmptyCell(), PdfCellBuilder.getEmptyCell());
     }
 }

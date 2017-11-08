@@ -19,7 +19,7 @@ final class SpacingTable extends InsertablePdfTable {
 
         table.setWidthPercent(100)
                 .setHeight(50)
-                .addCell(PdfCellBuilder.EMPTY_CELL);
+                .addCell(PdfCellBuilder.getEmptyCell());
         
         return table;
     }

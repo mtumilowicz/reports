@@ -18,7 +18,7 @@ import java.util.Date;
  */
 public class PdfCellBuilder {
 
-    public final static Cell EMPTY_CELL = new Cell().add("").setBorder(Border.NO_BORDER);
+    private final static Cell EMPTY_CELL = new Cell().add("").setBorder(Border.NO_BORDER);
     
     private final static DecimalFormat DF = new DecimalFormat("#.00");
 
@@ -119,7 +119,11 @@ public class PdfCellBuilder {
 
         return cell;
     }
-    
+
+    public static Cell getEmptyCell() {
+        return EMPTY_CELL.clone(true);
+    }
+
     private Cell prepareCell() {
         return new Cell()
                 .add(cellText.prepareParagraph(defaults))

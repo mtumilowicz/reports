@@ -28,7 +28,7 @@ final class SummaryBooksCollectionTable extends InsertablePdfTable {
                                 .value(getBundles().get("report.table.summary.header"))
                                 .noBorder()
                                 .build())
-                .addHeaderCell(PdfCellBuilder.EMPTY_CELL)
+                .addHeaderCell(PdfCellBuilder.getEmptyCell())
                 .addCell(
                         getCellBuilder()
                                 .value(getBundles().get("report.table.summary.quantity"))
