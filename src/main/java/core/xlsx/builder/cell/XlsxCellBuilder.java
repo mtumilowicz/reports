@@ -13,8 +13,7 @@ public class XlsxCellBuilder {
     
     private CellText cellText = new CellText();
     private CellFormat cellFormat = new CellFormat();
-    private CellBorder cellBorder = new CellBorder();
-    private CellForegroundColor cellForegroundColor = new CellForegroundColor();
+    private CustomCellStyle cellStyle = new CustomCellStyle();
     
     public XlsxCellBuilder row(Row row, int colCount, String value) {
         this.row = row;
@@ -55,25 +54,25 @@ public class XlsxCellBuilder {
     }
 
     public XlsxCellBuilder border() {
-        cellBorder.border();
+        cellStyle.getCellBorder().border();
         
         return this;
     }
     
     public XlsxCellBuilder noBorder() {
-        cellBorder.noBorder();
+        cellStyle.getCellBorder().noBorder();
         
         return this;
     }
 
     public XlsxCellBuilder foregroundColor(short var1) {
-        cellForegroundColor.foregroundColor(var1);
+        cellStyle.getCellForegroundColor().foregroundColor(var1);
 
         return this;
     }
     
     public XlsxCellBuilder fillPattern(FillPatternType type) {
-        cellForegroundColor.fillPattern(type);
+        cellStyle.getCellForegroundColor().fillPattern(type);
         
         return this;
     }
@@ -89,8 +88,7 @@ public class XlsxCellBuilder {
     private void resetFields() {
         cellText = new CellText();
         cellFormat = new CellFormat();
-        cellBorder = new CellBorder();
-        cellForegroundColor = new CellForegroundColor();
+        cellStyle = new CustomCellStyle();
     }
 
     private Cell prepareCell() {
@@ -114,7 +112,6 @@ public class XlsxCellBuilder {
     }
     
     private void prepareCellStyle(Cell cell) {
-        cellBorder.prepareBorder(cell);
-        cellForegroundColor.prepareForegroundColor(cell);
+        cellStyle.prepareCellStyle(cell);
     }
 }
