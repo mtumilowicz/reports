@@ -25,13 +25,13 @@ public class SummaryTable extends InsertableXlsContent {
         int columnCount = 0;
         Row row = getSheet().createRow(rowCount);
 
-        getCellBuilder().row(row, columnCount++, BookDAOMock.getAllEntities().size())
+        getCellBuilder().cell(row, columnCount++, BookDAOMock.getAllEntities().size())
                 .alignment(HorizontalAlignment.LEFT)
                 .foregroundColor(IndexedColors.AQUA)
                 .fillPattern(FillPatternType.SOLID_FOREGROUND)
                 .build();
 
-        getCellBuilder().row(row, columnCount, BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO))
+        getCellBuilder().cell(row, columnCount, BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO))
                 .dataFormat(getFormat().money())
                 .alignment(HorizontalAlignment.RIGHT)
                 .foregroundColor(IndexedColors.GOLD)
@@ -47,13 +47,13 @@ public class SummaryTable extends InsertableXlsContent {
             Row row = getSheet().createRow(getRowCount());
 
             getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);
-            getCellBuilder().row(row, columnCount++, getBundles().get("report.table.summary.quantity"))
+            getCellBuilder().cell(row, columnCount++, getBundles().get("report.table.summary.quantity"))
                     .border()
                     .fillPattern(FillPatternType.SOLID_FOREGROUND)
                     .build();
 
 
-            getCellBuilder().row(row, columnCount, getBundles().get("report.table.summary.value"))
+            getCellBuilder().cell(row, columnCount, getBundles().get("report.table.summary.value"))
                     .border()
                     .fillPattern(FillPatternType.SOLID_FOREGROUND)
                     .build();

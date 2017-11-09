@@ -19,13 +19,19 @@ public class XlsxCellBuilder {
     private CellFormat cellFormat = new CellFormat();
     private CustomCellStyle cellStyle = new CustomCellStyle();
     
-    public XlsxCellBuilder row(Row row, int colCount, String value) {
+    public XlsxCellBuilder cell(Row row, int colCount, String value) {
+        Preconditions.checkArgument(row != null);
+        Preconditions.checkArgument(colCount >= 0);
+        
         cell = CellUtil.createCell(row, colCount, value);
         
         return this;
     }
 
-    public XlsxCellBuilder row(Row row, int colCount, BigDecimal value) {
+    public XlsxCellBuilder cell(Row row, int colCount, BigDecimal value) {
+        Preconditions.checkArgument(row != null);
+        Preconditions.checkArgument(colCount >= 0);
+        
         cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
         cell.setCellValue(value != null ? value.doubleValue() : 0.0);
         cell.setCellType(CellType.NUMERIC);
@@ -33,7 +39,10 @@ public class XlsxCellBuilder {
         return this;
     }
 
-    public XlsxCellBuilder row(Row row, int colCount, int value) {
+    public XlsxCellBuilder cell(Row row, int colCount, int value) {
+        Preconditions.checkArgument(row != null);
+        Preconditions.checkArgument(colCount >= 0);
+        
         cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
         cell.setCellValue(value);
         cell.setCellType(CellType.NUMERIC);
@@ -41,7 +50,10 @@ public class XlsxCellBuilder {
         return this;
     }
 
-    public XlsxCellBuilder row(Row row, int colCount, Date value, short dataFormat) {
+    public XlsxCellBuilder cell(Row row, int colCount, Date value, short dataFormat) {
+        Preconditions.checkArgument(row != null);
+        Preconditions.checkArgument(colCount >= 0);
+        
         cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
         cell.setCellValue(value);
         dataFormat(dataFormat);
@@ -50,6 +62,7 @@ public class XlsxCellBuilder {
     }
     
     public XlsxCellBuilder alignment(HorizontalAlignment alignment) {
+        Preconditions.checkArgument(alignment != null);
         cellText.alignment(alignment);
         
         return this;
@@ -62,7 +75,7 @@ public class XlsxCellBuilder {
         return this;
     }
     
-    public XlsxCellBuilder dataFormat(Short format) {
+    public XlsxCellBuilder dataFormat(short format) {
         cellFormat.setDataFormat(format);
         
         return this;
@@ -81,16 +94,19 @@ public class XlsxCellBuilder {
     }
 
     public XlsxCellBuilder foregroundColor(IndexedColors color) {
+        Preconditions.checkArgument(color != null);
         cellStyle.getCellForegroundColor().foregroundColor(color);
 
         return this;
     }
 
     public void setDefaultForegroundColor(IndexedColors color) {
+        Preconditions.checkArgument(color != null);
         defaults.setBackgroundColor(color);
     }
     
     public XlsxCellBuilder fillPattern(FillPatternType type) {
+        Preconditions.checkArgument(type != null);
         cellStyle.getCellForegroundColor().fillPattern(type);
         
         return this;

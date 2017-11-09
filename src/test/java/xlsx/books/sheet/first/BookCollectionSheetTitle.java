@@ -19,7 +19,7 @@ final class BookCollectionSheetTitle extends InsertableXlsContent {
     public void create() {
         getSheet().addMergedRegion(new CellRangeAddress(0,0,0,7));
         
-        getCellBuilder().row(getSheet().createRow(getRowCount()), 0, getBundles().get("report.header"))
+        getCellBuilder().cell(getSheet().createRow(getRowCount()), 0, getBundles().get("report.header"))
                 .alignment(HorizontalAlignment.CENTER)
                 .singleCellFontSize(500)
                 .build();

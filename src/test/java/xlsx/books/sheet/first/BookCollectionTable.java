@@ -25,24 +25,24 @@ public class BookCollectionTable extends InsertableXlsContent {
             Row row = getSheet().createRow(rowCount++);
             int columnCount = 0;
 
-            getCellBuilder().row(row, columnCount++, book.getId()).build();
-            getCellBuilder().row(row, columnCount++, book.getAuthor()).build();
-            getCellBuilder().row(row, columnCount++, book.getTitle()).build();
-            getCellBuilder().row(row, columnCount++, book.getGenre()).build();
+            getCellBuilder().cell(row, columnCount++, book.getId()).build();
+            getCellBuilder().cell(row, columnCount++, book.getAuthor()).build();
+            getCellBuilder().cell(row, columnCount++, book.getTitle()).build();
+            getCellBuilder().cell(row, columnCount++, book.getGenre()).build();
 
-            getCellBuilder().row(row, columnCount++, book.getPrice())
+            getCellBuilder().cell(row, columnCount++, book.getPrice())
                     .alignment(HorizontalAlignment.RIGHT)
                     .dataFormat(getFormat().money())
                     .build();
 
 
-            getCellBuilder().row(row, columnCount++, book.getPubDate() ,getFormat().dateHours())
+            getCellBuilder().cell(row, columnCount++, book.getPubDate() ,getFormat().dateHours())
                     .alignment(HorizontalAlignment.CENTER)
                     .build();
 
-            getCellBuilder().row(row, columnCount++, book.getReview()).build();
+            getCellBuilder().cell(row, columnCount++, book.getReview()).build();
 
-            getCellBuilder().row(row, columnCount, getBundles().get(book.getType())).build();
+            getCellBuilder().cell(row, columnCount, getBundles().get(book.getType())).build();
         }
     }
 
@@ -55,7 +55,7 @@ public class BookCollectionTable extends InsertableXlsContent {
 
             getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);
             for (String header : getHeaders()) {
-                getCellBuilder().row(row, columnCount++, getBundles().get(header))
+                getCellBuilder().cell(row, columnCount++, getBundles().get(header))
                         .fillPattern(FillPatternType.SOLID_FOREGROUND)
                         .border()
                         .build();
