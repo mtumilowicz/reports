@@ -28,7 +28,7 @@ public class XlsxCellBuilder {
     public XlsxCellBuilder row(Row row, int colCount, BigDecimal value) {
         cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
         cell.setCellValue(value != null ? value.doubleValue() : 0.0);
-        cellFormat.setCellType(CellType.NUMERIC);
+        cell.setCellType(CellType.NUMERIC);
         
         return this;
     }
@@ -36,7 +36,7 @@ public class XlsxCellBuilder {
     public XlsxCellBuilder row(Row row, int colCount, int value) {
         cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
         cell.setCellValue(value);
-        cellFormat.setCellType(CellType.NUMERIC);
+        cell.setCellType(CellType.NUMERIC);
 
         return this;
     }
