@@ -27,11 +27,15 @@ public class SummaryTable extends InsertableXlsContent {
 
         getCellBuilder().row(row, columnCount++, BookDAOMock.getAllEntities().size())
                 .alignment(HorizontalAlignment.LEFT)
+                .foregroundColor(IndexedColors.AQUA)
+                .fillPattern(FillPatternType.SOLID_FOREGROUND)
                 .build();
 
         getCellBuilder().row(row, columnCount, BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO))
                 .dataFormat(getFormat().money())
                 .alignment(HorizontalAlignment.RIGHT)
+                .foregroundColor(IndexedColors.GOLD)
+                .fillPattern(FillPatternType.SOLID_FOREGROUND)
                 .build();
     }
 
