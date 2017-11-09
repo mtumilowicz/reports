@@ -36,11 +36,6 @@ public class XlsxCellBuilder {
 
         return this;
     }
-
-    public void setDefaultFontSize(int size) {
-        Preconditions.checkArgument(size > 0);
-        defaults.setFontSize(size);
-    }
     
     public XlsxCellBuilder dataFormat(Short format) {
         cellFormat.setDataFormat(format);
