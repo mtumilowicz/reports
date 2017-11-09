@@ -54,6 +54,15 @@ file parser, schema factory, validation by scheme, dom-document writer
     │            ├── writer
     │            │   └── DocumentWriter
     │            ├── xlsx
+    │            │   ├── builder
+    │            │   │   └── cell
+    │            │   │       ├── CellBorder
+    │            │   │       ├── CellDefaults
+    │            │   │       ├── CellForegroundColor
+    │            │   │       ├── CellFormat
+    │            │   │       ├── CellText
+    │            │   │       ├── CustomCellStyle
+    │            │   │       └── XlsxCellBuilder
     │            │   ├── format
     │            │   │   ├── XlsxDataFormat
     │            │   │   └── XlsxDataFormatType
@@ -80,8 +89,10 @@ file parser, schema factory, validation by scheme, dom-document writer
     │                ├── validator
     │                │   ├── XmlValidatorFactory
     │                │   └── XmlValidatorWrapper
-    │                └── writer
-    │                    └── XmlWriter
+    │                ├── writer
+    │                │   └── XmlWriter
+    │                └── xpath
+    │                    └── XpathSearcher
     └── test
          └── java
              ├── core
@@ -102,8 +113,10 @@ file parser, schema factory, validation by scheme, dom-document writer
              │       │   └── DateConverterTest
              │       ├── parser
              │       │   └── XmlFromFileTest
-             │       └── parser
-             │           └── XmlValidatorWrapperTest
+             │       ├── validator
+             │       │   └── XmlValidatorWrapperTest
+             │       └── xpath
+             │           └── XpathSearcherTest
              ├── dao
              │   └── BookDAOMock
              ├── database
@@ -120,6 +133,9 @@ file parser, schema factory, validation by scheme, dom-document writer
              │   │   ├── ReportHeader
              │   │   ├── SpacingTable
              │   │   └── SummaryBooksCollectionTable
+             │   └── builder
+             │       └── cell
+             │           └── PdfCellBuilderTest
              └── xlsx
                  └── books
                      ├── sheet
