@@ -1,15 +1,18 @@
 package core.xlsx.builder.cell;
 
 import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellUtil;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by mtumilowicz on 2017-11-08.
  */
 public class XlsxCellBuilder {
-    private Row row;
-    private int colCount;
+    private Cell cell;
     
     private CellDefaults defaults = new CellDefaults();
     private CellText cellText = new CellText();
@@ -17,10 +20,32 @@ public class XlsxCellBuilder {
     private CustomCellStyle cellStyle = new CustomCellStyle();
     
     public XlsxCellBuilder row(Row row, int colCount, String value) {
-        this.row = row;
-        this.colCount = colCount;
-        cellText.value(value);
+        cell = CellUtil.createCell(row, colCount, value);
         
+        return this;
+    }
+
+    public XlsxCellBuilder row(Row row, int colCount, BigDecimal value) {
+        cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
+        cell.setCellValue(value != null ? value.doubleValue() : 0.0);
+        cellFormat.setCellType(CellType.NUMERIC);
+        
+        return this;
+    }
+
+    public XlsxCellBuilder row(Row row, int colCount, int value) {
+        cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
+        cell.setCellValue(value);
+        cellFormat.setCellType(CellType.NUMERIC);
+
+        return this;
+    }
+
+    public XlsxCellBuilder row(Row row, int colCount, Date value, short dataFormat) {
+        cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
+        cell.setCellValue(value);
+        dataFormat(dataFormat);
+
         return this;
     }
     
@@ -39,12 +64,6 @@ public class XlsxCellBuilder {
     
     public XlsxCellBuilder dataFormat(Short format) {
         cellFormat.setDataFormat(format);
-        
-        return this;
-    }
-    
-    public XlsxCellBuilder cellType(CellType type) {
-        cellFormat.setCellType(type);
         
         return this;
     }
@@ -92,8 +111,6 @@ public class XlsxCellBuilder {
     }
 
     private Cell prepareCell() {
-        Cell cell = CellUtil.createCell(row, colCount, cellText.getValue());
-
         prepareText(cell);
 
         prepareCellFormat(cell);

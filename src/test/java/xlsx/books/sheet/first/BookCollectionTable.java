@@ -4,7 +4,6 @@ import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
 import entity.Book;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 
 /**
@@ -31,19 +30,15 @@ public class BookCollectionTable extends InsertableXlsContent {
             getCellBuilder().row(row, columnCount++, book.getTitle()).build();
             getCellBuilder().row(row, columnCount++, book.getGenre()).build();
 
-            Cell cell1 = getCellBuilder().row(row, columnCount++, StringUtils.EMPTY)
+            getCellBuilder().row(row, columnCount++, book.getPrice())
                     .alignment(HorizontalAlignment.RIGHT)
                     .dataFormat(getFormat().money())
-                    .cellType(CellType.NUMERIC)
                     .build();
-            cell1.setCellValue(book.getPrice() != null ? book.getPrice().doubleValue() : 0.0);
 
 
-            Cell cell2 = getCellBuilder().row(row, columnCount++, StringUtils.EMPTY)
+            getCellBuilder().row(row, columnCount++, book.getPubDate() ,getFormat().dateHours())
                     .alignment(HorizontalAlignment.CENTER)
-                    .dataFormat(getFormat().dateHours())
                     .build();
-            cell2.setCellValue(book.getPubDate());
 
             getCellBuilder().row(row, columnCount++, book.getReview()).build();
 

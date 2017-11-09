@@ -9,13 +9,8 @@ import org.apache.poi.ss.util.CellUtil;
  * Created by mtumilowicz on 2017-11-09.
  */
 final class CellText {
-    private String value;
     private HorizontalAlignment alignment;
     private int singleCellFontSize;
-
-    void value(String value) {
-        this.value = value;
-    }
 
     void alignment(HorizontalAlignment alignment) {
         this.alignment = alignment;
@@ -23,10 +18,6 @@ final class CellText {
 
     void singleCellFontSize(int singleCellFontSize) {
         this.singleCellFontSize = singleCellFontSize;
-    }
-
-    public String getValue() {
-        return value;
     }
 
     void prepareText(Cell cell) {

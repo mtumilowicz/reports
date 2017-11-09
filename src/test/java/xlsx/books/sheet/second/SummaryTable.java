@@ -25,13 +25,11 @@ public class SummaryTable extends InsertableXlsContent {
         int columnCount = 0;
         Row row = getSheet().createRow(rowCount);
 
-        getCellBuilder().row(row, columnCount++, String.valueOf(BookDAOMock.getAllEntities().size()))
+        getCellBuilder().row(row, columnCount++, BookDAOMock.getAllEntities().size())
                 .alignment(HorizontalAlignment.LEFT)
-                .cellType(CellType.NUMERIC)
                 .build();
 
-        getCellBuilder().row(row, columnCount, String.valueOf(BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO)))
-                .cellType(CellType.NUMERIC)
+        getCellBuilder().row(row, columnCount, BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO))
                 .dataFormat(getFormat().money())
                 .alignment(HorizontalAlignment.RIGHT)
                 .build();
