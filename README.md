@@ -161,7 +161,7 @@ handling basic features (eq. borders)
 * `ImageBuilder` - facilitates inserting images into pdf by setting size
 and position in one go
 * `PdfFontsContainer` - it is actually a map containing fonts (cache);
-* `PdfFontsContainer` - produces embedded fonts in encoding `Cp1250`
+* `PdfFontsFactory` - produces embedded fonts in encoding `Cp1250`
 * `AbstractPdfWriter` - base class used in pdf file generation
 * `InsertablePdfImage` - interface used for inserting images
 * `InsertablePdfTable` - base class used in building tables (inserted
@@ -171,6 +171,9 @@ into pdf)
 <a name="xls"></a>
 XLS
 ---
+* `XlsxCellBuilder`: `CellBorder`, `CellDefaults`, `CellForegroundColor`, 
+`CellFormat`, `CellText`, `CustomCellStyle` - facilitates composing of 
+xls cells by chaining methods and handling basic features (eq. borders)
 * `XlsxDataFormat` - facilitates handling with different column date 
 formats during files generation
 * `XlsxDataFormatType` - cache of format types (eg. `#.00` - money,
@@ -202,6 +205,7 @@ example: dom-document to string (using specific output format)
 * `XmlValidatorFactory` - javax.xml.validation.Validator factory
 * `XmlValidatorWrapper` - wrapper for xml validation (using schema)
 * `XmlWriter` - base class used in xml file generation
+* `XpathSearcher` - enables searching documents by xpath
 
 ## examples
 Example of using api (and references to more in test package).
