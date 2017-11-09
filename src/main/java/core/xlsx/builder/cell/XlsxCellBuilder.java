@@ -19,7 +19,9 @@ public class XlsxCellBuilder {
     private Short dataFormat;
     private CellType cellType;
     
-    private CellStyle cellStyle;
+    private boolean border;
+    private short foregroundColor;
+    private FillPatternType fillPattern;
     
     public XlsxCellBuilder row(Row row, int colCount, String value) {
         this.row = row;
@@ -58,9 +60,27 @@ public class XlsxCellBuilder {
         
         return this;
     }
+
+    public XlsxCellBuilder border() {
+        this.border = true;
+        
+        return this;
+    }
     
-    public XlsxCellBuilder cellStyle(CellStyle style) {
-        this.cellStyle = style;
+    public XlsxCellBuilder noBorder() {
+        this.border = false;
+        
+        return this;
+    }
+
+    public XlsxCellBuilder foregroundColor(short var1) {
+        this.foregroundColor = var1;
+
+        return this;
+    }
+    
+    public XlsxCellBuilder fillPattern(FillPatternType type) {
+        this.fillPattern = type;
         
         return this;
     }
@@ -115,10 +135,25 @@ public class XlsxCellBuilder {
     }
     
     private void prepareCellStyle(Cell cell) {
-        if (cellStyle != null) {
-            cell.setCellStyle(cellStyle);
+        if (border) {
+            CellUtil.setCellStyleProperty(cell, CellUtil.BORDER_BOTTOM, BorderStyle.THIN);
+            CellUtil.setCellStyleProperty(cell, CellUtil.BORDER_TOP, BorderStyle.THIN);
+            CellUtil.setCellStyleProperty(cell, CellUtil.BORDER_LEFT, BorderStyle.THIN);
+            CellUtil.setCellStyleProperty(cell, CellUtil.BORDER_RIGHT, BorderStyle.THIN);
 
-            cellStyle=null;
+            border = false;
+        }
+
+        if (foregroundColor > 0) {
+            CellUtil.setCellStyleProperty(cell, CellUtil.FILL_FOREGROUND_COLOR, foregroundColor);
+
+            foregroundColor=0;
+        }
+
+        if (fillPattern != null) {
+            CellUtil.setCellStyleProperty(cell, CellUtil.FILL_PATTERN, fillPattern);
+
+            fillPattern = null;
         }
     }
 }

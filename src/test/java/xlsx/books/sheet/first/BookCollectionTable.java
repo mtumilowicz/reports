@@ -1,6 +1,5 @@
 package xlsx.books.sheet.first;
 
-import core.builder.GenericBuilder;
 import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
@@ -58,15 +57,12 @@ public class BookCollectionTable extends InsertableXlsContent {
 
             Row row = getSheet().createRow(getRowCount());
 
-            CellStyle style = GenericBuilder.of(() -> getSheet().getWorkbook().createCellStyle())
-                    .with(CellStyle::setBorderLeft, BorderStyle.THIN)
-                    .with(CellStyle::setBorderBottom, BorderStyle.THIN)
-                    .with(CellStyle::setFillForegroundColor, IndexedColors.GREY_40_PERCENT.getIndex())
-                    .with(CellStyle::setFillPattern, FillPatternType.SOLID_FOREGROUND).build();
-            
             for (String header : getHeaders()) {
                 getCellBuilder().row(row, columnCount++, getBundles().get(header))
-                        .cellStyle(style).build();
+                        .fillPattern(FillPatternType.SOLID_FOREGROUND)
+                        .foregroundColor(IndexedColors.GREY_40_PERCENT.getIndex())
+                        .border()
+                        .build();
             }
         }
 

@@ -1,6 +1,5 @@
 package xlsx.books.sheet.second;
 
-import core.builder.GenericBuilder;
 import core.bundle.BundleHandler;
 import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
@@ -41,23 +40,21 @@ public class SummaryTable extends InsertableXlsContent {
     private class SummaryTableHeaders {
 
         void create() {
-            CellStyle style = GenericBuilder.of(() -> getSheet().getWorkbook().createCellStyle())
-                    .with(CellStyle::setBorderLeft, BorderStyle.THIN)
-                    .with(CellStyle::setBorderBottom, BorderStyle.THIN)
-                    .with(CellStyle::setFillForegroundColor, IndexedColors.GREY_40_PERCENT.getIndex())
-                    .with(CellStyle::setFillPattern, FillPatternType.SOLID_FOREGROUND).build();
-
             int columnCount = 0;
 
             Row row = getSheet().createRow(getRowCount());
 
             getCellBuilder().row(row, columnCount++, getBundles().get("report.table.summary.quantity"))
-                    .cellStyle(style)
+                    .border()
+                    .fillPattern(FillPatternType.SOLID_FOREGROUND)
+                    .foregroundColor(IndexedColors.GREY_40_PERCENT.getIndex())
                     .build();
 
 
             getCellBuilder().row(row, columnCount, getBundles().get("report.table.summary.value"))
-                    .cellStyle(style)
+                    .border()
+                    .fillPattern(FillPatternType.SOLID_FOREGROUND)
+                    .foregroundColor(IndexedColors.GREY_40_PERCENT.getIndex())
                     .build();
         }
     }
