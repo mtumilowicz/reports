@@ -20,10 +20,10 @@ final class CellForegroundColor {
         this.fillPattern = fillPattern;
     }
     
-    void prepareForegroundColor(Cell cell) {
-        if (foregroundColor != null) {
-            CellUtil.setCellStyleProperty(cell, CellUtil.FILL_FOREGROUND_COLOR, foregroundColor.index);
-        }
+    void prepareForegroundColor(Cell cell, CellDefaults defaults) {
+            CellUtil.setCellStyleProperty(cell, 
+                    CellUtil.FILL_FOREGROUND_COLOR, 
+                    foregroundColor != null ? foregroundColor.index : defaults.getBackgroundColor());
 
         if (fillPattern != null) {
             CellUtil.setCellStyleProperty(cell, CellUtil.FILL_PATTERN, fillPattern);

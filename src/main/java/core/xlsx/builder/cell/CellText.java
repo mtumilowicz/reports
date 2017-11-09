@@ -12,7 +12,6 @@ final class CellText {
     private String value;
     private HorizontalAlignment alignment;
     private int singleCellFontSize;
-    private int setDefaultFontSize;
 
     void value(String value) {
         this.value = value;
@@ -24,10 +23,6 @@ final class CellText {
 
     void singleCellFontSize(int singleCellFontSize) {
         this.singleCellFontSize = singleCellFontSize;
-    }
-
-    void setDefaultFontSize(int setDefaultFontSize) {
-        this.setDefaultFontSize = setDefaultFontSize;
     }
 
     public String getValue() {

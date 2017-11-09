@@ -9,14 +9,6 @@ final class CustomCellStyle {
     private CellBorder cellBorder = new CellBorder();
     private CellForegroundColor cellForegroundColor = new CellForegroundColor();
 
-    void cellBorder(CellBorder cellBorder) {
-        this.cellBorder = cellBorder;
-    }
-
-    void cellForegroundColor(CellForegroundColor cellForegroundColor) {
-        this.cellForegroundColor = cellForegroundColor;
-    }
-
     CellBorder getCellBorder() {
         return cellBorder;
     }
@@ -25,8 +17,8 @@ final class CustomCellStyle {
         return cellForegroundColor;
     }
 
-    void prepareCellStyle(Cell cell) {
+    void prepareCellStyle(Cell cell, CellDefaults defaults) {
         cellBorder.prepareBorder(cell);
-        cellForegroundColor.prepareForegroundColor(cell);
+        cellForegroundColor.prepareForegroundColor(cell, defaults);
     }
 }

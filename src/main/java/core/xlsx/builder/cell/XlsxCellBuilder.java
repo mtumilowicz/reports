@@ -11,6 +11,7 @@ public class XlsxCellBuilder {
     private Row row;
     private int colCount;
     
+    private CellDefaults defaults = new CellDefaults();
     private CellText cellText = new CellText();
     private CellFormat cellFormat = new CellFormat();
     private CustomCellStyle cellStyle = new CustomCellStyle();
@@ -38,7 +39,7 @@ public class XlsxCellBuilder {
 
     public void setDefaultFontSize(int size) {
         Preconditions.checkArgument(size > 0);
-        cellText.setDefaultFontSize(size);
+        defaults.setFontSize(size);
     }
     
     public XlsxCellBuilder dataFormat(Short format) {
@@ -70,6 +71,10 @@ public class XlsxCellBuilder {
 
         return this;
     }
+
+    public void setDefaultForegroundColor(IndexedColors color) {
+        defaults.setBackgroundColor(color);
+    }
     
     public XlsxCellBuilder fillPattern(FillPatternType type) {
         cellStyle.getCellForegroundColor().fillPattern(type);
@@ -98,7 +103,7 @@ public class XlsxCellBuilder {
 
         prepareCellFormat(cell);
 
-        prepareCellStyle(cell);
+        prepareCellStyle(cell, defaults);
         
         return cell;
     }
@@ -111,7 +116,7 @@ public class XlsxCellBuilder {
         cellFormat.prepareFormat(cell);
     }
     
-    private void prepareCellStyle(Cell cell) {
-        cellStyle.prepareCellStyle(cell);
+    private void prepareCellStyle(Cell cell, CellDefaults defaults) {
+        cellStyle.prepareCellStyle(cell, defaults);
     }
 }
