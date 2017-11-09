@@ -2,16 +2,17 @@ package core.xlsx.builder.cell;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.util.CellUtil;
 
 /**
  * Created by mtumilowicz on 2017-11-09.
  */
 final class CellForegroundColor {
-    private short foregroundColor;
+    private IndexedColors foregroundColor;
     private FillPatternType fillPattern;
 
-    void foregroundColor(short foregroundColor) {
+    void foregroundColor(IndexedColors foregroundColor) {
         this.foregroundColor = foregroundColor;
     }
 
@@ -20,8 +21,8 @@ final class CellForegroundColor {
     }
     
     void prepareForegroundColor(Cell cell) {
-        if (foregroundColor > 0) {
-            CellUtil.setCellStyleProperty(cell, CellUtil.FILL_FOREGROUND_COLOR, foregroundColor);
+        if (foregroundColor != null) {
+            CellUtil.setCellStyleProperty(cell, CellUtil.FILL_FOREGROUND_COLOR, foregroundColor.index);
         }
 
         if (fillPattern != null) {

@@ -65,8 +65,8 @@ public class XlsxCellBuilder {
         return this;
     }
 
-    public XlsxCellBuilder foregroundColor(short var1) {
-        cellStyle.getCellForegroundColor().foregroundColor(var1);
+    public XlsxCellBuilder foregroundColor(IndexedColors color) {
+        cellStyle.getCellForegroundColor().foregroundColor(color);
 
         return this;
     }

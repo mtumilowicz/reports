@@ -47,14 +47,14 @@ public class SummaryTable extends InsertableXlsContent {
             getCellBuilder().row(row, columnCount++, getBundles().get("report.table.summary.quantity"))
                     .border()
                     .fillPattern(FillPatternType.SOLID_FOREGROUND)
-                    .foregroundColor(IndexedColors.GREY_40_PERCENT.getIndex())
+                    .foregroundColor(IndexedColors.GREY_40_PERCENT)
                     .build();
 
 
             getCellBuilder().row(row, columnCount, getBundles().get("report.table.summary.value"))
                     .border()
                     .fillPattern(FillPatternType.SOLID_FOREGROUND)
-                    .foregroundColor(IndexedColors.GREY_40_PERCENT.getIndex())
+                    .foregroundColor(IndexedColors.GREY_40_PERCENT)
                     .build();
         }
     }
