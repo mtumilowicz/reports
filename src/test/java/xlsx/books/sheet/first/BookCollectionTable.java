@@ -31,11 +31,12 @@ public class BookCollectionTable extends InsertableXlsContent {
             getCellBuilder().row(row, columnCount++, book.getTitle()).build();
             getCellBuilder().row(row, columnCount++, book.getGenre()).build();
 
-            getCellBuilder().row(row, columnCount++, String.valueOf(book.getPrice()))
+            Cell cell1 = getCellBuilder().row(row, columnCount++, StringUtils.EMPTY)
                     .alignment(HorizontalAlignment.RIGHT)
                     .dataFormat(getFormat().money())
                     .cellType(CellType.NUMERIC)
                     .build();
+            cell1.setCellValue(book.getPrice() != null ? book.getPrice().doubleValue() : 0.0);
 
 
             Cell cell2 = getCellBuilder().row(row, columnCount++, StringUtils.EMPTY)
