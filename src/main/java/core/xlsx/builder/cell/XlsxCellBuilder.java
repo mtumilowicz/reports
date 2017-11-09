@@ -10,41 +10,36 @@ import org.apache.poi.ss.util.CellUtil;
 public class XlsxCellBuilder {
     private Row row;
     private int colCount;
-    private String value;
     
-    private HorizontalAlignment alignment;
-    private int singleCellFontSize;
-    private int setDefaultFontSize;
-    
+    private CellText cellText = new CellText();
     private CellFormat cellFormat = new CellFormat();
-    
     private CellBorder cellBorder = new CellBorder();
     private CellForegroundColor cellForegroundColor = new CellForegroundColor();
     
     public XlsxCellBuilder row(Row row, int colCount, String value) {
         this.row = row;
         this.colCount = colCount;
-        this.value = value;
+        cellText.value(value);
         
         return this;
     }
     
     public XlsxCellBuilder alignment(HorizontalAlignment alignment) {
-        this.alignment = alignment;
+        cellText.alignment(alignment);
         
         return this;
     }
 
     public XlsxCellBuilder singleCellFontSize(int size) {
         Preconditions.checkArgument(size > 0);
-        this.singleCellFontSize = size;
+        cellText.singleCellFontSize(size);
 
         return this;
     }
 
     public void setDefaultFontSize(int size) {
         Preconditions.checkArgument(size > 0);
-        this.setDefaultFontSize = size;
+        cellText.setDefaultFontSize(size);
     }
     
     public XlsxCellBuilder dataFormat(Short format) {
@@ -84,47 +79,42 @@ public class XlsxCellBuilder {
     }
     
     public Cell build() {
-        Cell cell = CellUtil.createCell(row, colCount, value);
-
-        prepareAlignment(cell);
-
-        singleCellFontSize(cell);
-
-        prepareCellFormat(cell);
+        Cell cell = prepareCell();
         
-        prepareCellStyle(cell);
+        resetFields();
         
         return cell;
     }
 
+    private void resetFields() {
+        cellText = new CellText();
+        cellFormat = new CellFormat();
+        cellBorder = new CellBorder();
+        cellForegroundColor = new CellForegroundColor();
+    }
+
+    private Cell prepareCell() {
+        Cell cell = CellUtil.createCell(row, colCount, cellText.getValue());
+
+        prepareText(cell);
+
+        prepareCellFormat(cell);
+
+        prepareCellStyle(cell);
+        
+        return cell;
+    }
+    
+    private void prepareText(Cell cell) {
+        cellText.prepareText(cell);
+    }
+
     private void prepareCellFormat(Cell cell) {
         cellFormat.prepareFormat(cell);
-        
-        cellFormat = new CellFormat();
-    }
-
-    private void prepareAlignment(Cell cell) {
-        if (alignment != null) {
-            CellUtil.setAlignment(cell, alignment);
-            alignment = null;
-        }
-    }
-
-    private void singleCellFontSize(Cell cell) {
-        if (singleCellFontSize > 0) {
-            Font font = cell.getSheet().getWorkbook().createFont();
-            font.setFontHeight((short) singleCellFontSize);
-            CellUtil.setFont(cell, font);
-
-            singleCellFontSize=0;
-        }
     }
     
     private void prepareCellStyle(Cell cell) {
         cellBorder.prepareBorder(cell);
-        cellBorder = new CellBorder();
-        
         cellForegroundColor.prepareForegroundColor(cell);
-        cellForegroundColor = new CellForegroundColor();
     }
 }
