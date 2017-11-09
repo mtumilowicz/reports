@@ -16,12 +16,10 @@ public class XlsxCellBuilder {
     private int singleCellFontSize;
     private int setDefaultFontSize;
     
-    private Short dataFormat;
-    private CellType cellType;
+    private CellFormat cellFormat = new CellFormat();
     
-    private boolean border;
-    private short foregroundColor;
-    private FillPatternType fillPattern;
+    private CellBorder cellBorder = new CellBorder();
+    private CellForegroundColor cellForegroundColor = new CellForegroundColor();
     
     public XlsxCellBuilder row(Row row, int colCount, String value) {
         this.row = row;
@@ -50,37 +48,37 @@ public class XlsxCellBuilder {
     }
     
     public XlsxCellBuilder dataFormat(Short format) {
-        this.dataFormat = format;
+        cellFormat.setDataFormat(format);
         
         return this;
     }
     
     public XlsxCellBuilder cellType(CellType type) {
-        this.cellType = type;
+        cellFormat.setCellType(type);
         
         return this;
     }
 
     public XlsxCellBuilder border() {
-        this.border = true;
+        cellBorder.border();
         
         return this;
     }
     
     public XlsxCellBuilder noBorder() {
-        this.border = false;
+        cellBorder.noBorder();
         
         return this;
     }
 
     public XlsxCellBuilder foregroundColor(short var1) {
-        this.foregroundColor = var1;
+        cellForegroundColor.foregroundColor(var1);
 
         return this;
     }
     
     public XlsxCellBuilder fillPattern(FillPatternType type) {
-        this.fillPattern = type;
+        cellForegroundColor.fillPattern(type);
         
         return this;
     }
@@ -92,15 +90,19 @@ public class XlsxCellBuilder {
 
         singleCellFontSize(cell);
 
-        prepareDataFormat(cell);
-
-        prepareCellType(cell);
+        prepareCellFormat(cell);
         
         prepareCellStyle(cell);
         
         return cell;
     }
-    
+
+    private void prepareCellFormat(Cell cell) {
+        cellFormat.prepareFormat(cell);
+        
+        cellFormat = new CellFormat();
+    }
+
     private void prepareAlignment(Cell cell) {
         if (alignment != null) {
             CellUtil.setAlignment(cell, alignment);
@@ -118,42 +120,11 @@ public class XlsxCellBuilder {
         }
     }
     
-    private void prepareDataFormat(Cell cell) {
-        if (dataFormat != null) {
-            CellUtil.setCellStyleProperty(cell, CellUtil.DATA_FORMAT, dataFormat);
-
-            dataFormat=null;
-        }
-    }
-    
-    private void prepareCellType(Cell cell) {
-        if (cellType != null) {
-            cell.setCellType(cellType);
-
-            cellType=null;
-        }
-    }
-    
     private void prepareCellStyle(Cell cell) {
-        if (border) {
-            CellUtil.setCellStyleProperty(cell, CellUtil.BORDER_BOTTOM, BorderStyle.THIN);
-            CellUtil.setCellStyleProperty(cell, CellUtil.BORDER_TOP, BorderStyle.THIN);
-            CellUtil.setCellStyleProperty(cell, CellUtil.BORDER_LEFT, BorderStyle.THIN);
-            CellUtil.setCellStyleProperty(cell, CellUtil.BORDER_RIGHT, BorderStyle.THIN);
-
-            border = false;
-        }
-
-        if (foregroundColor > 0) {
-            CellUtil.setCellStyleProperty(cell, CellUtil.FILL_FOREGROUND_COLOR, foregroundColor);
-
-            foregroundColor=0;
-        }
-
-        if (fillPattern != null) {
-            CellUtil.setCellStyleProperty(cell, CellUtil.FILL_PATTERN, fillPattern);
-
-            fillPattern = null;
-        }
+        cellBorder.prepareBorder(cell);
+        cellBorder = new CellBorder();
+        
+        cellForegroundColor.prepareForegroundColor(cell);
+        cellForegroundColor = new CellForegroundColor();
     }
 }
