@@ -57,10 +57,10 @@ public class BookCollectionTable extends InsertableXlsContent {
 
             Row row = getSheet().createRow(getRowCount());
 
+            getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);
             for (String header : getHeaders()) {
                 getCellBuilder().row(row, columnCount++, getBundles().get(header))
                         .fillPattern(FillPatternType.SOLID_FOREGROUND)
-                        .foregroundColor(IndexedColors.GREY_40_PERCENT)
                         .border()
                         .build();
             }

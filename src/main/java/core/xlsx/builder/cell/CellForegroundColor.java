@@ -23,7 +23,7 @@ final class CellForegroundColor {
     void prepareForegroundColor(Cell cell, CellDefaults defaults) {
             CellUtil.setCellStyleProperty(cell, 
                     CellUtil.FILL_FOREGROUND_COLOR, 
-                    foregroundColor != null ? foregroundColor.index : defaults.getBackgroundColor());
+                    foregroundColor != null ? foregroundColor.index : defaults.getBackgroundColor().index);
 
         if (fillPattern != null) {
             CellUtil.setCellStyleProperty(cell, CellUtil.FILL_PATTERN, fillPattern);
