@@ -407,8 +407,16 @@ getCellBuilder().cell(row, col, value).alignment(HorizontalAlignment.CENTER).bui
 getCellBuilder().cell(row, col, value).border().build();
 ```  
 
-`singleCellFontSize(int size)`, `foregroundColor(IndexedColors color)` - changes only in the cell we 
-are working on (without any influence on the others)  
+`dataFormat(XlsxDataFormatType type)` - display format of cell value
+```
+getCellBuilder().cell(row, col, BigDecimal.ONE)
+        .dataFormat(XlsxDataFormatType.MONEY)
+        .build();
+```
+
+`singleCellFontSize(int size)`, `foregroundColor(IndexedColors color)` - 
+changes only in the cell we are working on (without any influence on 
+the others)  
 ```
 getCellBuilder().cell(row, col, value).singleCellFontSize(500).build(); 
 getCellBuilder().cell(row, col, value).foregroundColor(IndexedColors.GOLD).build();
