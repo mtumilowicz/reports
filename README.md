@@ -396,17 +396,23 @@ integral part of `InsertableXlsContent`.
 `cell(Row row, int colCount, Date value, short dataFormat)` - used to 
 set value of type `Date` with specific format (all possible formats are
 defined in `XlsxDataFormat` - in `InsertableXlsContent`: `getFormat()`)  
-`getCellBuilder().cell(row, col, value).build();`  
-`getCellBuilder().cell(row, col, getFormat().dateHours()).build();`  
+```
+getCellBuilder().cell(row, col, value).build();
+getCellBuilder().cell(row, col, getFormat().dateHours()).build();
+```  
 
-`border()`, `alignment(HorizontalAlignment alignment)`  
-`getCellBuilder().cell(row, col, value).alignment(HorizontalAlignment.CENTER).build();`
-`getCellBuilder().cell(row, col, value).border().alignment(HorizontalAlignment.CENTER).build();`  
+`border()`, `alignment(HorizontalAlignment alignment)`
+```
+getCellBuilder().cell(row, col, value).alignment(HorizontalAlignment.CENTER).build();
+getCellBuilder().cell(row, col, value).border().alignment(HorizontalAlignment.CENTER).build();
+```  
 
 `singleCellFontSize(int size)`, `foregroundColor(IndexedColors color)` - changes only in the cell we 
 are working on (without any influence on the others)  
-`getCellBuilder().cell(row, col, value).singleCellFontSize(500).build();`  
-`getCellBuilder().cell(row, col, value).foregroundColor(IndexedColors.GOLD).build();`  
+```
+getCellBuilder().cell(row, col, value).singleCellFontSize(500).build(); 
+getCellBuilder().cell(row, col, value).foregroundColor(IndexedColors.GOLD).build();
+```
 
 `setDefaultForegroundColor(IndexedColors color)` - changes permanently 
 all cells constructed by instance of `XlsxCellBuilder` (still can be 
@@ -414,8 +420,8 @@ outshouted by using `foregroundColor`); changes are saved in
 `CellDefaults`; method doesn't allow chaining  
 `getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);`
 and then we have to use `fillPattern(FillPatternType type)` to color
-specific cell on already set default foreground color
-`getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();`
+specific cell with already set default foreground color
+```getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();```
 
 `build()` - after calling this method we construct cell with all set
 features then reset all fields to default, eg. `CustomCellStyle.CellBorder.border` field
