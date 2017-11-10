@@ -393,12 +393,12 @@ integral part of `InsertableXlsContent`.
 
 `cell(Row row, int colCount, XXX value)` - used to set value of type XXX
 (eg. String, BigDecimal, Integer)  
-`cell(Row row, int colCount, Date value, short dataFormat)` - used to 
-set value of type `Date` with specific format (all possible formats are
-defined in `XlsxDataFormat` - in `InsertableXlsContent`: `getFormat()`)  
+`XlsxCellBuilder cell(Row row, int colCount, Date value, 
+XlsxDataFormatType type)` - used to set value of type `Date` with 
+specific format (all possible formats are defined in `XlsxDataFormatType`)  
 ```
 getCellBuilder().cell(row, col, value).build();
-getCellBuilder().cell(row, col, getFormat().dateHours()).build();
+getCellBuilder().cell(row, col, XlsxDataFormatType.DATE_ONLY).build();
 ```  
 
 `border()`, `alignment(HorizontalAlignment alignment)`
