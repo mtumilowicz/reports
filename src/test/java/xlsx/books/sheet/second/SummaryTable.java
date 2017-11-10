@@ -32,7 +32,7 @@ public class SummaryTable extends InsertableXlsContent {
                 .build();
 
         getCellBuilder().cell(row, columnCount, BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO))
-                .dataFormat(getFormat().of(XlsxDataFormatType.MONEY))
+                .dataFormat(XlsxDataFormatType.MONEY)
                 .alignment(HorizontalAlignment.RIGHT)
                 .foregroundColor(IndexedColors.GOLD)
                 .build();

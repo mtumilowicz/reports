@@ -1,9 +1,12 @@
 package core.xlsx.builder.cell;
 
 import com.google.common.base.Preconditions;
+import core.xlsx.format.XlsxDataFormat;
+import core.xlsx.format.XlsxDataFormatType;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellUtil;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,9 +19,13 @@ public class XlsxCellBuilder {
     
     private CellDefaults defaults = new CellDefaults();
     private CellText cellText = new CellText();
-    private CellFormat cellFormat = new CellFormat();
+    private CellFormat cellFormat;
     private CustomCellStyle cellStyle = new CustomCellStyle();
-    
+
+    public XlsxCellBuilder(XlsxDataFormat dataFormat) {
+        cellFormat = new CellFormat(dataFormat);
+    }
+
     public XlsxCellBuilder cell(Row row, int colCount, String value) {
         Preconditions.checkArgument(row != null);
         Preconditions.checkArgument(colCount >= 0);
@@ -50,13 +57,13 @@ public class XlsxCellBuilder {
         return this;
     }
 
-    public XlsxCellBuilder cell(Row row, int colCount, Date value, short dataFormat) {
+    public XlsxCellBuilder cell(Row row, int colCount, Date value, XlsxDataFormatType type) {
         Preconditions.checkArgument(row != null);
         Preconditions.checkArgument(colCount >= 0);
         
         cell = CellUtil.createCell(row, colCount, StringUtils.EMPTY);
         cell.setCellValue(value);
-        dataFormat(dataFormat);
+        dataFormat(type);
 
         return this;
     }
@@ -75,8 +82,8 @@ public class XlsxCellBuilder {
         return this;
     }
     
-    public XlsxCellBuilder dataFormat(short format) {
-        cellFormat.setDataFormat(format);
+    public XlsxCellBuilder dataFormat(XlsxDataFormatType type) {
+        cellFormat.setDataFormat(type);
         
         return this;
     }
@@ -123,7 +130,7 @@ public class XlsxCellBuilder {
 
     private void resetFields() {
         cellText = new CellText();
-        cellFormat = new CellFormat();
+        cellFormat = cellFormat.newInstanceWithTheSameFormat();
         cellStyle = new CustomCellStyle();
     }
 

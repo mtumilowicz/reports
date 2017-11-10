@@ -12,16 +12,14 @@ import org.apache.poi.ss.usermodel.Workbook;
 public abstract class InsertableXlsContent {
     private BundleHandler bundles = new BundleHandler();
     private final Sheet sheet;
-    private final XlsxDataFormat format;
     private final int rowCount;
     private final XlsxCellBuilder cellBuilder;
 
     public InsertableXlsContent(BundleHandler bundles, Sheet sheet, int rowCount) {
         this.bundles = bundles;
         this.sheet = sheet;
-        this.format = initDateFormat(sheet.getWorkbook());
         this.rowCount = rowCount;
-        this.cellBuilder = new XlsxCellBuilder();
+        this.cellBuilder = new XlsxCellBuilder(initDateFormat(sheet.getWorkbook()));
     }
     
     public abstract void create();
@@ -32,10 +30,6 @@ public abstract class InsertableXlsContent {
 
     public Sheet getSheet() {
         return sheet;
-    }
-
-    protected XlsxDataFormat getFormat() {
-        return format;
     }
 
     public int getRowCount() {

@@ -33,11 +33,11 @@ public class BookCollectionTable extends InsertableXlsContent {
 
             getCellBuilder().cell(row, columnCount++, book.getPrice())
                     .alignment(HorizontalAlignment.RIGHT)
-                    .dataFormat(getFormat().of(XlsxDataFormatType.MONEY))
+                    .dataFormat(XlsxDataFormatType.MONEY)
                     .build();
 
 
-            getCellBuilder().cell(row, columnCount++, book.getPubDate(), getFormat().of(XlsxDataFormatType.DATE_HOURS))
+            getCellBuilder().cell(row, columnCount++, book.getPubDate(), XlsxDataFormatType.DATE_HOURS)
                     .alignment(HorizontalAlignment.CENTER)
                     .build();
 
