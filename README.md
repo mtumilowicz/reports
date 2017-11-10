@@ -450,8 +450,8 @@ more exemplary code of usages `XlsxCellBuilder` in packages:
 
 ---
 2) **XlsxDataFormat** - cells in excel could have specific format (eg. 
-date: `YYYY-MM-DD` or date with time: `YYYY-MM-DD hh:mm` - take a look 
-at pt. 2)) - this class is simply the cache
+date: `YYYY-MM-DD` or date with time: `YYYY-MM-DD hh:mm`) - this class 
+is simply the cache
 
 ---
 3) **XlsxDataFormatType** - enum for excel format types  
