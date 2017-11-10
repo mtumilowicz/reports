@@ -3,10 +3,11 @@ This project has 3 APIs:
 
 * [PDF](#pdf) - cells and images builder, fonts handler, report files 
 creator
-* [XLS](#xls) - xls cell formats handler, report files creator
+* [XLS](#xls) - cells builder, report files creator
 * [XML](#xml) - two types of xml builders, xml to entity converter 
-(using x-stream), entity to xml converter (using x-stream), 
-file parser, schema factory, validation by scheme, dom-document writer
+(using x-stream), entity to xml converter (using x-stream), file parser, 
+schema factory, validation by scheme, dom-document writer, searching by 
+xpath
 
 ## project structure
 ```
@@ -137,19 +138,23 @@ file parser, schema factory, validation by scheme, dom-document writer
              │       └── cell
              │           └── PdfCellBuilderTest
              └── xlsx
-                 └── books
-                     ├── sheet
-                     │   ├── first
-                     │   │   ├── BookCollectionSheet
-                     │   │   ├── BookCollectionSheetContent
-                     │   │   ├── BookCollectionSheetTitle
-                     │   │   └── BookCollectionTable
-                     │   └── second
-                     │       ├── SummarySheet
-                     │       ├── SummarySheetContent
-                     │       ├── SummarySheetTitle
-                     │       └── SummaryTable
-                     └── XlsxGenerationTest
+                 ├── books
+                 │   ├── sheet
+                 │   │   ├── first
+                 │   │   │   ├── BookCollectionSheet
+                 │   │   │   ├── BookCollectionSheetContent
+                 │   │   │   ├── BookCollectionSheetTitle
+                 │   │   │   └── BookCollectionTable
+                 │   │   └── second
+                 │   │       ├── SummarySheet
+                 │   │       ├── SummarySheetContent
+                 │   │       ├── SummarySheetTitle
+                 │   │       └── SummaryTable
+                 │   └── XlsxGenerationTest
+                 └── builder
+                     └── cell
+                         └── XlsxCellBuilderTest
+
 ```
 ## description
 <a name="pdf"></a>
@@ -174,9 +179,9 @@ XLS
 * `XlsxCellBuilder`: `CellBorder`, `CellDefaults`, `CellForegroundColor`, 
 `CellFormat`, `CellText`, `CustomCellStyle` - facilitates composing of 
 xls cells by chaining methods and handling basic features (eq. borders)
-* `XlsxDataFormat` - facilitates handling with different column date 
-formats during files generation
-* `XlsxDataFormatType` - cache of format types (eg. `#.00` - money,
+* `XlsxDataFormat` - facilitates handling different column date formats 
+during files generation
+* `XlsxDataFormatType` - cache of format types (eg. `0.00` - money,
 `YYYY-MM-DD hh:mm` - date with time)
 * `AbstractXlsxWriter` - base class used in xls file generation
 * `InsertableXlsContent` - base class used in building content of sheets
@@ -197,7 +202,7 @@ element has to be created and then added)
 * `DateOnlyConverter` - exemplary x-stream converter
 * `EntityToXmlConverter` - wrapper for x-stream conversion from entity 
 to xml
-* `XmlFromFile` - parse xml from file to a specific class
+* `XmlFromFile` - parse xml from file to a given class
 * `XmlSchemaFactory` - loads xml schema from file (given path + 
 language)
 * `XmlTransformer` - couple useful methods for xml transforming, for 
