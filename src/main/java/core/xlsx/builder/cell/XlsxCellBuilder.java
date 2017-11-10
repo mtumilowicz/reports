@@ -39,7 +39,7 @@ public class XlsxCellBuilder {
         return this;
     }
 
-    public XlsxCellBuilder cell(Row row, int colCount, int value) {
+    public XlsxCellBuilder cell(Row row, int colCount, Integer value) {
         Preconditions.checkArgument(row != null);
         Preconditions.checkArgument(colCount >= 0);
         

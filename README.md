@@ -388,15 +388,24 @@ more exemplary code of usages `InsertablePdfTable` in class (test package)
 `BooksCollectionTable`  
 
 ## XLS
-1) **XlsxDataFormat** - cells in excel could have specific format (eg. 
+1) **XlsxCellBuilder** - we don't use this class directly but as a 
+integral part of `InsertableXlsContent`.
+`cell(Row row, int colCount, XXX value)` - used to set value of type XXX
+(eg. String, BigDecimal, Integer)
+`cell(Row row, int colCount, XXX value)` - used to set value of type XXX
+(eg. String, BigDecimal, Integer)
+
+
+---
+2) **XlsxDataFormat** - cells in excel could have specific format (eg. 
 date: `YYYY-MM-DD` or date with time: `YYYY-MM-DD hh:mm` - take a look 
 at pt. 2)) - this class is simply the cache
 
 ---
-2) **XlsxDataFormatType** - enum for excel format types  
+3) **XlsxDataFormatType** - enum for excel format types  
 
 ---
-3) **AbstractXlsxWriter** - base class for creating pdf file; usage:
+4) **AbstractXlsxWriter** - base class for creating pdf file; usage:
 ```
 XXX extends AbstractXlsxWriter
 ```
@@ -414,7 +423,7 @@ more exemplary code of usages `AbstractXlsxWriter` in class (test package)
 : `XlsxGenerationTest`  
 
 ---
-4) **InsertableXlsContent** - every content that is inserted into sheet 
+5) **InsertableXlsContent** - every content that is inserted into sheet 
 should be defined in separate class extending `InsertableXlsContent`:  
 ```
 XXX extends InsertableXlsContent
@@ -438,7 +447,7 @@ more exemplary code of usages `InsertableXlsContent` in classes
 `SummarySheetContent`, `SummarySheetTitle`, `SummaryTable`  
 
 ---
-5) **InsertableXlsSheet** - every sheet that is inserted into report 
+6) **InsertableXlsSheet** - every sheet that is inserted into report 
 should be defined in separate class extending `InsertableXlsSheet`:
 ```
 XXX extends InsertableXlsSheet
