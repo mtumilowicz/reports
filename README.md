@@ -418,10 +418,14 @@ getCellBuilder().cell(row, col, value).foregroundColor(IndexedColors.GOLD).build
 all cells constructed by instance of `XlsxCellBuilder` (still can be 
 outshouted by using `foregroundColor`); changes are saved in 
 `CellDefaults`; method doesn't allow chaining  
-```getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);```
+```
+getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);
+```
 and then we have to use `fillPattern(FillPatternType type)` to color 
 specific cell with already set default foreground color
-```getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();```
+```
+getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();
+```
 
 `build()` - after calling this method we construct cell with all set
 features then reset all fields to default, eg. `CustomCellStyle.CellBorder.border` field
