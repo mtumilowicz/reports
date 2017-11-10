@@ -96,6 +96,7 @@ public class XlsxCellBuilder {
     public XlsxCellBuilder foregroundColor(IndexedColors color) {
         Preconditions.checkArgument(color != null);
         cellStyle.getCellForegroundColor().foregroundColor(color);
+        fillPattern(FillPatternType.SOLID_FOREGROUND);
 
         return this;
     }

@@ -243,7 +243,7 @@ getCellBuilder().value(value).backgroundColor(Color.CYAN).build()
 
 `setDefaultFontSize(int defaultFontSize)`, 
 `setDefaultBackgroundColor(Color defaultBackgroundColor)`,
-`setDefaultStyle(Style style)` - changes permanently all cell constructed
+`setDefaultStyle(Style style)` - changes permanently all cells constructed
 by instance of `PdfCellBuilder` (still can be outshouted by using 
 `singleCellFontSize` and so on...); changes are saved in `CellDefaults`;
 methods don't allow chaining
@@ -253,8 +253,8 @@ getCellBuilder().setDefaultFontSize(20);
 ```
 
 `build()` - after calling this method we construct cell with all set
-features then reset all fields to default, eg. `CellBorder.border field`
-is set to true;
+features then reset all fields to default, eg. `CellBorder.border` field
+is set to `true`;
 ```
 public Cell build() {
     Cell cell = prepareCell();
@@ -389,12 +389,49 @@ more exemplary code of usages `InsertablePdfTable` in class (test package)
 
 ## XLS
 1) **XlsxCellBuilder** - we don't use this class directly but as a 
-integral part of `InsertableXlsContent`.
+integral part of `InsertableXlsContent`.  
 `cell(Row row, int colCount, XXX value)` - used to set value of type XXX
-(eg. String, BigDecimal, Integer)
-`cell(Row row, int colCount, XXX value)` - used to set value of type XXX
-(eg. String, BigDecimal, Integer)
+(eg. String, BigDecimal, Integer)  
+`cell(Row row, int colCount, Date value, short dataFormat)` - used to 
+set value of type Date with specific format (all possible formats are
+defined in `XlsxDataFormat` - in `InsertableXlsContent`: `getFormat()`)  
+`getCellBuilder().cell(row, col, value).build();`  
+`getCellBuilder().cell(row, col, getFormat().dateHours()).build();`  
+`border()`, `alignment(HorizontalAlignment alignment)`  
+`getCellBuilder().cell(row, col, value).alignment(HorizontalAlignment.CENTER).build();`  
+`singleCellFontSize(int size)`, 
+`foregroundColor(IndexedColors color)` - changes only in the cell we 
+are working on (without any influence on the others)  
+`getCellBuilder().cell(row, col, value).singleCellFontSize(500).build();`  
+`getCellBuilder().cell(row, col, value).foregroundColor(IndexedColors.GOLD).build();`  
+`setDefaultForegroundColor(IndexedColors color)` - changes permanently 
+all cells constructed by instance of `XlsxCellBuilder` (still can be 
+outshouted by using `foregroundColor`); changes are saved in 
+`CellDefaults`; method doesn't allow chaining  
+`getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);`
+and then we have to use `fillPattern(FillPatternType type)` to color
+specific cell on already set default foreground color
+`getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();`
+`build()` - after calling this method we construct cell with all set
+features then reset all fields to default, eg. `CustomCellStyle.CellBorder.border` field
+is set to `false`;
+```
+public Cell build() {
+    Cell cell = prepareCell();
 
+    resetFields();
+
+    return cell;
+}
+    
+private void resetFields() {
+    cellText = new CellText();
+    cellFormat = new CellFormat();
+    cellStyle = new CustomCellStyle();
+}
+```
+more exemplary code of usages `XlsxCellBuilder` in packages:
+`xlsx.books.sheet.first`, `xlsx.books.sheet.second`
 
 ---
 2) **XlsxDataFormat** - cells in excel could have specific format (eg. 

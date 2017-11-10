@@ -36,7 +36,7 @@ public class BookCollectionTable extends InsertableXlsContent {
                     .build();
 
 
-            getCellBuilder().cell(row, columnCount++, book.getPubDate() ,getFormat().dateHours())
+            getCellBuilder().cell(row, columnCount++, book.getPubDate(), getFormat().dateHours())
                     .alignment(HorizontalAlignment.CENTER)
                     .build();
 
