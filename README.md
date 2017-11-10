@@ -404,7 +404,7 @@ getCellBuilder().cell(row, col, getFormat().dateHours()).build();
 `border()`, `alignment(HorizontalAlignment alignment)`
 ```
 getCellBuilder().cell(row, col, value).alignment(HorizontalAlignment.CENTER).build();
-getCellBuilder().cell(row, col, value).border().alignment(HorizontalAlignment.CENTER).build();
+getCellBuilder().cell(row, col, value).border().build();
 ```  
 
 `singleCellFontSize(int size)`, `foregroundColor(IndexedColors color)` - changes only in the cell we 
@@ -418,8 +418,8 @@ getCellBuilder().cell(row, col, value).foregroundColor(IndexedColors.GOLD).build
 all cells constructed by instance of `XlsxCellBuilder` (still can be 
 outshouted by using `foregroundColor`); changes are saved in 
 `CellDefaults`; method doesn't allow chaining  
-`getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);`
-and then we have to use `fillPattern(FillPatternType type)` to color
+```getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);```
+and then we have to use `fillPattern(FillPatternType type)` to color 
 specific cell with already set default foreground color
 ```getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();```
 
