@@ -15,17 +15,10 @@ public class XlsxDataFormat {
     private XlsxDataFormat(ImmutableMap<XlsxDataFormatType, Short> map) {
         this.map = map;
     }
-
-    public Short money() {
-        return Objects.requireNonNull(map.get(XlsxDataFormatType.MONEY));
-    }
-
-    public Short dateOnly() {
-        return Objects.requireNonNull(map.get(XlsxDataFormatType.DATE_ONLY));
-    }
-
-    public Short dateHours() {
-        return Objects.requireNonNull((map.get(XlsxDataFormatType.DATE_HOURS)));
+    
+    public Short of(XlsxDataFormatType type) {
+        Preconditions.checkArgument(type != null);
+        return Objects.requireNonNull(map.get(type));
     }
 
     public static final class Factory {

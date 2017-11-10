@@ -1,6 +1,7 @@
 package xlsx.books.sheet.second;
 
 import core.bundle.BundleHandler;
+import core.xlsx.format.XlsxDataFormatType;
 import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
 import org.apache.poi.ss.usermodel.*;
@@ -31,7 +32,7 @@ public class SummaryTable extends InsertableXlsContent {
                 .build();
 
         getCellBuilder().cell(row, columnCount, BookDAOMock.sumPriceOfAllEntities().orElse(BigDecimal.ZERO))
-                .dataFormat(getFormat().money())
+                .dataFormat(getFormat().of(XlsxDataFormatType.MONEY))
                 .alignment(HorizontalAlignment.RIGHT)
                 .foregroundColor(IndexedColors.GOLD)
                 .build();

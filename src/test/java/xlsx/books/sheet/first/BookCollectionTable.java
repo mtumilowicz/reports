@@ -1,6 +1,7 @@
 package xlsx.books.sheet.first;
 
 import core.bundle.BundleHandler;
+import core.xlsx.format.XlsxDataFormatType;
 import core.xlsx.writer.InsertableXlsContent;
 import dao.BookDAOMock;
 import entity.Book;
@@ -32,11 +33,11 @@ public class BookCollectionTable extends InsertableXlsContent {
 
             getCellBuilder().cell(row, columnCount++, book.getPrice())
                     .alignment(HorizontalAlignment.RIGHT)
-                    .dataFormat(getFormat().money())
+                    .dataFormat(getFormat().of(XlsxDataFormatType.MONEY))
                     .build();
 
 
-            getCellBuilder().cell(row, columnCount++, book.getPubDate(), getFormat().dateHours())
+            getCellBuilder().cell(row, columnCount++, book.getPubDate(), getFormat().of(XlsxDataFormatType.DATE_HOURS))
                     .alignment(HorizontalAlignment.CENTER)
                     .build();
 
