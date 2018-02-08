@@ -1,7 +1,6 @@
 package core.xml.builder.chain;
 
 import core.dom.ControlXmlDocument;
-import core.xml.builder.XmlDocumentBuilderChainImpl;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,7 @@ public class XmlDocumentBuilderChainImplTest {
     
     @Test
     public void xmlDocumentBuilderChainImplConstructor_name() {
-        XmlDocumentBuilderChainImpl xmlDocumentBuilderChain = new XmlDocumentBuilderChainImpl("test");
+        XmlDocumentBuilderImpl xmlDocumentBuilderChain = new XmlDocumentBuilderImpl("test");
         assertXMLEqual(ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"),
                 xmlDocumentBuilderChain.getDocument());
     }

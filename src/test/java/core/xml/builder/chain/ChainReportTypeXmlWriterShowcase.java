@@ -1,7 +1,6 @@
 package core.xml.builder.chain;
 
-import core.xml.builder.XmlDocumentBuilderChainImpl;
-import core.xml.writer.XmlWriter;
+import core.xml.writer.chain.XmlWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -11,7 +10,7 @@ import org.w3c.dom.Element;
 public class ChainReportTypeXmlWriterShowcase extends XmlWriter {
 
     ChainReportTypeXmlWriterShowcase(String rootName) {
-        super(new XmlDocumentBuilderChainImpl(rootName));
+        super(new XmlDocumentBuilderImpl(rootName));
     }
 
     @Override

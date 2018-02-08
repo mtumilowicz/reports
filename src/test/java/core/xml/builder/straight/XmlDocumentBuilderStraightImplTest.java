@@ -1,7 +1,6 @@
 package core.xml.builder.straight;
 
 import core.dom.ControlXmlDocument;
-import core.xml.builder.XmlDocumentBuilderStraightImpl;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,7 @@ public class XmlDocumentBuilderStraightImplTest {
     
     @Test
     public void xmlDocumentBuilderStraightImplConstructor_name() {
-        XmlDocumentBuilderStraightImpl xmlDocumentBuilder = new XmlDocumentBuilderStraightImpl("test");
+        XmlDocumentBuilderImpl xmlDocumentBuilder = new XmlDocumentBuilderImpl("test");
         assertXMLEqual(ControlXmlDocument.byPath("src/test/resources/onlyRoot.xml"),
                 xmlDocumentBuilder.getDocument());
     }

@@ -1,7 +1,6 @@
 package core.xml.builder.straight;
 
-import core.xml.builder.XmlDocumentBuilderStraightImpl;
-import core.xml.writer.XmlWriter;
+import core.xml.writer.straight.XmlWriter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -11,7 +10,7 @@ import org.w3c.dom.Element;
 public class StraightReportTypeXmlWriterShowcase extends XmlWriter {
 
     StraightReportTypeXmlWriterShowcase(String rootName) {
-        super(new XmlDocumentBuilderStraightImpl(rootName));
+        super(new XmlDocumentBuilderImpl(rootName));
     }
 
     @Override
