@@ -539,7 +539,7 @@ more exemplary code of usages `InsertableXlsSheet` in classes (test
 package): `SummarySheet`, `BookCollectionSheet`  
 
 ## XML
-1) **XmlDocumentBuilderChainImpl** - allows to create xml (by chaining
+1) **builder.chain.XmlDocumentBuilderImpl** - allows to create xml (by chaining
 feature)  
 to adding new elements / attributes we use methods:  
 ```
@@ -577,12 +577,13 @@ produces:
 ```
 after all we called `build()`
 
-more exemplary code of usages `XmlDocumentBuilderChainImpl` in class 
-(test package): `ChainReportTypeXmlWriterShowcase`, 
-`XmlDocumentBuilderChainImplTest`
+more exemplary code of usages `builder.chain.XmlDocumentBuilderImpl` 
+in the class (test package): 
+`builder.chain.ReportTypeXmlWriterShowcase`, 
+`builder.chain.XmlDocumentBuilderImplTest`
 
 ---
-2) **XmlDocumentBuilderStraightImpl** - allows to create xml in a 
+2) **builder.straight.XmlDocumentBuilderStraightImpl** - allows to create xml in a 
 "straight" way:  
 Creating elements / attributes:
 ```
@@ -627,6 +628,6 @@ Element node1 = createElement("node1")
                         .build())
                 .build();
 ```
-more exemplary code of usages `XmlDocumentBuilderStraightImpl` in class 
-(test package): `StraightReportTypeXmlWriterShowcase`, 
-`XmlDocumentBuilderStraightImpl`
+more exemplary code of usages `builder.straight.XmlDocumentBuilderImpl` 
+in the class (test package): `builder.straight.ReportTypeXmlWriterShowcase`, 
+`builder.straight.XmlDocumentBuilderImplTest`
