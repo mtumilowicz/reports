@@ -11,7 +11,7 @@ import static org.custommonkey.xmlunit.XMLAssert.assertXMLNotEqual;
 /**
  * Created by mtumilowicz on 2017-06-15.
  */
-public class XmlDocumentBuilderChainImplTest {
+public class XmlDocumentBuilderImplTest {
 
     @Before
     public void setUp() {
@@ -28,13 +28,13 @@ public class XmlDocumentBuilderChainImplTest {
     @Test
     public void xmlDocumentBuilderChainImplFullMethodsTestPositive() {
         assertXMLEqual(ControlXmlDocument.byPath("src/test/resources/extendedXmlDoc.xml"),
-                new ChainReportTypeXmlWriterShowcase("node0").prepare());
+                new ReportTypeXmlWriterShowcase("node0").prepare());
     }
 
     @Test
     public void xmlDocumentBuilderChainImplFullMethodsTestNegative() {
         assertXMLNotEqual(ControlXmlDocument.byPath("src/test/resources/extendedXmlDocWrongNode.xml"),
-                new ChainReportTypeXmlWriterShowcase("node0").prepare());
+                new ReportTypeXmlWriterShowcase("node0").prepare());
     }
 
 }
