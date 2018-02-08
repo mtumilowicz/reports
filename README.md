@@ -629,5 +629,6 @@ Element node1 = createElement("node1")
                 .build();
 ```
 more exemplary code of usages `builder.straight.XmlDocumentBuilderImpl` 
-in the class (test package): `builder.straight.ReportTypeXmlWriterShowcase`, 
+in the class (test package): 
+`builder.straight.ReportTypeXmlWriterShowcase`, 
 `builder.straight.XmlDocumentBuilderImplTest`
