@@ -7,9 +7,9 @@ import org.w3c.dom.Element;
 /**
  * Created by mtumilowicz on 2017-06-15.
  */
-public class ChainReportTypeXmlWriterShowcase extends XmlWriter {
+public class ReportTypeXmlWriterShowcase extends XmlWriter {
 
-    ChainReportTypeXmlWriterShowcase(String rootName) {
+    ReportTypeXmlWriterShowcase(String rootName) {
         super(new XmlDocumentBuilderImpl(rootName));
     }
 
@@ -32,7 +32,7 @@ public class ChainReportTypeXmlWriterShowcase extends XmlWriter {
     }
 
     public static void main(String[] args) {
-        ChainReportTypeXmlWriterShowcase xmlWriter = new ChainReportTypeXmlWriterShowcase("node0");
+        ReportTypeXmlWriterShowcase xmlWriter = new ReportTypeXmlWriterShowcase("node0");
 
         xmlWriter.print();
     }
