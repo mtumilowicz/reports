@@ -275,24 +275,23 @@ integral part of `InsertablePdfTable`.
   
 ---
 2) **ImageBuilder** - we use this class directly
-    ```
-    ImageBuilder.Factory.get(path)
+    * Width and height we give in floats, position is set in order: firstly abscissa then ordinate (also floats):
+        ```
+        ImageBuilder.Factory.get(path)
                 .widthAndHeight(100, 100)
                 .position(100, 100)
                 .build();
-    ```
-    width and height we give in floats, position is set in order: firstly
-    abscissa then ordinate (also floats).  
+        ```
     * When we have reference to the dom document, we could use it like that 
     (top left corner):
-    ```
-    ImageBuilder.Factory.get("src/main/resources/harvard.png")
+        ```
+        ImageBuilder.Factory.get("src/main/resources/harvard.png")
                 .widthAndHeight(100, 100)
                 .position(document.getLeftMargin(),
                         PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
                 .build();
-    ```
-    * more exemplary code of usages `ImageBuilder` in class (test package)
+        ```
+    * More exemplary code of usages `ImageBuilder` in class (test package)
     : `HarvardEmblem`.
 
 ---
@@ -305,7 +304,7 @@ and strictly restricted:
             return get(FontConstants.HELVETICA);
     }
     ```
-    * more exemplary code of usages `PdfFontsContainer` in class (test package)
+    * More exemplary code of usages `PdfFontsContainer` in class (test package)
     : `CellDefaults`.
 
 ---
@@ -313,24 +312,25 @@ and strictly restricted:
 `PdfFontsContainer`  
 
 ---
-5) **AbstractPdfWriter** - base class for creating pdf file; usage:
-    ```
-        XXX extends AbstractPdfWriter
-    ```
+5) **AbstractPdfWriter** - base class for creating pdf file. 
+    * Usage:
+        ```
+            XXX extends AbstractPdfWriter
+        ```
     then we `@Override` method `prepare(Document document)`, where we construct 
     document. 
     * We could use `PdfDocumentBuilder` to facilitate this activity 
     (for more info go to pt. 6.).
-    ```
-        protected void prepare(Document document) {
-            Table table = new Table(new float[]{1});
-            table.setDocument(document);
-            table.setWidthPercent(100)
-              .addHeaderCell(new PdfCellBuilder().value("bomba").build())
-              .complete();
-        }
-    ```
-    * more exemplary code of usages `AbstractPdfWriter` in class (test package)
+        ```
+            protected void prepare(Document document) {
+               Table table = new Table(new float[]{1});
+                table.setDocument(document);
+                table.setWidthPercent(100)
+                  .addHeaderCell(new PdfCellBuilder().value("bomba").build())
+                  .complete();
+            }
+        ```
+    * More exemplary code of usages `AbstractPdfWriter` in class (test package)
     : `PdfGenerationTest`.
 
 ---
@@ -340,51 +340,53 @@ allowing chaining methods:
     `InsertablePdfImage`; more info in p. 7.)  
     * `add(InsertablePdfTable table)` - for adding tables (wrapped in the 
     `InsertablePdfTable`; more info in p. 8.)  
-    * more exemplary code of usages `PdfDocumentBuilder` in class (test package)
+    * More exemplary code of usages `PdfDocumentBuilder` in class (test package)
     : `PdfGenerationTest`.
 
 ---
-7) **InsertablePdfImage** - every image that is inserted into report 
-should be defined in separate class implementing `InsertablePdfImage`:
-    ```
-    XXX implements InsertablePdfImage
-    ```
+7) **InsertablePdfImage** 
+    * Every image that is inserted into report should be defined 
+    in separate class implementing `InsertablePdfImage`:
+        ```
+        XXX implements InsertablePdfImage
+        ```
     then we have to simply `@Override` method 
     `Image getScaledFor(Document document)`
-    ```
-    @Override
-    public Image getScaledFor(Document document) {
-        return ImageBuilder.Factory.get("src/main/resources/harvard.png")
-                .widthAndHeight(100, 100)
-                .position(document.getLeftMargin(),
-                        PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
-                .build();
-    }
-    ```
-    * more exemplary code of usages `InsertablePdfImage` in class (test package)
+        ```
+        @Override
+        public Image getScaledFor(Document document) {
+           return ImageBuilder.Factory.get("src/main/resources/harvard.png")
+                   .widthAndHeight(100, 100)
+                   .position(document.getLeftMargin(),
+                          PageSize.A4.rotate().getHeight() - document.getTopMargin() - 100)
+                  .build();
+        }
+        ```
+    * More exemplary code of usages `InsertablePdfImage` in class (test package)
     : `HarvardEmblem`.
 
 ---
-8) **InsertablePdfTable** - every table that is inserted into report 
-should be defined in separate class extending `InsertablePdfTable`:
-    ```
-    XXX extends InsertablePdfTable
-    ```
+8) **InsertablePdfTable**
+    * Every table that is inserted into report should be defined in separate 
+    class extending `InsertablePdfTable`:
+        ```
+        XXX extends InsertablePdfTable
+        ```
     then we have to only `@Override` method `Table get()` (we have access 
     to `PdfCellBuilder` by `getCellBuilder()`, and `BundleHandler` by 
     `getBundles()`):
-    ```
-    @Override
-    public Table get() {
-        Table table = new Table(new float[]{1});
-        table.setWidthPercent(100)
-                .addHeaderCell(
+        ```
+        @Override
+        public Table get() {
+            Table table = new Table(new float[]{1});
+            table.setWidthPercent(100)
+                    .addHeaderCell(
                         getCellBuilder().value(getBundles().get(key)).build());
     
-        return table;
-    }
-    ```
-    * more exemplary code of usages `InsertablePdfTable` in class (test package)
+            return table;
+        }
+        ```
+    * More exemplary code of usages `InsertablePdfTable` in class (test package)
     : `SummaryBooksCollectionTable`, `SpacingTable`, `ReportHeader`, 
     `BooksCollectionTable`.
 
@@ -466,10 +468,11 @@ is simply the cache
 3) **XlsxDataFormatType** - enum for excel format types  
 
 ---
-4) **AbstractXlsxWriter** - base class for creating pdf file; usage:
-    ```
-    XXX extends AbstractXlsxWriter
-    ```
+4) **AbstractXlsxWriter** - base class for creating pdf file. 
+    * Usage:
+        ```
+        XXX extends AbstractXlsxWriter
+        ```
     then we `@Override` method `prepare(Workbook workbook)`, where we construct 
     document. Use method:  
     * `add(InsertableXlsSheet sheet)` to add sheet:
@@ -480,15 +483,16 @@ is simply the cache
             add(new SecondSheet(bundles, workbook));
         }
         ```
-    * more exemplary code of usages `AbstractXlsxWriter` in class (test package)
+    * More exemplary code of usages `AbstractXlsxWriter` in class (test package)
     : `XlsxGenerationTest`.
 
 ---
-5) **InsertableXlsContent** - every content that is inserted into sheet 
-should be defined in separate class extending `InsertableXlsContent`:  
-    ```
-    XXX extends InsertableXlsContent
-    ```
+5) **InsertableXlsContent**
+    * Every content that is inserted into sheet 
+    should be defined in separate class extending `InsertableXlsContent`:  
+        ```
+        XXX extends InsertableXlsContent
+        ```
     then we have to `@Override` methods:  
     * `void create()` (we have access to `Sheet` by `getSheet()`, 
     and `BundleHandler` by `getBundles()`):
@@ -508,11 +512,12 @@ should be defined in separate class extending `InsertableXlsContent`:
     `SummarySheetContent`, `SummarySheetTitle`, `SummaryTable`.
 
 ---
-6) **InsertableXlsSheet** - every sheet that is inserted into report 
-should be defined in separate class extending `InsertableXlsSheet`:
-    ```
-    XXX extends InsertableXlsSheet
-    ```
+6) **InsertableXlsSheet**
+    * Every sheet that is inserted into report 
+    should be defined in separate class extending `InsertableXlsSheet`:
+        ```
+        XXX extends InsertableXlsSheet
+        ```
     then we have to `@Override` methods:  
     * `void create()` (we have access to `Sheet` by `getSheet()`, 
     and `BundleHandler` by `getBundles()`),  
@@ -535,7 +540,7 @@ should be defined in separate class extending `InsertableXlsSheet`:
 
         }
         ```
-    * more exemplary code of usages `InsertableXlsSheet` in classes (test 
+    * More exemplary code of usages `InsertableXlsSheet` in classes (test 
     package): `SummarySheet`, `BookCollectionSheet`.
 
 ## XML
@@ -576,12 +581,12 @@ feature)
         </name1>
         <name2/>
         ```
-    * after all we called `build()`
+    * after all we called `build()`.
 
-    * more exemplary code of usages `builder.chain.XmlDocumentBuilderImpl` 
+    * More exemplary code of usages `builder.chain.XmlDocumentBuilderImpl` 
     in the class (test package): 
     `builder.chain.ReportTypeXmlWriterShowcase`, 
-    `builder.chain.XmlDocumentBuilderImplTest`
+    `builder.chain.XmlDocumentBuilderImplTest`.
 
 ---
 2) **builder.straight.XmlDocumentBuilderStraightImpl** - allows to create xml in a 
@@ -628,7 +633,7 @@ feature)
             <innerElementOfName1/>
         </name1>
         ```
-    * more exemplary code of usages `builder.straight.XmlDocumentBuilderImpl` 
+    * More exemplary code of usages `builder.straight.XmlDocumentBuilderImpl` 
     in the class (test package): 
     `builder.straight.ReportTypeXmlWriterShowcase`, 
     `builder.straight.XmlDocumentBuilderImplTest`.
