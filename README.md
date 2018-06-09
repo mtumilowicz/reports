@@ -270,7 +270,7 @@ integral part of `InsertablePdfTable`.
             this.cellBorder = new CellBorder();
         }
         ```
-    * more exemplary code of usages `PdfCellBuilder` in classes (test package)
+    * More exemplary code of usages `PdfCellBuilder` in classes (test package)
     : `ReportHeader`, `SummaryBooksCollectionTable`, `BooksCollectionTable`.
   
 ---
@@ -295,21 +295,22 @@ integral part of `InsertablePdfTable`.
     : `HarvardEmblem`.
 
 ---
-3) **PdfFontsContainer** - we don't have direct access to the cache map, if
-we want a new font, we have to declare method (as shown with helvetica),
-because number of fonts used in application should be as less as possible
-and strictly restricted:
-    ```
-        public static PdfFont getHelvetica() {
-            return get(FontConstants.HELVETICA);
-    }
-    ```
+3) **PdfFontsContainer**
+    * We don't have direct access to the cache map, if
+    we want a new font, we have to declare method (as shown with helvetica),
+    because number of fonts used in application should be as less as possible
+    and strictly restricted:
+        ```
+           public static PdfFont getHelvetica() {
+                return get(FontConstants.HELVETICA);
+        }
+        ```
     * More exemplary code of usages `PdfFontsContainer` in class (test package)
     : `CellDefaults`.
 
 ---
 4) **PdfFontsFactory** - produces embedded fonts in `Cp1250` encoding for
-`PdfFontsContainer`  
+`PdfFontsContainer`.
 
 ---
 5) **AbstractPdfWriter** - base class for creating pdf file. 
@@ -317,8 +318,8 @@ and strictly restricted:
         ```
             XXX extends AbstractPdfWriter
         ```
-    then we `@Override` method `prepare(Document document)`, where we construct 
-    document. 
+        then we `@Override` method `prepare(Document document)`, where we construct 
+        document. 
     * We could use `PdfDocumentBuilder` to facilitate this activity 
     (for more info go to pt. 6.).
         ```
@@ -456,16 +457,16 @@ integral part of `InsertableXlsContent`.
             cellStyle = new CustomCellStyle();
         }
         ```
-    * more exemplary code of usages `XlsxCellBuilder` in packages:
-    `xlsx.books.sheet.first`, `xlsx.books.sheet.second`
+    * More exemplary code of usages `XlsxCellBuilder` in packages:
+    `xlsx.books.sheet.first`, `xlsx.books.sheet.second`.
 
 ---
 2) **XlsxDataFormat** - cells in excel could have specific format (eg. 
 date: `YYYY-MM-DD` or date with time: `YYYY-MM-DD hh:mm`) - this class 
-is simply the cache
+is simply the cache.
 
 ---
-3) **XlsxDataFormatType** - enum for excel format types  
+3) **XlsxDataFormatType** - enum for excel format types.
 
 ---
 4) **AbstractXlsxWriter** - base class for creating pdf file. 
@@ -473,8 +474,9 @@ is simply the cache
         ```
         XXX extends AbstractXlsxWriter
         ```
-    then we `@Override` method `prepare(Workbook workbook)`, where we construct 
-    document. Use method:  
+        then we `@Override` method `prepare(Workbook workbook)`, where we construct 
+        document.  
+        Use method:  
     * `add(InsertableXlsSheet sheet)` to add sheet:
         ```
         @Override
@@ -493,7 +495,7 @@ is simply the cache
         ```
         XXX extends InsertableXlsContent
         ```
-    then we have to `@Override` methods:  
+        then we have to `@Override` methods:  
     * `void create()` (we have access to `Sheet` by `getSheet()`, 
     and `BundleHandler` by `getBundles()`):
         ```
@@ -506,7 +508,7 @@ is simply the cache
 
         }
         ```
-    * more exemplary code of usages `InsertableXlsContent` in classes 
+    * More exemplary code of usages `InsertableXlsContent` in classes 
     (test package): `BookCollectionSheetContent`, 
     `BookCollectionSheetTitle`, `BookCollectionTable`, 
     `SummarySheetContent`, `SummarySheetTitle`, `SummaryTable`.
@@ -518,7 +520,7 @@ is simply the cache
         ```
         XXX extends InsertableXlsSheet
         ```
-    then we have to `@Override` methods:  
+        then we have to `@Override` methods:  
     * `void create()` (we have access to `Sheet` by `getSheet()`, 
     and `BundleHandler` by `getBundles()`),  
     * `String getBundleKeySheetName()`,
@@ -546,7 +548,7 @@ is simply the cache
 ## XML
 1) **builder.chain.XmlDocumentBuilderImpl** - allows to create xml (by chaining
 feature)  
-    * adding new elements / attributes:  
+    * Adding new elements / attributes:  
         ```
         @Override
         public XmlElementBuilderImpl element(String name) {
@@ -565,15 +567,21 @@ feature)
             return new XmlElementBuilderImpl(super.up(1));
         }
         ```
-    * calling `element("name1").element("innerElementOfName1")` produces chain:
+    * Calling:
+        ```
+        element("name1").element("innerElementOfName1")
+        ``` 
+        produces chain:
         ```
         <name1>
             <innerElementOfName1/>
         </name1>
         ```
         so we have to provide method `up()` to escape from inside of the tag, so:  
-        calling 
-        `element("name1").element("innerElementOfName1").up().element("name2")`
+    * Calling: 
+        ```
+        element("name1").element("innerElementOfName1").up().element("name2")`
+        ```
         produces:
         ```
         <name1>
@@ -581,7 +589,7 @@ feature)
         </name1>
         <name2/>
         ```
-    * after all we called `build()`.
+    * After all we called `build()`.
 
     * More exemplary code of usages `builder.chain.XmlDocumentBuilderImpl` 
     in the class (test package): 
@@ -605,7 +613,7 @@ feature)
         return this;
         }
         ```
-    * inner elements:
+    * Inner elements:
         ```
         public XmlElementBuilderImpl addInnerElement(String name) {
             innerElements.add(createElement(Objects.requireNonNull(name)));
@@ -619,7 +627,7 @@ feature)
         return this;
         }
         ```
-    * calling:
+    * Calling:
         ```
         Element node1 = createElement("node1")
                 .addInnerElement(
