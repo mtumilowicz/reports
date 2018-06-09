@@ -351,8 +351,8 @@ allowing chaining methods:
         ```
         XXX implements InsertablePdfImage
         ```
-    then we have to simply `@Override` method 
-    `Image getScaledFor(Document document)`
+        then we have to simply `@Override` method 
+        `Image getScaledFor(Document document)`
         ```
         @Override
         public Image getScaledFor(Document document) {
