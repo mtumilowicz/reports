@@ -373,9 +373,9 @@ allowing chaining methods:
         ```
         XXX extends InsertablePdfTable
         ```
-    then we have to only `@Override` method `Table get()` (we have access 
-    to `PdfCellBuilder` by `getCellBuilder()`, and `BundleHandler` by 
-    `getBundles()`):
+        then we have to only `@Override` method `Table get()` (we have access 
+        to `PdfCellBuilder` by `getCellBuilder()`, and `BundleHandler` by 
+        `getBundles()`):
         ```
         @Override
         public Table get() {
