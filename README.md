@@ -391,70 +391,70 @@ more exemplary code of usages `InsertablePdfTable` in class (test package)
 1) **XlsxCellBuilder** - we don't use this class directly but as a 
 integral part of `InsertableXlsContent`.  
 
-`cell(Row row, int colCount, XXX value)` - used to set value of type XXX
-(eg. String, BigDecimal, Integer)  
-`XlsxCellBuilder cell(Row row, int colCount, Date value, 
-XlsxDataFormatType type)` - used to set value of type `Date` with 
-specific format (all possible formats are defined in `XlsxDataFormatType`)  
-```
-getCellBuilder().cell(row, col, value).build();
-getCellBuilder().cell(row, col, XlsxDataFormatType.DATE_ONLY).build();
-```  
+    * `cell(Row row, int colCount, XXX value)` - used to set value of type XXX
+    (eg. String, BigDecimal, Integer)  
+    `XlsxCellBuilder cell(Row row, int colCount, Date value, 
+    XlsxDataFormatType type)` - used to set value of type `Date` with 
+    specific format (all possible formats are defined in `XlsxDataFormatType`)  
+        ```
+        getCellBuilder().cell(row, col, value).build();
+        getCellBuilder().cell(row, col, XlsxDataFormatType.DATE_ONLY).build();
+        ```  
 
-`border()`, `alignment(HorizontalAlignment alignment)`
-```
-getCellBuilder().cell(row, col, value).alignment(HorizontalAlignment.CENTER).build();
-getCellBuilder().cell(row, col, value).border().build();
-```  
+    * `border()`, `alignment(HorizontalAlignment alignment)`
+        ```
+        getCellBuilder().cell(row, col, value).alignment(HorizontalAlignment.CENTER).build();
+        getCellBuilder().cell(row, col, value).border().build();
+        ```  
 
-`dataFormat(XlsxDataFormatType type)` - display format of cell value
-```
-getCellBuilder().cell(row, col, BigDecimal.ONE)
+    * `dataFormat(XlsxDataFormatType type)` - display format of cell value
+        ```
+        getCellBuilder().cell(row, col, BigDecimal.ONE)
         .dataFormat(XlsxDataFormatType.MONEY)
         .build();
-```
+        ```
 
-`singleCellFontSize(int size)`, `foregroundColor(IndexedColors color)` - 
-changes only in the cell we are working on (without any influence on 
-the others)  
-```
-getCellBuilder().cell(row, col, value).singleCellFontSize(500).build(); 
-getCellBuilder().cell(row, col, value).foregroundColor(IndexedColors.GOLD).build();
-```
+    * `singleCellFontSize(int size)`, `foregroundColor(IndexedColors color)` - 
+    changes only in the cell we are working on (without any influence on 
+    the others)  
+        ```
+        getCellBuilder().cell(row, col, value).singleCellFontSize(500).build(); 
+        getCellBuilder().cell(row, col, value).foregroundColor(IndexedColors.GOLD).build();
+        ```
 
-`setDefaultForegroundColor(IndexedColors color)` - changes permanently 
-all cells constructed by instance of `XlsxCellBuilder` (still can be 
-outshouted by using `foregroundColor`); changes are saved in 
-`CellDefaults`; method doesn't allow chaining  
-```
-getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);
-```
-and then we have to use `fillPattern(FillPatternType type)` to color 
-specific cell with already set default foreground color
-```
-getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();
-```
+    * `setDefaultForegroundColor(IndexedColors color)` - changes permanently 
+    all cells constructed by instance of `XlsxCellBuilder` (still can be 
+    outshouted by using `foregroundColor`); changes are saved in 
+    `CellDefaults`; method doesn't allow chaining  
+        ```
+        getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);
+        ```
+    and then we have to use `fillPattern(FillPatternType type)` to color 
+    specific cell with already set default foreground color
+        ```
+        getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();
+        ```
 
-`build()` - after calling this method we construct cell with all set
-features then reset all fields to default, eg. `CustomCellStyle.CellBorder.border` field
-is set to `false`
-```
-public Cell build() {
-    Cell cell = prepareCell();
+    * `build()` - after calling this method we construct cell with all set
+    features then reset all fields to default, eg. 
+    `CustomCellStyle.CellBorder.border` field is set to `false`
+        ```
+        public Cell build() {
+            Cell cell = prepareCell();
 
-    resetFields();
+            resetFields();
 
-    return cell;
-}
+            return cell;
+        }
     
-private void resetFields() {
-    cellText = new CellText();
-    cellFormat = new CellFormat();
-    cellStyle = new CustomCellStyle();
-}
-```
-more exemplary code of usages `XlsxCellBuilder` in packages:
-`xlsx.books.sheet.first`, `xlsx.books.sheet.second`
+        private void resetFields() {
+            cellText = new CellText();
+            cellFormat = new CellFormat();
+            cellStyle = new CustomCellStyle();
+        }
+        ```
+    * more exemplary code of usages `XlsxCellBuilder` in packages:
+    `xlsx.books.sheet.first`, `xlsx.books.sheet.second`
 
 ---
 2) **XlsxDataFormat** - cells in excel could have specific format (eg. 
@@ -541,94 +541,94 @@ package): `SummarySheet`, `BookCollectionSheet`
 ## XML
 1) **builder.chain.XmlDocumentBuilderImpl** - allows to create xml (by chaining
 feature)  
-to adding new elements / attributes we use methods:  
-```
-@Override
-public XmlElementBuilderImpl element(String name) {
-    return new XmlElementBuilderImpl(createElement(Objects.requireNonNull(name)), getElement());
-}
+    * adding new elements / attributes:  
+        ```
+        @Override
+        public XmlElementBuilderImpl element(String name) {
+            return new XmlElementBuilderImpl(createElement(Objects.requireNonNull(name)), getElement());
+        }
 
-@Override
-public XmlElementBuilderImpl attribute(String name, String value) {
-    super.addAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
+        @Override
+        public XmlElementBuilderImpl attribute(String name, String value) {
+            super.addAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
 
-    return this;
-}
+        return this;
+        }
 
-@Override
-public XmlElementBuilderImpl up() {
-    return new XmlElementBuilderImpl(super.up(1));
-}
-```
-calling `element("name1").element("innerElementOfName1")` produces chain:
-```
-<name1>
-    <innerElementOfName1/>
-</name1>
-```
-so we have to provide method `up()` to escape from inside of the tag, so:  
-calling `element("name1").element("innerElementOfName1").up().element("name2")`
-produces:
-```
-<name1>
-    <innerElementOfName1/>
-</name1>
-<name2/>
-```
-after all we called `build()`
+        @Override
+        public XmlElementBuilderImpl up() {
+            return new XmlElementBuilderImpl(super.up(1));
+        }
+        ```
+    * calling `element("name1").element("innerElementOfName1")` produces chain:
+        ```
+        <name1>
+            <innerElementOfName1/>
+        </name1>
+        ```
+        so we have to provide method `up()` to escape from inside of the tag, so:  
+        calling 
+        `element("name1").element("innerElementOfName1").up().element("name2")`
+        produces:
+        ```
+        <name1>
+            <innerElementOfName1/>
+        </name1>
+        <name2/>
+        ```
+    * after all we called `build()`
 
-more exemplary code of usages `builder.chain.XmlDocumentBuilderImpl` 
-in the class (test package): 
-`builder.chain.ReportTypeXmlWriterShowcase`, 
-`builder.chain.XmlDocumentBuilderImplTest`
+    * more exemplary code of usages `builder.chain.XmlDocumentBuilderImpl` 
+    in the class (test package): 
+    `builder.chain.ReportTypeXmlWriterShowcase`, 
+    `builder.chain.XmlDocumentBuilderImplTest`
 
 ---
 2) **builder.straight.XmlDocumentBuilderStraightImpl** - allows to create xml in a 
 "straight" way:  
-Creating elements / attributes:
-```
-@Override
-public XmlElementBuilderImpl element(String name) {
-    return new XmlElementBuilderImpl(createElement(Objects.requireNonNull(name)));
-}
+    * Creating elements / attributes:
+        ```
+        @Override
+        public XmlElementBuilderImpl element(String name) {
+            return new XmlElementBuilderImpl(createElement(Objects.requireNonNull(name)));
+        }
 
-@Override
-public XmlElementBuilderImpl attribute(String name, String value) {
-    super.addAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
+        @Override
+        public XmlElementBuilderImpl attribute(String name, String value) {
+            super.addAttribute(Objects.requireNonNull(name), Objects.requireNonNull(value));
 
-    return this;
-}
-```
-inner elements:
-```
-public XmlElementBuilderImpl addInnerElement(String name) {
-    innerElements.add(createElement(Objects.requireNonNull(name)));
+        return this;
+        }
+        ```
+    * inner elements:
+        ```
+        public XmlElementBuilderImpl addInnerElement(String name) {
+            innerElements.add(createElement(Objects.requireNonNull(name)));
 
-    return this;
-}
+        return this;
+        }
 
-public XmlElementBuilderImpl addInnerElement(Element elem) {
-    innerElements.add(Objects.requireNonNull(elem));
+        public XmlElementBuilderImpl addInnerElement(Element elem) {
+            innerElements.add(Objects.requireNonNull(elem));
 
-    return this;
-}
-```
-Examples:  
-to get
-```
-<name1>
-    <innerElementOfName1/>
-</name1>
-```
-we should call
-```
-Element node1 = createElement("node1")
+        return this;
+        }
+        ```
+    * calling:
+        ```
+        Element node1 = createElement("node1")
                 .addInnerElement(
                         createElement("innerElementOfName1")
                         .build())
                 .build();
-```
+        ```
+        produces:
+        ```
+        <name1>
+            <innerElementOfName1/>
+        </name1>
+        ```
 more exemplary code of usages `builder.straight.XmlDocumentBuilderImpl` 
 in the class (test package): 
 `builder.straight.ReportTypeXmlWriterShowcase`, 
-`builder.straight.XmlDocumentBuilderImplTest`
+`builder.straight.XmlDocumentBuilderImplTest`.
