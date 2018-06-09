@@ -429,8 +429,8 @@ integral part of `InsertableXlsContent`.
         ```
         getCellBuilder().setDefaultForegroundColor(IndexedColors.GREY_40_PERCENT);
         ```
-    and then we have to use `fillPattern(FillPatternType type)` to color 
-    specific cell with already set default foreground color
+        and then we have to use `fillPattern(FillPatternType type)` to color 
+        specific cell with already set default foreground color
         ```
         getCellBuilder().cell(row, col, value).fillPattern(FillPatternType.SOLID_FOREGROUND).build();
         ```
