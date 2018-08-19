@@ -5,7 +5,7 @@ package core.constants;
  */
 public final class CoreConstants {
 
-    public static final String GENERAL_RESOURCES = "GENERAL";
+    public static final String GENERAL_RESOURCES = "General";
 
     private CoreConstants() {
     }
