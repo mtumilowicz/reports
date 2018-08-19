@@ -6,11 +6,13 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -69,9 +71,9 @@ public class DateConverterTest {
     }
 
     @Test
-    public void unmarshalDateArgument() {
+    public void unmarshalDateArgument() throws ParseException {
         when(reader.getValue()).thenReturn("2017-09-02");
-        assertEquals(new Date(Long.valueOf("1504303200000")), 
+        assertEquals(FastDateFormat.getInstance("yyyy-MM-dd").parse("2017-09-02"), 
                 new DateOnlyConverter().unmarshal(reader, unmarshallingContext));
     }
     
