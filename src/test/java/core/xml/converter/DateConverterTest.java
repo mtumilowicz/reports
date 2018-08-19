@@ -24,6 +24,8 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DateConverterTest {
+
+    private static FastDateFormat fdf = FastDateFormat.getInstance("yyyy-MM-dd");
     
     @Mock
     HierarchicalStreamWriter writer;
@@ -73,7 +75,7 @@ public class DateConverterTest {
     @Test
     public void unmarshalDateArgument() throws ParseException {
         when(reader.getValue()).thenReturn("2017-09-02");
-        assertEquals(FastDateFormat.getInstance("yyyy-MM-dd").parse("2017-09-02"), 
+        assertEquals(fdf.parse("2017-09-02"), 
                 new DateOnlyConverter().unmarshal(reader, unmarshallingContext));
     }
     
