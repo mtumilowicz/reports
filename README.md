@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/mtumilowicz/reports.svg?branch=master)](https://travis-ci.com/mtumilowicz/reports)
 # reports
 This project has 3 APIs:
 
@@ -645,3 +646,6 @@ feature)
     in the class (test package): 
     `builder.straight.ReportTypeXmlWriterShowcase`, 
     `builder.straight.XmlDocumentBuilderImplTest`.
+
+# tests
+**Coverage**: `85%`
