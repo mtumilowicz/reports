@@ -2,7 +2,6 @@ package xlsx.books;
 
 import core.xlsx.writer.AbstractXlsxWriter;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import xlsx.books.sheet.first.BookCollectionSheet;
 import xlsx.books.sheet.second.SummarySheet;
