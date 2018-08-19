@@ -19,6 +19,11 @@
                 </configuration>
             </plugin>
         </plugins>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
         <!--By default, Maven will look for your project's resources under src/main/resources.-->
         <!--<resources>-->
         <!--<resource>-->
